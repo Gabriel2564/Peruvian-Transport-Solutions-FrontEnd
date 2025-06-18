@@ -1,4 +1,46 @@
-<router-outlet></router-outlet>
-<div [hidden]="route.children.length !== 0">
-  <app-listaraplicacion></app-listaraplicacion>
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h1>Lista de Usuarios</h1>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef>Tecnología</th>
+        <td mat-cell *matCellDef="let element">{{ element.username}}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.password}}
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef>Fabricante</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.enabled }}
+        </td>
+      </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef>Documentación</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.roles.id}}
+        </td>
+   
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
 </div>
+
