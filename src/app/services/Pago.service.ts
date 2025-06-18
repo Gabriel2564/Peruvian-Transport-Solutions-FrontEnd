@@ -30,7 +30,7 @@ export class PagoService {
     return this.http.put(`${this.url}/modificar`, pago);
   }
 
-  deleteA(id: number) {
+  deleteP(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
 

@@ -6,7 +6,7 @@ export const routes: Routes = [{
   path:'rutaPago',component:PagoComponent,
   children:[
     {
-      path:'conexion',component:InsertarpagoComponent
+      path:'insertar',component:InsertarpagoComponent
     },
 
     {
