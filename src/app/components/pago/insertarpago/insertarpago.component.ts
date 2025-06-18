@@ -5,7 +5,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms';
+} 
+from '@angular/forms';
 import { Pago } from '../../../models/Pago';
 import { PagoService } from '../../../services/Pago.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
