@@ -1,1 +1,22 @@
-<p>insertarpago works!</p>
+<div class="container">
+ <div style="text-align: center;margin: 5%;"><h1>Registro de aplicaciones</h1></div>
+ <div style="text-align: center;margin: 5%;">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field>
+        <mat-label>Tipo de Pago</mat-label>
+        <mat-select formControlName="type">
+          @for (food of types; track food) {
+          <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+          El tipo es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <button matButton="outlined">Actualizar</button>
+    </form>
+  </div>
+</div>

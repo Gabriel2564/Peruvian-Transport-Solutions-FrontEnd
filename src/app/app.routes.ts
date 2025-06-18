@@ -4,4 +4,13 @@ import { InsertarpagoComponent } from './components/pago/insertarpago/insertarpa
 
 export const routes: Routes = [{
   path:'rutaPago',component:PagoComponent,
+  children:[
+    {
+      path:'conexion',component:InsertarpagoComponent
+    },
+
+    {
+      path:'actualizaciones/:id',component:InsertarpagoComponent
+    }
+  ]
 }];
