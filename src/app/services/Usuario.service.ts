@@ -17,4 +17,13 @@ export class UsuarioService {
   list(){
     return this.http.get<Usuario[]>(this.url)
   }
+  insert(a:Usuario){
+    return this.http.post(this.url,a)
+  }
+  setList(listaNueva:Usuario[]){
+    this.listaCambio.next(listaNueva)
+  }
+  getList(){
+    return this.listaCambio.asObservable()
+  }
 }
