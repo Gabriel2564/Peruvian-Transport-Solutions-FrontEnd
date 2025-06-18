@@ -1,0 +1,41 @@
+<div>
+    <h1>Lista de Buses</h1>
+</div>
+
+<div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="bus1">
+   <th mat-header-cell *matHeaderCellDef> ID </th>
+   <td mat-cell *matCellDef="let element"> {{element.idBus}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="bus2">
+   <th mat-header-cell *matHeaderCellDef> Destino </th>
+   <td mat-cell *matCellDef="let element"> {{element.arrivalAddressBus}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="bus3">
+   <th mat-header-cell *matHeaderCellDef> Capacidad </th>
+   <td mat-cell *matCellDef="let element"> {{element.capacityBus}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="bus4">
+   <th mat-header-cell *matHeaderCellDef> Duración </th>
+   <td mat-cell *matCellDef="let element"> {{element.durationBus}} </td>
+  </ng-container>
+
+   <!-- Symbol Column -->
+   <ng-container matColumnDef="bus5">
+    <th mat-header-cell *matHeaderCellDef> Monto </th>
+    <td mat-cell *matCellDef="let element"> {{element.viaje}} </td>
+   </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+ </table>
+</div>
