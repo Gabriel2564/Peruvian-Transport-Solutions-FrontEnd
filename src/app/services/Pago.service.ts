@@ -38,6 +38,9 @@ export class PagoService {
     return this.http.get<Pago>(`${this.url}/listar/${id}`);
   }
 
+  getList() {
+    return this.listaCambio.asObservable();
+  }
 
 }
 

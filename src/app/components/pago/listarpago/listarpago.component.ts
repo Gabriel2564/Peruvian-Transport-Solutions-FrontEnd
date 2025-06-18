@@ -19,12 +19,17 @@ export class ListarpagoComponent implements OnInit{
   displayedColumns: string[] = ['c1', 'c2','c3','c4'];
 
   constructor(private pagoService: PagoService) {}
-
   ngOnInit(): void {
     this.pagoService.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
+    //Actualiza la tabla automaticamente
+    this.pagoService.getList().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    });
   }
+
+
 
   eliminar(id: number) {
     this.pagoService.deleteA(id).subscribe(() => {
