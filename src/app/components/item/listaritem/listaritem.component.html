@@ -1,1 +1,29 @@
-<p>listaritem works!</p>
+<h1>Lista de Items</h1>
+
+<div class="acciones-superiores">
+  <button mat-raised-button color="accent" [routerLink]="['/rutaItem/insertar']">
+  <mat-icon>add</mat-icon> Agregar Item
+</button>
+
+</div>
+
+<div class="contenedor-tarjetas">
+  <div class="tarjeta" *ngFor="let element of dataSource.data">
+    <p><strong>ID:</strong> {{ element.idItem }}</p>
+    <p><strong>Titulo del Item:</strong> {{ element.titleItem }}</p>
+    <p><strong>Descripcion del Item:</strong> {{ element.descriptionItem }}</p>
+    <p><strong>Imagen del Item:</strong> {{ element.imageItem }}</p>
+    <p><strong>Formato del Item:</strong> {{ element.formatItem }}</p>
+
+    <div class="acciones">
+      <button mat-raised-button color="primary" [routerLink]="['actualizaciones', element.idItem]">
+        <mat-icon>edit</mat-icon> Actualizar
+      </button>
+
+      <button mat-raised-button color="warn" (click)="eliminar(element.idItem)">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
