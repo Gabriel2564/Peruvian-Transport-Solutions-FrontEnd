@@ -1,1 +1,27 @@
-<p>insertarestado works!</p>
+<form [formGroup]="form" (submit)="aceptar()">
+
+  <!-- Mostrar ID solo si estás editando -->
+  <ng-container *ngIf="edicion">
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" [disabled]="!edicion" />
+    </mat-form-field>
+    <br />
+  </ng-container>
+
+  <!-- Campo Tipo de Estado -->
+  <mat-form-field>
+    <mat-label>Tipo de Estado</mat-label>
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let food of types" [value]="food.value">
+        {{ food.viewValue }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('type')?.hasError('required')">
+      El estado es obligatorio!!
+    </mat-error>
+  </mat-form-field>
+  <br />
+
+  <button mat-raised-button type="submit">Actualizar</button>
+</form>
