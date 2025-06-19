@@ -1,71 +1,58 @@
 <div class="container">
+  <div class="topbar">
+  <div class="left">
+  <!-- Logo -->
+  <img src="LOGOBUS.jpg" alt="Logo" class="logo" />
+
+  <!-- Menú de navegación -->
+    <nav class="nav-links">
+  <span class="nav-item">Usuarios</span>
+  <span class="nav-item">Roles</span>
+  <span class="nav-item">Reserva</span>
+  <span class="nav-item">Boleto</span>
+  <span class="nav-item">Bus</span>
+  <span class="nav-item">Viaje</span>
+  <span class="nav-item">Ruta</span>
+  <span class="nav-item">Asiento</span>
+  <span class="nav-item">Estado</span>
+  <span class="nav-item">Item por usuario</span>
+  <span class="nav-item">Items</span>
+  <span class="nav-item">Reseña</span>
+  <span class="nav-item">Pagos</span>
+</nav>
+  </div>
+  <div class="right">
+    <img src="icono-perfil.png" class="avatar" alt="Usuario" />
+    <span class="username">Hola</span>
+  </div>
+</div>
   
   <div style="text-align: center; margin: 5%">
     <h1>Lista de Usuarios</h1>
   </div>
-  <div style="text-align: center; margin: 5%">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
-      <ng-container matColumnDef="c1">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
+  <div class="card-container">
+  <mat-card *ngFor="let element of dataSource.data" class="usuario-card" appearance="outlined">
+    <img mat-card-image src="hellokitty.jpg" alt="Foto de usuario" class="coner-icon" />
+    <mat-card-header>
+    <mat-card-title>ID: {{ element.id }}</mat-card-title>
+    <mat-card-subtitle>Usuario: {{ element.username }}</mat-card-subtitle>
+  </mat-card-header>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef>username</th>
-        <td mat-cell *matCellDef="let element">{{ element.username}}</td>
-      </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef>password</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.password}}
-        </td>
-      </ng-container>
+  <mat-card-content>
+    <p><strong>Contraseña:</strong> {{ element.password }}</p>
+    <p><strong>Estado:</strong> {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
+  </mat-card-content>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef>Estado</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.enabled? "Activo" : "Inactivo"  }}
-        </td>
-      </ng-container>
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef>Rol</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.roles.id }}
-        </td>
-      
-      </ng-container>
-       <!-- Symbol Column -->
-         <ng-container matColumnDef="c6">
-          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-          <td mat-cell *matCellDef="let element">
-            <button matButton="outlined" (click)="eliminar(element.id)"
-            >
-            <mat-icon>delete_outline</mat-icon>
-          </button>
-          </td>
-        </ng-container>
-        
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="c7">
-        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
-        <td mat-cell *matCellDef="let element">
-          <button matButton="outlined" [routerLink]="['ediciones',element.id]"
-          >
-          <mat-icon>edit</mat-icon>
-        </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-  
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="eliminar(element.id)">
+      <mat-icon>delete_outline</mat-icon> Eliminar
+    </button>
+    <button mat-button color="primary" [routerLink]="['/ediciones', element.id]">
+      <mat-icon>edit</mat-icon> Actualizar
+    </button>
+  </mat-card-actions>
+</mat-card>
+</div>
 </div>
 

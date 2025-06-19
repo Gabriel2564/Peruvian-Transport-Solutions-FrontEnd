@@ -6,3 +6,121 @@ button[matButton="outlined"] {
   outline: none;
   color: rgb(82,67,20)
  }
+ .topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a38f5e;
+  color: white;
+  padding: 10px 20px;
+  height: 60px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 15px;
+}
+.usuario-card {
+  width: 250px; /* más pequeño */
+  position: relative;
+}
+.fotousuario{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;      /* ⬅ Tamaño pequeño */
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.corner-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.avatar {
+  height: 30px;
+  margin-right: 5px;
+}
+
+.username {
+  color: black;
+  font-weight: bold;
+}
+.carta de usuario{
+  max-width: 400px;
+}
+h1 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+mat-card {
+  margin: 20px auto;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+mat-card-title,
+mat-card-subtitle {
+  color: #444;
+}
+
+mat-card-content {
+  padding: 10px 20px;
+}
+
+mat-list-item {
+  font-size: 16px;
+  padding: 5px 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+}
+
+mat-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}

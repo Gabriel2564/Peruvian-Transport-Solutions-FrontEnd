@@ -36,6 +36,8 @@ import { MatButtonModule } from '@angular/material/button';
 export class InsertarusuarioComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
+  status: boolean = true;
+
   id: number = 0;
   edicion: boolean = false;
 
@@ -47,53 +49,52 @@ export class InsertarusuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      //actualizar trae data
+      this.init();
+    });
+ this.form = this.formBuilder.group({
       codigo: [''],
       nombre: ['', Validators.required],
       contrasenia: ['', Validators.required],
-      estado: [true], // agregado para el radio button
-    });
-
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      this.edicion = this.id != null;
-      this.init();
+       estado: [true],
     });
   }
+aceptar(): void {
+  if (this.form.valid) {
+    this.usuario.id = +this.form.value.codigo;
+    this.usuario.username = this.form.value.nombre;
+    this.usuario.password = this.form.value.contrasenia;
 
-  aceptar(): void {
-    if (this.form.valid) {
-      this.usuario.id = this.form.value.codigo;
-      this.usuario.username = this.form.value.nombre;
-      this.usuario.password = this.form.value.contrasenia;
-      this.usuario.enabled = this.form.value.estado;
-
-      if (this.edicion) {
-        this.uS.update(this.usuario).subscribe(() => {
+    if (this.edicion) {
+       //actualizar
+       this.uS.update(this.usuario).subscribe(() => {
           this.uS.list().subscribe((data) => {
             this.uS.setList(data);
           });
         });
-      } else {
+    } else {
+      //insertar
         this.uS.insert(this.usuario).subscribe(() => {
           this.uS.list().subscribe((data) => {
             this.uS.setList(data);
           });
-        });
-      }
-
-      this.router.navigate(['rutausuario']);
+      });
     }
+    this.router.navigate(['rutausuario']);
   }
+}
+
 
   init(): void {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
-        this.form.patchValue({
-          codigo: data.id,
-          nombre: data.username,
-          contrasenia: data.password,
-          estado: data.enabled,
+        this.form= new FormGroup({
+          codigo: new FormGroup(data.id),
+          nombre: new FormGroup(data.username),
+          contrasenia: new FormGroup(data.password),
         });
       });
     }
