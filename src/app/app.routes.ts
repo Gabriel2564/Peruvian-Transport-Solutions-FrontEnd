@@ -3,8 +3,13 @@ import { PagoComponent } from './components/pago/pago.component';
 import { InsertarpagoComponent } from './components/pago/insertarpago/insertarpago.component';
 import { ItemComponent } from './components/item/item.component';
 import { InsertaritemComponent } from './components/item/insertaritem/insertaritem.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: LandingComponent
+  },
   {
   path:'rutaPago', component:PagoComponent,
   children:[
