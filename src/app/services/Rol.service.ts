@@ -22,7 +22,6 @@ export class RolService {
       return this.http.post(`${this.url}/insertar`, rol);
   }
 
-
   setList(listaNueva:Rol[]){
     this.listaCambio.next(listaNueva)
   }
@@ -36,7 +35,7 @@ export class RolService {
   }
 
   listId(id: number) {
-    return this.http.get<Rol>(`${this.url}/listar/${id}`);
+    return this.http.get<Rol>(`${this.url}/listar${id}`);
   }
 
   getList() {

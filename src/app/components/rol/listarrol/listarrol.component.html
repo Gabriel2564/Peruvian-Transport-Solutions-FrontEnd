@@ -11,7 +11,7 @@
   <div class="tarjeta" *ngFor="let element of dataSource.data">
     <p><strong>ID:</strong> {{ element.id }}</p>
     <p><strong>Nombre del rol:</strong> {{ element.rol }}</p>
-    <p><strong>ID del usuario:</strong> {{ element.usuario}}</p>
+    <p><strong>ID del usuario:</strong> {{ element.usuario.id}}</p>
 
     <div class="acciones">
       <button mat-raised-button color="primary" [routerLink]="['actualizaciones', element.id]">

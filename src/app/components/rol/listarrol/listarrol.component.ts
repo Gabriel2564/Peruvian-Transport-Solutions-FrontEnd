@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Rol } from '../../../models/Rol';
 import { RolService } from '../../../services/Rol.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-listarrol',
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
+  imports: [MatTableModule,CommonModule, RouterModule, MatButtonModule, MatIconModule],
   templateUrl: './listarrol.component.html',
   styleUrl: './listarrol.component.css'
 })
@@ -30,8 +30,8 @@ export class ListarrolComponent {
   }
 
   eliminar(id: number) {
-    this.rolService.deleteI(id).subscribe(() => {
-      this.rolService.list().subscribe(data => {
+    this.rolService.deleteI(id).subscribe((data) => {
+      this.rolService.list().subscribe((data) => {
         this.rolService.setList(data);
       });
     });
