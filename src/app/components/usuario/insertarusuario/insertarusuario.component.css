@@ -3,7 +3,7 @@ mat-form-field {
   }
 
 button[matButton="outlined"] {
- background-color:rgb(12, 19, 92); /* color primario bootstrap azul */
+ background-color:rgb(82,67,20); /* color primario bootstrap azul */
  color: white;
  border: none;
  padding: 0.5rem 1.25rem;

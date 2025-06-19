@@ -8,7 +8,6 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  standalone: true,
   selector: 'app-listarusuario',
   imports: [
     CommonModule,
