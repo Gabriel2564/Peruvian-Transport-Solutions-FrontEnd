@@ -1,1 +1,27 @@
-<p>listarrol works!</p>
+<h1>Lista de Roles</h1>
+
+<div class="acciones-superiores">
+  <button mat-raised-button color="accent" [routerLink]="['/rutaRol/insertar']">
+  <mat-icon>add</mat-icon> Agregar Rol
+</button>
+
+</div>
+
+<div class="contenedor-tarjetas">
+  <div class="tarjeta" *ngFor="let element of dataSource.data">
+    <p><strong>ID:</strong> {{ element.id }}</p>
+    <p><strong>Nombre del rol:</strong> {{ element.rol }}</p>
+    <p><strong>ID del usuario:</strong> {{ element.usuario}}</p>
+
+    <div class="acciones">
+      <button mat-raised-button color="primary" [routerLink]="['actualizaciones', element.id]">
+        <mat-icon>edit</mat-icon> Actualizar
+      </button>
+
+      <button mat-raised-button color="warn" (click)="eliminar(element.id)">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
