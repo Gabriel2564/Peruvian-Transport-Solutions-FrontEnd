@@ -28,19 +28,31 @@
       <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef>Fabricante</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.enabled }}
+          {{ element.enabled? "Activo" : "Inactivo"  }}
         </td>
       </ng-container>
       <!-- Symbol Column -->
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>Documentación</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.roles.id}}
+          {{ element.roles }}
         </td>
-   
+      </ng-container>
+       <!-- Symbol Column -->
+         <ng-container matColumnDef="c6">
+          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+          <td mat-cell *matCellDef="let element">
+            <button matButton="outlined" (click)="eliminar(element.id)"
+            >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+          </td>
+        </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
+  
 </div>
 
