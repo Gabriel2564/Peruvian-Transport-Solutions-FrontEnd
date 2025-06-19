@@ -3,7 +3,8 @@ import { PagoComponent } from './components/pago/pago.component';
 import { InsertarpagoComponent } from './components/pago/insertarpago/insertarpago.component';
 import { ItemComponent } from './components/item/item.component';
 import { InsertaritemComponent } from './components/item/insertaritem/insertaritem.component';
-import { LandingComponent } from './components/landing/landing.component';
+import { RolComponent } from './components/rol/rol.component';
+import { InsertarrolComponent } from './components/rol/insertarrol/insertarrol.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,19 @@ export const routes: Routes = [
 
       {
         path:'actualizaciones/:id', component:InsertaritemComponent
+      }
+    ]
+},
+
+{
+  path:'rutaRol',component:RolComponent,
+  children:[
+      {
+        path:'insertar', component:InsertarrolComponent
+      },
+
+      {
+        path:'actualizaciones/:id', component:InsertarrolComponent
       }
     ]
 }
