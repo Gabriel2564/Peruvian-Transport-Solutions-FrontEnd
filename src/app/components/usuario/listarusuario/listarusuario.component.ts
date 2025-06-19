@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  standalone: true,
   selector: 'app-listarusuario',
   imports: [
     CommonModule,
@@ -21,16 +22,17 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ListarusuarioComponent implements OnInit{
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6','c7'];
   
   constructor(private uS:UsuarioService){}
+
 
   ngOnInit(): void {
     this.uS.list().subscribe((data)=>{
       this.dataSource=new MatTableDataSource(data);
     });
   }
-  
+
   eliminar(id: number) {
     this.uS.deleteA(id).subscribe((data) => {
       this.uS.list().subscribe((data) => {

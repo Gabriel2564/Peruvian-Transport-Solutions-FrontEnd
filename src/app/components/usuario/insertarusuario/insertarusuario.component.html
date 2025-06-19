@@ -1,0 +1,43 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;"><h1>Registro de usuarios</h1></div>
+  <div style="text-align: center;margin: 5%;">
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field class="example-full-width" *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El Código es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Ex. Camisamorada" formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+          El usuario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-radio-group
+        aria-label="Select an option"
+        formControlName="estado"
+      >
+        <mat-radio-button [value]="true">Activo</mat-radio-button>
+        <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+      </mat-radio-group>
+      <br />
+      
+      <mat-form-field class="example-full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Ex. Camisamorada" formControlName="contrasenia" />
+        <mat-error *ngIf="form.get('contrasenia')?.hasError('required')">
+          La contraseña es obligatorio!!
+        </mat-error>
+         </mat-form-field>
+      <button matButton="outlined">Aceptar</button>
+    </form>
+  </div>
+</div>
+

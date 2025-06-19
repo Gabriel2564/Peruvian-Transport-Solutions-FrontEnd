@@ -17,8 +17,9 @@ export class UsuarioService {
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Usuario[]>(this.url)
+    return this.http.get<Usuario[]>(`${this.url}/listar`)
   }
+  
   insert(u:Usuario){
     return this.http.post(this.url,u)
   }
@@ -33,7 +34,7 @@ export class UsuarioService {
   }
 
   update(u: Usuario) {
-    return this.http.put(this.url, u);
+    return this.http.put(`${this.url}/modificar`, u);
   }
 
   deleteA(id: number) {
