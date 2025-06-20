@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { PagoComponent } from "./components/pago/pago.component";
-import { ItemComponent } from "./components/item/item.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [PagoComponent, ItemComponent],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

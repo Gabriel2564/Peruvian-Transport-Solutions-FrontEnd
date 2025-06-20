@@ -1,1 +1,42 @@
-<p>insertarusuario works!</p>
+<!-- Fuente Prompt -->
+<link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+
+<div class="formulario-marron">
+  <!-- Título dinámico según acción -->
+  <h1>{{ edicion ? 'Actualización de Usuarios' : 'Registro de Usuario' }}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="aceptar()">
+
+    <!-- Campo Username -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Ej: Camisamorada" formControlName="nombre" />
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+        El usuario es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botones Activo/Inactivo -->
+    <mat-radio-group formControlName="estado" aria-label="Selecciona estado">
+      <mat-radio-button [value]="true">Activo</mat-radio-button>
+      <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+    </mat-radio-group>
+
+    <!-- Campo Contraseña -->
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" placeholder="********" formControlName="contrasenia" />
+      <mat-error *ngIf="form.get('contrasenia')?.hasError('required')">
+        La contraseña es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botón Aceptar -->
+    <div style="text-align: center;">
+      <button matButton="outlined" type="submit">
+        Aceptar
+      </button>
+    </div>
+
+  </form>
+</div>

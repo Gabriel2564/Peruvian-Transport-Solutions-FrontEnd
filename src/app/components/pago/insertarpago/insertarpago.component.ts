@@ -37,6 +37,7 @@ export class InsertarpagoComponent implements OnInit{
   form: FormGroup = new FormGroup({});
   pago: Pago = new Pago();
   edicion: boolean = false;
+
   id: number = 0
   types:{value:string;viewValue:string}[]=[
     {value:"Plin",viewValue:"Plin"},
@@ -45,13 +46,15 @@ export class InsertarpagoComponent implements OnInit{
     {value:"Efectivo",viewValue:"Efectivo"},
 
   ]
-    constructor(
+  
+  constructor(
     private aS: PagoService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route:ActivatedRoute
   ) {}
-  ngOnInit(): void { //se ejecuta primero
+
+  ngOnInit(): void { 
     this.route.params.subscribe((data:Params)=>{
       this.id=data['id']
       this.edicion=data['id']!=null //boleano
