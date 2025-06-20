@@ -1,45 +1,51 @@
-<div class="container">
-  <div style="text-align: center;margin: 5%;"><h1>Actualizacion de usuarios</h1></div>
-  <div style="text-align: center;margin: 5%;">
-    <form [formGroup]="form" (ngSubmit)="aceptar()">
+<!-- Fuente Prompt -->
+<link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 
+<div class="formulario-marron">
+  <!-- Título dinámico según acción -->
+  <h1>{{ edicion ? 'Actualización de Usuarios' : 'Registro de Usuario' }}</h1>
 
-      <mat-form-field class="example-full-width" *ngIf="edicion">
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" />
-        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
-          El Código es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-      <br />
+  <form [formGroup]="form" (ngSubmit)="aceptar()">
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Username</mat-label>
-        <input matInput placeholder="Ex. Camisamorada" formControlName="nombre" />
-        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
-          El usuario es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-      <br />
-      <mat-radio-group
-        aria-label="Select an option"
-        [ngModel]="status"
-        formControlName="estado"
-      >
-        <mat-radio-button [value]="true">Activo</mat-radio-button>
-        <mat-radio-button [value]="false">Inactivo</mat-radio-button>
-      </mat-radio-group>
-      <br />
-      
-      <mat-form-field class="example-full-width">
-        <mat-label>Contraseña</mat-label>
-        <input matInput placeholder="Ex. Camisamorada" formControlName="contrasenia" />
-        <mat-error *ngIf="form.get('contrasenia')?.hasError('required')">
-          La contraseña es obligatorio!!
-        </mat-error>
-         </mat-form-field>
-      <button matButton="outlined">Aceptar</button>
-    </form>
-  </div>
+    <!-- Campo ID (solo en edición) -->
+    <mat-form-field *ngIf="edicion">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="codigo" readonly />
+      <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+        El código es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Username -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Ej: Camisamorada" formControlName="nombre" />
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+        El usuario es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botones Activo/Inactivo -->
+    <mat-radio-group formControlName="estado" aria-label="Selecciona estado">
+      <mat-radio-button [value]="true">Activo</mat-radio-button>
+      <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+    </mat-radio-group>
+
+    <!-- Campo Contraseña -->
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" placeholder="********" formControlName="contrasenia" />
+      <mat-error *ngIf="form.get('contrasenia')?.hasError('required')">
+        La contraseña es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botón Aceptar -->
+    <div style="text-align: center;">
+      <button matButton="outlined" type="submit">
+        Aceptar
+      </button>
+    </div>
+
+  </form>
 </div>
-

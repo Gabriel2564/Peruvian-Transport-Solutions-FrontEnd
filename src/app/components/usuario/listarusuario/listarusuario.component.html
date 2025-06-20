@@ -1,58 +1,74 @@
-<div class="container">
-  <div class="topbar">
-  <div class="left">
-  <!-- Logo -->
-  <img src="LOGOBUS.jpg" alt="Logo" class="logo" />
+<!-- Fuente personalizada -->
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:ital,wght@0,800&display=swap" rel="stylesheet">
 
-  <!-- Menú de navegación -->
-    <nav class="nav-links">
-  <span class="nav-item">Usuarios</span>
-  <span class="nav-item">Roles</span>
-  <span class="nav-item">Reserva</span>
-  <span class="nav-item">Boleto</span>
-  <span class="nav-item">Bus</span>
-  <span class="nav-item">Viaje</span>
-  <span class="nav-item">Ruta</span>
-  <span class="nav-item">Asiento</span>
-  <span class="nav-item">Estado</span>
-  <span class="nav-item">Item por usuario</span>
-  <span class="nav-item">Items</span>
-  <span class="nav-item">Reseña</span>
-  <span class="nav-item">Pagos</span>
-</nav>
+<div class="container">
+  <!-- BARRA SUPERIOR -->
+  <div class="topbar">
+    <div class="left">
+      <img src="LOGOBUS.jpg" alt="Logo" class="logo" />
+      <nav class="nav-links">
+        <span class="nav-item">PERUVIAN</span>
+        <span class="nav-item">TRANSPORT</span>
+        <span class="nav-item">SOLUTIONS</span>
+        <span class="nav-item">Usuarios</span>
+        <span class="nav-item">Roles</span>
+        <span class="nav-item">Reserva</span>
+        <span class="nav-item">Boleto</span>
+        <span class="nav-item">Bus</span>
+        <span class="nav-item">Viaje</span>
+        <span class="nav-item">Ruta</span>
+        <span class="nav-item">Asiento</span>
+        <span class="nav-item">Estado</span>
+        <span class="nav-item">Item por usuario</span>
+        <span class="nav-item">Items</span>
+        <span class="nav-item">Reseña</span>
+        <span class="nav-item">Pagos</span>
+      </nav>
+    </div>
+    <div class="right">
+      <img src="icono-perfil.png" class="avatar" alt="Usuario" />
+      <span class="username">Hola</span>
+    </div>
   </div>
-  <div class="right">
-    <img src="icono-perfil.png" class="avatar" alt="Usuario" />
-    <span class="username">Hola</span>
-  </div>
-</div>
-  
+
+  <!-- TÍTULO -->
   <div style="text-align: center; margin: 5%">
     <h1>Lista de Usuarios</h1>
   </div>
-  <div class="card-container">
-  <mat-card *ngFor="let element of dataSource.data" class="usuario-card" appearance="outlined">
-    <img mat-card-image src="hellokitty.jpg" alt="Foto de usuario" class="coner-icon" />
-    <mat-card-header>
-    <mat-card-title>ID: {{ element.id }}</mat-card-title>
-    <mat-card-subtitle>Usuario: {{ element.username }}</mat-card-subtitle>
-  </mat-card-header>
 
+  <!-- CONTENEDOR MARRÓN con todo lo visual principal -->
+  <div class="contenedor-marron">
+    <!-- Línea agregar usuario -->
+    <div class="linea-con-agregar">
+      <span class="mensaje">¿Deseas agregar un usuario?</span>
+      <button mat-raised-button class="boton-agregar" [routerLink]="['insertarusuario']">
+        <mat-icon>person_add</mat-icon> Agregar Usuario
+      </button>
+    </div>
 
-  <mat-card-content>
-    <p><strong>Contraseña:</strong> {{ element.password }}</p>
-    <p><strong>Estado:</strong> {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
-  </mat-card-content>
+    <hr class="linea-blanca" />
 
-  <mat-card-actions>
-    <button mat-button color="warn" (click)="eliminar(element.id)">
-      <mat-icon>delete_outline</mat-icon> Eliminar
-    </button>
-    <button mat-button color="primary" [routerLink]="['/ediciones', element.id]">
-      <mat-icon>edit</mat-icon> Actualizar
-    </button>
-  </mat-card-actions>
-</mat-card>
+    <!-- Cards de usuario -->
+    <div class="card-container">
+      <mat-card *ngFor="let element of dataSource.data" class="usuario-card" appearance="outlined">
+        <img mat-card-image src="hellokitty.jpg" alt="Foto de usuario" class="corner-icon" />
+        <mat-card-header>
+          <mat-card-title>ID: {{ element.id }}</mat-card-title>
+          <mat-card-subtitle>Usuario: {{ element.username }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Contraseña:</strong> {{ element.password }}</p>
+          <p><strong>Estado:</strong> {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="warn" (click)="eliminar(element.id)">
+            <mat-icon>delete_outline</mat-icon> Eliminar
+          </button>
+          <button mat-button color="primary" [routerLink]="['ediciones', element.id]">
+            <mat-icon>edit</mat-icon> Actualizar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>
-</div>
-

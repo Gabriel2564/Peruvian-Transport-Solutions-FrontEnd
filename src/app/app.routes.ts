@@ -4,16 +4,15 @@ import { ListarusuarioComponent } from './components/usuario/listarusuario/lista
 import { InsertarusuarioComponent } from './components/usuario/insertarusuario/insertarusuario.component';
 
 export const routes: Routes = [
-  {
-    path: 'rutausuario',
-    component: UsuarioComponent,
-    children: [
-      { path: 'listarusuario', component: ListarusuarioComponent }
-    ]
-  },
-  {
-    path: 'ediciones/:id',
-    component: InsertarusuarioComponent
-  }
+ {
+  path: 'rutausuario',
+  component: UsuarioComponent,
+  children: [
+    { path: 'listarusuario', component: ListarusuarioComponent },
+    { path: 'insertarusuario', component: InsertarusuarioComponent },
+    { path: 'ediciones/:id', component: InsertarusuarioComponent },
+  ]
+}
+
 ];
 

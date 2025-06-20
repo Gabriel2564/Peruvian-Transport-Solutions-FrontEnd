@@ -21,7 +21,7 @@ export class UsuarioService {
   }
   
   insert(u:Usuario){
-    return this.http.post(`${this.url}/inseratr`,u)
+    return this.http.post(`${this.url}/insertar`,u)
   }
   setList(listaNueva:Usuario[]){
     this.listaCambio.next(listaNueva)

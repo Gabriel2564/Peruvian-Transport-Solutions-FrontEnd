@@ -49,17 +49,18 @@ export class InsertarusuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      //actualizar trae data
-      this.init();
-    });
+    
  this.form = this.formBuilder.group({
       codigo: [''],
       nombre: ['', Validators.required],
       contrasenia: ['', Validators.required],
        estado: [true],
+    });
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      //actualizar trae data
+      this.init();// solo si estamos editando
     });
   }
 aceptar(): void {
@@ -67,6 +68,7 @@ aceptar(): void {
     this.usuario.id = +this.form.value.codigo;
     this.usuario.username = this.form.value.nombre;
     this.usuario.password = this.form.value.contrasenia;
+    this.usuario.enabled = this.form.value.estado;
 
     if (this.edicion) {
        //actualizar
@@ -91,11 +93,12 @@ aceptar(): void {
   init(): void {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
-        this.form= new FormGroup({
-          codigo: new FormGroup(data.id),
-          nombre: new FormGroup(data.username),
-          contrasenia: new FormGroup(data.password),
-        });
+         this.form.patchValue({
+      codigo: data.id,
+      nombre: data.username,
+      contrasenia: data.password,
+      estado: data.enabled,
+    });
       });
     }
   }
