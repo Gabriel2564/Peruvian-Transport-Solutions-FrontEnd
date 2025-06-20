@@ -10,6 +10,7 @@ import { InsertarrolComponent } from './components/rol/insertarrol/insertarrol.c
 
 import { EstadoComponent } from './components/estado/estado.component';
 import { InsertarestadoComponent } from './components/estado/insertarestado/insertarestado.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 
 export const routes: Routes = [
@@ -54,7 +55,7 @@ export const routes: Routes = [
         path:'actualizaciones/:id', component:InsertarrolComponent
       }
     ]
-}
+},
 
 {
   path:'rutaEstado', component:EstadoComponent,
