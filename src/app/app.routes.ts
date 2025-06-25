@@ -11,6 +11,8 @@ import { InsertarrolComponent } from './components/rol/insertarrol/insertarrol.c
 import { EstadoComponent } from './components/estado/estado.component';
 import { InsertarestadoComponent } from './components/estado/insertarestado/insertarestado.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { BusComponent } from './components/bus/bus.component';
+import { ListarbusComponent } from './components/bus/listarbus/listarbus.component';
 
 
 export const routes: Routes = [
@@ -70,6 +72,13 @@ export const routes: Routes = [
   ]
 },
 
-
+{
+  path:'rutaBus', component:BusComponent,
+  children:[
+    {
+      path:'listar', component:ListarbusComponent
+    }
+  ]
+},
 ];
 
