@@ -1,1 +1,37 @@
-<p>insertarviaje works!</p>
+<div class="container">
+  <div style="text-align: center;margin: 5%;"><h1>Registro de viajes</h1></div>
+  <div style="text-align: center;margin: 5%;">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Tecnología</mat-label>
+        <input matInput placeholder="Ex. VSCode" formControlName="nombre" />
+        <mat-error *ngIf="form.get('departureDateViaje')?.hasError('required')">
+          El nombre es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Fabricante</mat-label>
+        <input matInput placeholder="IBM" formControlName="fabricante" />
+        <mat-error *ngIf="form.get('priceViaje')?.hasError('required')">
+          El fabricante es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Favorite food</mat-label>
+        <mat-select formControlName="apli">
+          @for (food of listaRuta; track food) {
+            <mat-option [value]="food.idRuta">{{food.idRuta}}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('apli')?.hasError('required')">
+          La app es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <button matButton="outlined">Aceptar</button>
+
+    </form>
+  </div>
+</div>
