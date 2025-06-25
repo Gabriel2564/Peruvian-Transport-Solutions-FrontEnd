@@ -6,25 +6,20 @@
     <div style="margin: 5%;">
       <form [formGroup]="form" (ngSubmit)="aceptar()">
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>ID</mat-label>
-          <input matInput formControlName="id" />
-          <mat-error *ngIf="form.get('id')?.hasError('required')">
-            El título es obligatorio.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Rol</mat-label>
           <input matInput formControlName="rol" />
-          <mat-error *ngIf="form.get('rol')?.hasError('required')">
-            El título es obligatorio.
-          </mat-error>
+           @for (food of opciones; track food) {
+          <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+          }
         </mat-form-field>
   
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Usuario</mat-label>
           <textarea matInput formControlName="usuario" rows="4"></textarea>
-          <mat-error *ngIf="form.get('usuario.id')?.hasError('required')">
+           @for (food of listaUsuarios; track food) {
+          <mat-option [value]="food.id">{{ food.username }}</mat-option>
+          }
+          <mat-error *ngIf="form.get('usu')?.hasError('required')">
             La descripción es obligatoria.
           </mat-error>
         </mat-form-field>

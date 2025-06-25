@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { Usuario } from '../../../models/Usuario';
+import { UsuarioService } from '../../../services/Usuario.service';
 
 
 @Component({
@@ -31,60 +33,41 @@ export class InsertarrolComponent implements OnInit{
   edicion: boolean = false;
   id: number = 0
 
+  opciones:{value:string,viewValue:string}[]=[
+    {value:'ADMINISTRADOR',viewValue:'ADMINISTRADOR'},
+    {value:'TURISTA',viewValue:'TURISTA'},
+    {value:'CONDUCTOR',viewValue:'CONDUCTOR'},
+  ]
+
+  listaUsuarios:Usuario[]=[]
+
   constructor(
     private rS: RolService,
     private formBuilder: FormBuilder,
     private router: Router,  
-    private route:ActivatedRoute
+    private uS:UsuarioService
   ) {}
 
-  ngOnInit(): void { //se ejecuta primero
-    this.route.params.subscribe((data:Params)=>{
-      this.id=data['id']
-      this.edicion=data['id']!=null //boleano
-      //actualiza y trae la data
-      this.init()
-    });
+  ngOnInit(): void {
     this.form = this.formBuilder.group({
-      id:[''],
-      rol: ['', Validators.required],
-      usuario: ['', Validators.required],
+      nombre: ['', Validators.required],
+      usu: ['', Validators.required],
     });
+    this.uS.list().subscribe(data=>{
+      this.listaUsuarios=data
+    })
   }
 
-  aceptar() {
+ aceptar() {
     if (this.form.valid) {
-      this.rol.id = this.form.value.id;
-      this.rol.rol = this.form.value.rol;
-      this.rol.usuario = this.form.value.usuario.id;
-      if (this.edicion) {
-        //actualizar
-        this.rS.update(this.rol).subscribe(() => {
-          this.rS.list().subscribe((data) => {
-            this.rS.setList(data);
-          });
-        });
-      } else {
-        //insertar
-        this.rS.insert(this.rol).subscribe(() => {
-          this.rS.list().subscribe((data) => {
-            this.rS.setList(data);
-          });
-        });
-      }
-      this.router.navigate(['rutaRol']);
-    }
-  }
-
-  init() {
-    if (this.edicion) {
-      this.rS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          id: new FormControl(data.id),
-          rol: new FormControl(data.rol),
-          usuario: new FormControl(data.usuario.id),
+      this.rol.rol = this.form.value.nombre;
+      this.rol.usuario.id = this.form.value.usu;
+      this.rS.insert(this.rol).subscribe((data) => {
+        this.rS.list().subscribe((data) => {
+          this.rS.setList(data);
         });
       });
+      this.router.navigate(['rutaRol'])
     }
   }
 
