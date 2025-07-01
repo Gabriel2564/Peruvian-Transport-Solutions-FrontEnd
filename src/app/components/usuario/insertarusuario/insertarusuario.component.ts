@@ -38,7 +38,10 @@ export class InsertarusuarioComponent implements OnInit {
   usuario: Usuario = new Usuario();
   id: number = 0;
   edicion: boolean = false;
-
+  types:{ value: string; viewValue: string }[] = [
+    { value: 'Disponible', viewValue: 'Disponible' },
+    { value: 'Ocupado', viewValue: 'Ocupado' },
+  ];
   constructor(
     private uS: UsuarioService,
     private formBuilder: FormBuilder,
@@ -47,21 +50,14 @@ export class InsertarusuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      nombre: ['', Validators.required],
-      contrasenia: ['', Validators.required],
-      estado: [true], // agregado para el radio button
-    });
-
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
       this.edicion = this.id != null;
       this.init();
     });
   }
 
-  aceptar(): void {
+  aceptar() {
     if (this.form.valid) {
       this.usuario.id = this.form.value.codigo;
       this.usuario.username = this.form.value.nombre;
@@ -86,14 +82,14 @@ export class InsertarusuarioComponent implements OnInit {
     }
   }
 
-  init(): void {
+  init(){
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
-        this.form.patchValue({
-          codigo: data.id,
-          nombre: data.username,
-          contrasenia: data.password,
-          estado: data.enabled,
+        this.form=this.formBuilder.group({
+          codigo: [data.id,Validators.required],
+          nombre: [data.username,Validators.required],
+          contrasenia:[data.password,Validators.required],
+          estado: [data.enabled,Validators.required],
         });
       });
     }
