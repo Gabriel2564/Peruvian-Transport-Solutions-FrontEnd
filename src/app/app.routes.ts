@@ -15,6 +15,9 @@ import { ViajeComponent } from './components/viaje/viaje.component';
 import { InsertarviajeComponent } from './components/viaje/insertarviaje/insertarviaje.component';
 import { BusComponent } from './components/bus/bus.component';
 import { ListarbusComponent } from './components/bus/listarbus/listarbus.component';
+import { Usuario } from './models/Usuario';
+import { InsertarusuarioComponent } from './components/usuario/insertarusuario/insertarusuario.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
 
 
 export const routes: Routes = [
@@ -22,6 +25,18 @@ export const routes: Routes = [
     path: '',
     component: LandingComponent
   },
+  {
+  path:'rutaUsuario', component:UsuarioComponent,
+  children:[
+    {
+      path:'insertar', component:InsertarusuarioComponent
+    },
+
+    {
+      path:'actualizaciones/:id', component:InsertarusuarioComponent
+    }
+  ]
+},
   {
   path:'rutaPago', component:PagoComponent,
   children:[
