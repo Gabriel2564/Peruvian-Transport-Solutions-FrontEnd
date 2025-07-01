@@ -1,5 +1,5 @@
 <!-- Fuente personalizada -->
-<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:ital,wght@0,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:ital,wght@0,800&display=swap" rel="stylesheet" />
 
 <div class="container">
   <!-- BARRA SUPERIOR -->
@@ -33,7 +33,7 @@
 
   <!-- TÍTULO -->
   <div style="text-align: center; margin: 5%">
-    <h1>Lista de Usuarios</h1>
+    <h1 style="font-family: 'Abhaya Libre', serif; font-weight: 800;">Lista de Usuarios</h1>
   </div>
 
   <!-- CONTENEDOR MARRÓN con todo lo visual principal -->
@@ -41,7 +41,7 @@
     <!-- Línea agregar usuario -->
     <div class="linea-con-agregar">
       <span class="mensaje">¿Deseas agregar un usuario?</span>
-      <button mat-raised-button class="boton-agregar" [routerLink]="['insertarusuario']">
+      <button mat-raised-button class="boton-agregar" color="primary" [routerLink]="['listarusuario']" aria-label="Agregar usuario">
         <mat-icon>person_add</mat-icon> Agregar Usuario
       </button>
     </div>
@@ -61,11 +61,11 @@
           <p><strong>Estado:</strong> {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button color="warn" (click)="eliminar(element.id)">
-            <mat-icon>delete_outline</mat-icon> Eliminar
+          <button mat-icon-button color="warn" (click)="eliminar(element.id)" aria-label="Eliminar usuario">
+            <mat-icon>delete_outline</mat-icon>
           </button>
-          <button mat-button color="primary" [routerLink]="['ediciones', element.id]">
-            <mat-icon>edit</mat-icon> Actualizar
+          <button mat-icon-button color="primary" [routerLink]="['/rutausuario/ediciones', element.id]" aria-label="Actualizar usuario">
+            <mat-icon>edit</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>

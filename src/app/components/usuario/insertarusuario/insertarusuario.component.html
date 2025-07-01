@@ -3,7 +3,8 @@
 
 <div class="formulario-marron">
   <!-- Título dinámico según acción -->
-  <h1>{{ edicion ? 'Actualización de Usuarios' : 'Registro de Usuario' }}</h1>
+  <div style="text-align: center;margin: 5%;"><h1>Registro de aplicaciones</h1></div>
+  <div style="text-align: center;margin: 5%;">
 
   <form [formGroup]="form" (ngSubmit)="aceptar()">
 
@@ -15,7 +16,7 @@
         El código es obligatorio.
       </mat-error>
     </mat-form-field>
-
+<br />
     <!-- Campo Username -->
     <mat-form-field>
       <mat-label>Username</mat-label>
@@ -24,13 +25,17 @@
         El usuario es obligatorio.
       </mat-error>
     </mat-form-field>
-
+<br />
     <!-- Botones Activo/Inactivo -->
-    <mat-radio-group formControlName="estado" aria-label="Selecciona estado">
+    <mat-radio-group 
+    formControlName="estado" 
+    aria-label="Selecciona estado"
+    [ngModel]="status"
+    >
       <mat-radio-button [value]="true">Activo</mat-radio-button>
       <mat-radio-button [value]="false">Inactivo</mat-radio-button>
     </mat-radio-group>
-
+<br />
     <!-- Campo Contraseña -->
     <mat-form-field>
       <mat-label>Contraseña</mat-label>
@@ -39,13 +44,12 @@
         La contraseña es obligatoria.
       </mat-error>
     </mat-form-field>
-
+<br />
     <!-- Botón Aceptar -->
     <div style="text-align: center;">
-      <button matButton="outlined" type="submit">
-        Aceptar
-      </button>
+     <button matButton="outlined">Aceptar</button>
     </div>
 
   </form>
+</div>
 </div>

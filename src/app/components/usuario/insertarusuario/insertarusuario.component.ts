@@ -90,15 +90,15 @@ aceptar(): void {
 }
 
 
-  init(): void {
+  init() {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
-         this.form.patchValue({
-      codigo: data.id,
-      nombre: data.username,
-      contrasenia: data.password,
-      estado: data.enabled,
-    });
+         this.form = new FormGroup({
+          codigo: new FormControl(data.id),
+          nombre: new FormControl(data.username),
+          contrasenia:new FormControl (data.password),
+          estado: new FormControl(data.enabled),
+        });
       });
     }
   }
