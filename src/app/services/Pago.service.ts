@@ -17,4 +17,5 @@ export class PagoService {
   list(){
     return this.http.get<Pago[]>(this.url)
   }
+  
 }
