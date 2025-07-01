@@ -1,1 +1,36 @@
-<p>insertarrol works!</p>
+<div class="container">
+    <div style="text-align: center; margin: 5%;">
+      <h1>{{ edicion ? 'Actualizar' : 'Registrar' }} Item</h1>
+    </div>
+  
+    <div style="margin: 5%;">
+      <form [formGroup]="form" (ngSubmit)="aceptar()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Rol</mat-label>
+          <input matInput formControlName="rol" />
+           @for (food of opciones; track food) {
+          <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+          }
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <textarea matInput formControlName="usuario" rows="4"></textarea>
+           @for (food of listaUsuarios; track food) {
+          <mat-option [value]="food.id">{{ food.username }}</mat-option>
+          }
+          <mat-error *ngIf="form.get('usu')?.hasError('required')">
+            La descripción es obligatoria.
+          </mat-error>
+        </mat-form-field>
+  
+  
+        <div style="text-align: center; margin-top: 20px;">
+          <button mat-raised-button color="primary" type="submit">
+            {{ edicion ? 'Actualizar' : 'Registrar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

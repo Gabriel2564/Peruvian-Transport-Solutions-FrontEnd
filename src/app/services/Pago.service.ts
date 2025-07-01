@@ -10,12 +10,10 @@ const base_url = environment.base
   providedIn: 'root',
 })
 export class PagoService {
-  private url = `${base_url}/pagos`;
+  private url = `${base_url}/payments`;
   private listaCambio = new Subject<Pago[]>();
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Pago[]>(this.url)
+    return this.http.get<Pago[]>(`${this.url}/listar`)
   }
-  
-}

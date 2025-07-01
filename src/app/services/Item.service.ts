@@ -10,11 +10,43 @@ const base_url = environment.base
   providedIn: 'root',
 })
 export class ItemService {
-  private url = `${base_url}/items`;
+  private url = `${base_url}/item`;
   private listaCambio = new Subject<Item[]>();
   constructor(private http: HttpClient) {}
   
   list(){
-    return this.http.get<Item[]>(this.url)
+    return this.http.get<Item[]>(`${this.url}/listar`)
   }
+
+  insert(item: Item) {
+    return this.http.post(`${this.url}/insertar`, item);
+  }
+
+  setList(listaNueva:Item[]){
+    this.listaCambio.next(listaNueva)
+  }
+
+  update(item: Item) {
+    return this.http.put(`${this.url}/modificar`, item);
+  }
+
+  deleteI(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  listId(id: number) {
+    return this.http.get<Item>(`${this.url}/listar/${id}`);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
+  }
+
+
+
 }
+
+
+
+
+

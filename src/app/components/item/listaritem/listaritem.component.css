@@ -1,0 +1,29 @@
+.contenedor-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tarjeta {
+  width: 260px;
+  background-color: #f8eed9;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+mat-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}

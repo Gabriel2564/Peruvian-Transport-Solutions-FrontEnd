@@ -15,6 +15,30 @@ export class BusService {
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Bus[]>(this.url)
+    return this.http.get<Bus[]>(`${this.url}/listar`)
+  }
+
+  insert(b: Bus){
+    this.http.post(`${this.url}/insertar`, b);
+  }
+
+  setList(listaNueva: Bus[]){
+    this.listaCambio.next(listaNueva);
+  }
+
+  getList(){
+    return this.listaCambio.asObservable();
+  }
+
+  listId(id: number){
+    return this.http.get<Bus>(`${this.url}/${id}`);
+  }
+
+  update(b: Bus){
+    return this.http.put(this.url, b);
+  }
+
+  delete(id: number){
+    return this.http.delete(`${this.url}/${id}`);
   }
 }

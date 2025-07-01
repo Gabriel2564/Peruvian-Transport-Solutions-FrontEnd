@@ -1,1 +1,40 @@
-<p>listarestado works!</p>
+
+<h1 class="titulo">Lista de Estados</h1>
+
+<div class="buscar-container">
+  <label>Buscar Estado por Tipo:</label>
+  <input matInput placeholder="Ingrese el tipo de estado" />
+  <button class="buscar-btn">Buscar</button>
+</div>
+
+<div class="agregar-container">
+  <span>Deseas agregar un estado: Haz click aquí</span>
+  <button class="agregar-btn" [routerLink]="['/rutaEstado/insertar']">
+    <mat-icon>add</mat-icon> Agregar estado
+  </button>
+</div>
+
+<div class="contenedor-tarjetas">
+  <div class="tarjeta" *ngFor="let element of dataSource.data">
+    <p><strong>Codigo:</strong> {{ element.idEstado }}</p>
+    <p>
+      <strong>Tipo de Estado:</strong> {{ element.statusTypeEstado }}
+      <span
+        class="cuadro-estado"
+        [ngStyle]="{
+          'background-color':
+            element.statusTypeEstado === 'Ocupado' ? 'red' : 'limegreen'
+        }"
+      ></span>
+    </p>
+    <hr />
+    <div class="acciones">
+      <button mat-icon-button color="primary" [routerLink]="['actualizaciones', element.idEstado]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="eliminar(element.idEstado)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

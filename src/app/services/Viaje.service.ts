@@ -15,6 +15,15 @@ export class ViajeService {
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Viaje[]>(this.url)
+    return this.http.get<Viaje[]>(`${this.url}/listar`)
+  }
+  insert(viaje: Viaje) {
+    return this.http.post(`${this.url}/insertar`, viaje);
+  }
+   getList() {
+    return this.listaCambio.asObservable();
+  }
+    setList(listaNueva: Viaje[]) {
+    this.listaCambio.next(listaNueva);
   }
 }

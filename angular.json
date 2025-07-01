@@ -21,10 +21,8 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
@@ -101,6 +99,6 @@
     }
   },
   "cli": {
-    "analytics": "a8d303cd-57d5-49d8-a1cb-ec13661e8ed1"
+
   }
 }

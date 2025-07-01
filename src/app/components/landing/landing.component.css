@@ -1,0 +1,253 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: white;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 50px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  height: 42px;
+}
+
+.brand-text {
+  font-family: 'Georgia', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.7px;
+  color: #a0843a;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav a {
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.login-btn {
+  background-color: #8c6f28;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 18px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s;
+}
+
+.login-btn:hover {
+  transform: scale(1.03);
+}
+
+.lang-btn {
+  background-color: #8c6f28;
+  color: white;
+  border: 1px solid black;
+  padding: 8px 16px;
+  border-radius: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.lang-btn img.icono-global {
+  height: 20px;
+  margin: 0;
+}
+
+/* HERO */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('/assets/images/fondo.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-left: 60px;
+  padding-top: 120px;
+}
+
+.overlay {
+  display: none;
+}
+
+.main-content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.main-content h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  color: #f4dc90;
+  font-family: 'Georgia', serif;
+  font-weight: 700;
+}
+
+.main-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: white;
+}
+
+.cta-button {
+  margin-top: 30px;
+  background-color: #6a5f2c;
+  color: white;
+  border: none;
+  padding: 16px 38px;
+  border-radius: 18px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* SERVICIOS */
+.servicios-wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+.servicios-header {
+  background-color: white;
+  padding: 80px 60px 0;
+  text-align: center;
+}
+
+.servicios-header h2 {
+  font-family: 'Georgia', serif;
+  font-size: 2.8rem;
+  color: black;
+  margin: 0;
+  padding-bottom: 40px;
+}
+
+.servicios-section {
+  background-color: #665826;
+  padding: 60px;
+  text-align: center;
+}
+
+.servicios-section .intro {
+  font-size: 1.2rem;
+  max-width: 900px;
+  margin: 0 auto 60px auto;
+  line-height: 1.8;
+  color: white;
+}
+
+.servicios-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.card {
+  background-color: #d6a82c;
+  border-radius: 12px;
+  padding: 32px 20px;
+  width: 220px;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-family: 'Georgia', serif;
+  color: #231f0e;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 40px 20px;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+  }
+
+  .main-content {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .servicios-grid {
+    gap: 20px;
+  }
+
+  .card {
+    width: 160px;
+    height: auto;
+    padding: 24px 16px;
+  }
+
+  .card img {
+    max-height: 120px;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+  }
+}

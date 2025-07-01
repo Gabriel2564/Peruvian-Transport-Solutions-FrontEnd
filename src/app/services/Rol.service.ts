@@ -15,6 +15,30 @@ export class RolService {
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Rol[]>(this.url)
+    return this.http.get<Rol[]>(`${this.url}/listar`)
+  }
+
+  insert(rol: Rol){
+      return this.http.post(`${this.url}/insertar`, rol);
+  }
+
+  setList(listaNueva:Rol[]){
+    this.listaCambio.next(listaNueva)
+  }
+
+  update(rol: Rol) {
+    return this.http.put(`${this.url}/modificar`, rol);
+  }
+
+  deleteI(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  listId(id: number) {
+    return this.http.get<Rol>(`${this.url}/listar${id}`);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
   }
 }

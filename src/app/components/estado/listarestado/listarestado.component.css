@@ -1,0 +1,75 @@
+.titulo {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 32px;
+}
+
+.buscar-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.buscar-btn {
+  background-color: #8b6a2f;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.agregar-container {
+  background-color: black;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.agregar-btn {
+  margin-left: 10px;
+  background-color: #b58f35;
+  border: none;
+  border-radius: 15px;
+  padding: 8px 16px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+mat-icon {
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.contenedor-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 30px;
+}
+
+.tarjeta {
+  width: 240px;
+  background-color: #fbf1dc;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cuadro-estado {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
