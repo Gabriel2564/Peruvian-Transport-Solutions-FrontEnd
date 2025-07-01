@@ -1,4 +1,3 @@
-import { environment } from "../../environments/environment"
 import { Rol } from "./Rol"
 
 export class Usuario{
@@ -6,5 +5,5 @@ export class Usuario{
     username: string = ""
     password: string = ""
     enabled: Boolean = false
-    roles: Rol[] = []
+    roles: Rol = new Rol()
 }
