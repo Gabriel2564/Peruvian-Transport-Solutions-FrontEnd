@@ -40,5 +40,4 @@ export class PagoService {
   getList() {
     return this.listaCambio.asObservable();
   }
-
 }
