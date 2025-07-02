@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Viaje } from "../models/Viaje";
 import { HttpClient } from "@angular/common/http";
+import { ViajeByRutaDTO } from "../models/ViajeByRutaDTO";
 
 const base_url = environment.base
 
@@ -25,5 +26,9 @@ export class ViajeService {
   }
     setList(listaNueva: Viaje[]) {
     this.listaCambio.next(listaNueva);
+  }
+
+  getQuantity():Observable<ViajeByRutaDTO[]>{
+    return this.http.get<ViajeByRutaDTO[]>(`${this.url}/viajePorRuta`);
   }
 }

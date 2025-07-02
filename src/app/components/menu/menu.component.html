@@ -47,6 +47,11 @@
     Bus
   </button>
 
+  <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
+        <mat-icon>library_books</mat-icon>
+       Reportes
+  </button>
+
   <!-- EXIT -->
   <button mat-button [routerLink]="['/login']" class="btn-rojo exit-btn">
     <mat-icon>exit_to_app</mat-icon>
@@ -95,3 +100,9 @@
 <mat-menu #menuBus="matMenu">
   <button mat-menu-item routerLink="/rutaBus/listar">Listar</button>
 </mat-menu>
+
+<!-- MENU REPORTES -->
+<mat-menu #menuReportes="matMenu">
+  <button mat-menu-item routerLink="/rutareportes">Reporte Viaje Por Ruta</button>
+  <button mat-menu-item routerLink="/rutareportes/userbyrol">Reporte Usuario por Rol</button>
+ </mat-menu>

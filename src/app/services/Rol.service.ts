@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Rol } from "../models/Rol";
 import { HttpClient } from "@angular/common/http";
+import { UserByRolDTO } from "../models/UserByRol";
 
 const base_url = environment.base
 
@@ -40,5 +41,9 @@ export class RolService {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+
+  getQuantity():Observable<UserByRolDTO[]>{
+      return this.http.get<UserByRolDTO[]>(`${this.url}/totalDeUsuariosPorRol`);
   }
 }

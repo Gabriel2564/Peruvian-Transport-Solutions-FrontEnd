@@ -23,6 +23,9 @@ import { ReseniaComponent } from './components/resenia/resenia.component';
 import { InsertarreseniaComponent } from './components/resenia/insertarresenia/insertarresenia.component';
 import { ListarreseniaComponent } from './components/resenia/listarresenia/listarresenia.component';
 import { LoginComponent } from './components/login/login.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
+import { ReporteviajebyrutaComponent } from './components/reportes/reporteviajebyruta/reporteviajebyruta.component';
+import { ReporteuserbyrolComponent } from './components/reportes/reporteuserbyrol/reporteuserbyrol.component';
 
 
 
@@ -106,5 +109,15 @@ export const routes: Routes = [
       component: InsertarrolComponent
     }
   ]
-}
+},
+{
+    path: 'rutareportes',
+    component: ReportesComponent,
+    children: [
+    {
+      path: 'userbyrol',
+      component: ReporteuserbyrolComponent
+    }
+    ],
+  },
 ];
