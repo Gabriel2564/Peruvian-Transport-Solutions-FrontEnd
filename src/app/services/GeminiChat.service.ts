@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class GeminiChatService {
 
   // Pon tu API Key real aquí
-  private readonly API_KEY = 'AIzaSyDfrY-PN-RCVUoXzIulrHG53BBgf4mHiEE';
+  private readonly API_KEY = 'AIzaSyARYjbpblkkfNY9QvmBHoMyoKdqb7DzjIo';
 
   private readonly GEMINI_API_URL =
     'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + this.API_KEY;
