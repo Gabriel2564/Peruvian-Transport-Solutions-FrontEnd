@@ -1,22 +1,30 @@
-<mat-card class="card_usuario" appearance="outlined" *ngFor="let element of usuarios">
-  <mat-card-header>
-    <img
-      mat-card-avatar
-      [src]="'https://randomuser.me/api/portraits/lego/' + element.id + '.jpg'"
-      alt="Avatar"
-    />
-    <mat-card-title>{{ element.id }}</mat-card-title>
-  </mat-card-header>
+<div class="card-container">
+  <mat-card
+    class="card_usuario"
+    appearance="outlined"
+    *ngFor="let element of usuarios"
+  >
+    <mat-card-header>
+      <img
+        mat-card-avatar
+        [src]="'https://randomuser.me/api/portraits/lego/' + element.id + '.jpg'"
+        alt="Avatar"
+      />
+      <mat-card-title>{{ element.id }}</mat-card-title>
+    </mat-card-header>
 
-  <mat-card-content>
-    <p>Username: {{ element.username }}</p>
-    <p>Password: {{ element.password }}</p>
-    <p>Estado: {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
-    <p>Rol: {{ element.roles?.rol}}</p>
-  </mat-card-content>
+    <mat-card-content>
+      <p>Username: {{ element.username }}</p>
+      <p>Password: {{ element.password }}</p>
+      <p>Estado: {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
+      <p>Rol: {{ element.roles.rol }}</p>
+    </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-stroked-button [routerLink]="['ediciones', element.id]">Actualizar</button>
-    <button mat-stroked-button (click)="eliminar(element.id)">Eliminar</button>
-  </mat-card-actions>
-</mat-card>
+    <mat-card-actions>
+      <button mat-stroked-button [routerLink]="['ediciones', element.id]"
+        >Actualizar</button
+      >
+      <button mat-stroked-button (click)="eliminar(element.id)">Eliminar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
