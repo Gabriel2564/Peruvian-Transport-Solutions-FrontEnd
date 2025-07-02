@@ -1,1 +1,4 @@
-<p>resenia works!</p>
+<router-outlet></router-outlet>
+<div [hidden]="route.children.length !== 0">
+  <app-listarresenia></app-listarresenia>
+</div>
