@@ -22,6 +22,10 @@ import { HomeComponent } from './components/home/home.component';
 import { ReseniaComponent } from './components/resenia/resenia.component';
 import { InsertarreseniaComponent } from './components/resenia/insertarresenia/insertarresenia.component';
 import { ListarreseniaComponent } from './components/resenia/listarresenia/listarresenia.component';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 82cb005e1f21e082fe5bc7c0be4b81b73ea9d08e
 import { LoginComponent } from './components/login/login.component';
 
 
