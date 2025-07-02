@@ -5,5 +5,5 @@ export class Usuario{
     username: string = ""
     password: string = ""
     enabled: Boolean = false
-    roles: Rol = new Rol()
+   roles: Rol = new Rol(); // inicializado para evitar undefined
 }

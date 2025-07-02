@@ -1,8 +1,10 @@
-button[matButton="outlined"] {
-  background-color: rgb(254, 251, 251);
-  border: none;
-  width: 50%;
-  box-shadow: none;
-  outline: none;
-  color: rgb(12, 19, 92)
- }
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* para que bajen de línea si no caben */
+  gap: 16px; /* espacio entre cards */
+  justify-content: center; /* opcional: centra horizontalmente */
+}
+
+.card_usuario {
+  width: 300px; /* puedes ajustar este ancho */
+}
