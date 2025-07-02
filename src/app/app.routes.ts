@@ -18,6 +18,9 @@ import { ListarbusComponent } from './components/bus/listarbus/listarbus.compone
 import { InsertarusuarioComponent } from './components/usuario/insertarusuario/insertarusuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HomeComponent } from './components/home/home.component';
+import { ReseniaComponent } from './components/resenia/resenia.component';
+import { InsertarreseniaComponent } from './components/resenia/insertarresenia/insertarresenia.component';
+import { ListarreseniaComponent } from './components/resenia/listarresenia/listarresenia.component';
 
 
 
@@ -51,64 +54,46 @@ export const routes: Routes = [
   ]
 },
 {
-  path:'rutaItem',component:ItemComponent,
-  children:[
-      {
-        path:'insertar', component:InsertaritemComponent
-      },
-
-      {
-        path:'actualizaciones/:id', component:InsertaritemComponent
-      }
-    ]
-},
-
-
-{
-  path:'rutaRol',component:RolComponent,
-  children:[
-      {
-        path:'insertar', component:InsertarrolComponent
-      },
-
-      {
-        path:'actualizaciones/:id', component:InsertarrolComponent
-      }
-    ]
-},
-
-{
-  path:'rutaEstado', component:EstadoComponent,
-  children:[
+  path: 'rutaResenia',
+  component: ReseniaComponent,
+  children: [
+     { path: '', component: ListarreseniaComponent }, // este path vacío actúa como default
     {
-      path:'insertar', component:InsertarestadoComponent
+      path: 'insertar',
+      component: InsertarreseniaComponent
     },
-
     {
-      path:'actualizaciones/:id', component:InsertarestadoComponent
+      path: 'actualizaciones/:id',
+      component: InsertarreseniaComponent
     }
   ]
 },
-
 {
-  path:'rutaViaje',component:ViajeComponent,
-  children:[
-      {
-        path:'insertar', component:InsertarviajeComponent,
-      },
-
-      {
-        path:'actualizaciones/:id', component:InsertarviajeComponent,
-      }
-    ]
-},
-
-{
-  path:'rutaBus', component:BusComponent,
-  children:[
+  path: 'rutaEstado',
+  component: EstadoComponent,
+  children: [
     {
-      path:'listar', component:ListarbusComponent,
+      path: 'insertar',
+      component: InsertarestadoComponent
+    },
+    {
+      path: 'actualizaciones/:id',
+      component: InsertarestadoComponent
     }
   ]
 },
+{
+  path: 'rutaRol',
+  component: RolComponent,
+  children: [
+    {
+      path: 'insertar',
+      component: InsertarrolComponent
+    },
+    {
+      path: 'actualizaciones/:id',
+      component: InsertarrolComponent
+    }
+  ]
+}
 ];
