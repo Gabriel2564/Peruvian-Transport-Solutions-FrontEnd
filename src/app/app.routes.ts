@@ -22,7 +22,6 @@ import { HomeComponent } from './components/home/home.component';
 import { ReseniaComponent } from './components/resenia/resenia.component';
 import { InsertarreseniaComponent } from './components/resenia/insertarresenia/insertarresenia.component';
 import { ListarreseniaComponent } from './components/resenia/listarresenia/listarresenia.component';
-=======
 import { LoginComponent } from './components/login/login.component';
 
 
