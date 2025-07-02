@@ -18,13 +18,23 @@ import { ListarbusComponent } from './components/bus/listarbus/listarbus.compone
 import { InsertarusuarioComponent } from './components/usuario/insertarusuario/insertarusuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 
 export const routes: Routes = [
   {
     path: '',
-    component:UsuarioComponent
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component:LoginComponent
+  },
+  {
+    path: 'home',
+    component:HomeComponent
   },
   {
   path:'rutaUsuario', component:UsuarioComponent,
