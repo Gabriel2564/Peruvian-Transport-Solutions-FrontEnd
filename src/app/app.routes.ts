@@ -10,20 +10,21 @@ import { InsertarrolComponent } from './components/rol/insertarrol/insertarrol.c
 
 import { EstadoComponent } from './components/estado/estado.component';
 import { InsertarestadoComponent } from './components/estado/insertarestado/insertarestado.component';
-import { LandingComponent } from './components/landing/landing.component';
 import { ViajeComponent } from './components/viaje/viaje.component';
 import { InsertarviajeComponent } from './components/viaje/insertarviaje/insertarviaje.component';
 import { BusComponent } from './components/bus/bus.component';
 import { ListarbusComponent } from './components/bus/listarbus/listarbus.component';
-import { Usuario } from './models/Usuario';
+
 import { InsertarusuarioComponent } from './components/usuario/insertarusuario/insertarusuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { HomeComponent } from './components/home/home.component';
+
 
 
 export const routes: Routes = [
   {
     path: '',
-    component: LandingComponent
+    component:UsuarioComponent
   },
   {
   path:'rutaUsuario', component:UsuarioComponent,
