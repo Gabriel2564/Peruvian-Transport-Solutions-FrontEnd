@@ -18,16 +18,28 @@ import { ListarbusComponent } from './components/bus/listarbus/listarbus.compone
 import { InsertarusuarioComponent } from './components/usuario/insertarusuario/insertarusuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HomeComponent } from './components/home/home.component';
+
 import { ReseniaComponent } from './components/resenia/resenia.component';
 import { InsertarreseniaComponent } from './components/resenia/insertarresenia/insertarresenia.component';
 import { ListarreseniaComponent } from './components/resenia/listarresenia/listarresenia.component';
+=======
+import { LoginComponent } from './components/login/login.component';
 
 
 
 export const routes: Routes = [
   {
     path: '',
-    component:UsuarioComponent
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component:LoginComponent
+  },
+  {
+    path: 'home',
+    component:HomeComponent
   },
   {
   path:'rutaUsuario', component:UsuarioComponent,

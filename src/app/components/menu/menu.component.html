@@ -1,10 +1,10 @@
-
 <mat-toolbar class="custom-toolbar">
     <!-- HOME -->
-  <button mat-button [matMenuTriggerFor]="menuHome" class="btn-rojo">
-    <mat-icon>home</mat-icon>
-    Home
-  </button>
+  <button mat-button class="btn-rojo" [routerLink]="['/home']">
+  <mat-icon>home</mat-icon>
+  Home
+</button>
+
   <!-- USUARIO -->
   <button mat-button [matMenuTriggerFor]="menuUsuario" class="btn-rojo">
     <mat-icon>person</mat-icon>
@@ -22,11 +22,7 @@
     <mat-icon>list</mat-icon>
     Item
   </button>
-  <!-- Resenia -->
-  <button mat-button [matMenuTriggerFor]="menuResenia" class="btn-rojo">
-    <mat-icon>assignment</mat-icon>
-    Resenia
-  </button>
+
   <!-- ROL -->
   <button mat-button [matMenuTriggerFor]="menuRol" class="btn-rojo">
     <mat-icon>admin_panel_settings</mat-icon>
@@ -50,6 +46,12 @@
     <mat-icon>directions_bus</mat-icon>
     Bus
   </button>
+
+  <!-- EXIT -->
+  <button mat-button [routerLink]="['/login']" class="btn-rojo exit-btn">
+    <mat-icon>exit_to_app</mat-icon>
+    Cerrar Sesión
+  </button>
 </mat-toolbar>
 
 <!-- MENU USUARIO -->
@@ -57,10 +59,7 @@
   <button mat-menu-item routerLink="/rutaUsuario">Listar</button>
   <button mat-menu-item routerLink="/rutaUsuario/insertar">Insertar</button>
 </mat-menu>
-<!-- MENU HOME -->
-<mat-menu #menuHome="matMenu">
-  <button mat-menu-item routerLink="/rutaUsuario">Listar</button>
-</mat-menu>
+
 
 <!-- MENU PAGO -->
 <mat-menu #menuPago="matMenu">
@@ -72,11 +71,6 @@
 <mat-menu #menuItem="matMenu">
   <button mat-menu-item routerLink="/rutaItem">Listar</button>
   <button mat-menu-item routerLink="/rutaItem/insertar">Insertar</button>
-</mat-menu>
-<!-- MENU RESENIA -->
-<mat-menu #menuResenia="matMenu">
-  <button mat-menu-item routerLink="/rutaResenia">Listar</button>
-  <button mat-menu-item routerLink="/rutaResenia/insertar">Insertar</button>
 </mat-menu>
 
 <!-- MENU ROL -->
@@ -101,21 +95,3 @@
 <mat-menu #menuBus="matMenu">
   <button mat-menu-item routerLink="/rutaBus/listar">Listar</button>
 </mat-menu>
-=======
-<section class="hero">
-  <div class="hero-overlay">
-    <div class="hero-content">
-      <h1>¡Visita a los mejores lugares del Perú!</h1>
-      <p class="quote">
-        "Explora Perú como nunca antes: seguro, cómodo y a tu ritmo"
-      </p>
-      <p class="subtitle">
-        Reserva tu próxima aventura desde Lima hacia destinos inolvidables.
-      </p>
-      <button class="cta">TRAZA TU RUTA</button>
-    </div>
-    <!-- si quieres colocar el bus encima del fondo, descomenta esta línea -->
-    <!-- <img src="assets/images/bus.png" alt="Bus Peruvian Transport" class="bus"> -->
-  </div>
-</section>
-

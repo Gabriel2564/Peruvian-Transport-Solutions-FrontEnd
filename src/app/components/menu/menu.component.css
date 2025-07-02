@@ -1,0 +1,33 @@
+/* estilo para la barra completa */
+.custom-toolbar {
+  background-color: #948862;
+  color: white;
+  display: flex;          /* añadido */
+  align-items: center;    /* añadido */
+}
+
+/* estilo para los botones de la barra */
+.custom-toolbar button {
+  color: white;
+}
+
+/* estilo para los iconos dentro de los botones de la barra */
+.custom-toolbar mat-icon {
+  color: white;
+}
+
+/* si quieres también que los items del mat-menu salgan en blanco sobre fondo #948862 */
+.mat-menu-item {
+  color: white;
+  background-color: #948862;
+}
+
+/* al hacer hover en el menú */
+.mat-menu-item:hover {
+  background-color: #7c734f; /* un tono un poco más oscuro al pasar el mouse */
+}
+
+/* empuja el botón de Cerrar Sesión al extremo derecho */
+.exit-btn {
+  margin-left: auto;
+}
