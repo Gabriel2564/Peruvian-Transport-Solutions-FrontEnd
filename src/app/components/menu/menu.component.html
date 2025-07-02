@@ -22,7 +22,11 @@
     <mat-icon>list</mat-icon>
     Item
   </button>
-
+ <!-- RESENIA -->
+  <button mat-button [matMenuTriggerFor]="menuResenia" class="btn-rojo">
+    <mat-icon>list</mat-icon>
+    Resenia
+  </button>
   <!-- ROL -->
   <button mat-button [matMenuTriggerFor]="menuRol" class="btn-rojo">
     <mat-icon>admin_panel_settings</mat-icon>
@@ -76,6 +80,11 @@
 <mat-menu #menuItem="matMenu">
   <button mat-menu-item routerLink="/rutaItem">Listar</button>
   <button mat-menu-item routerLink="/rutaItem/insertar">Insertar</button>
+</mat-menu>
+<!-- MENU RESENIA -->
+<mat-menu #menuResenia="matMenu">
+  <button mat-menu-item routerLink="/rutaResenia">Listar</button>
+  <button mat-menu-item routerLink="/rutaResenia/insertar">Insertar</button>
 </mat-menu>
 
 <!-- MENU ROL -->
