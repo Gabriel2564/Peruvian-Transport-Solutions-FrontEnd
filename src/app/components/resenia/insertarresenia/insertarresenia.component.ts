@@ -12,10 +12,11 @@ import { ReseniaService } from '../../../services/Resenia.service';
 import { UsuarioService } from '../../../services/Usuario.service';
 import { ViajeService } from '../../../services/Viaje.service';
 import { Router } from '@angular/router';
+import {MatTimepickerModule} from '@angular/material/timepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-insertarresenia',
-  standalone: true,
   templateUrl: './insertarresenia.component.html',
   styleUrl: './insertarresenia.component.css',
   imports: [
@@ -24,15 +25,16 @@ import { Router } from '@angular/router';
     MatInputModule,
     CommonModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTimepickerModule
   ]
 })
 export class InsertarreseniaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   resenia: Resenia = new Resenia();
 
-  listaUsuarios: Usuario[] = [];
-  listaViajes: Viaje[] = [];
+  listaUsuarios: Usuario[] = []
+  listaViajes: Viaje[] = []
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,7 +47,7 @@ export class InsertarreseniaComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       contenido: ['', Validators.required],
-      fecha: ['', Validators.required],
+      hora: ['', Validators.required],
       likes: [0],
       usuarioId: ['', Validators.required],
       viajeId: ['', Validators.required],
@@ -58,16 +60,17 @@ export class InsertarreseniaComponent implements OnInit {
   aceptar() {
     if (this.form.valid) {
       this.resenia.contentResenia = this.form.value.contenido;
-      this.resenia.publicationDateResenia = this.form.value.fecha;
+      this.resenia.publicationDateResenia = this.form.value.hora;
       this.resenia.likesResenia = this.form.value.likes;
-      this.resenia.usuario = new Usuario();
       this.resenia.usuario.id = this.form.value.usuarioId;
-      this.resenia.viaje = new Viaje();
       this.resenia.viaje.idViaje = this.form.value.viajeId;
 
-      this.rS.insert(this.resenia).subscribe(() => {
-        this.router.navigate(['rutaResenia']);
+      this.rS.insert(this.resenia).subscribe((data) => {
+        this.rS.list().subscribe((data) => {
+          this.rS.setList(data);
+        });
       });
+      this.router.navigate(['rutaResenia'])
     }
   }
 }

@@ -1,29 +1,41 @@
 <div class="container">
+  <div style="text-align: center;margin: 5%;"><h1>Cuentanos tu experiencia</h1></div>
+  <div style="text-align: center;margin: 5%;">
   <form [formGroup]="form" (ngSubmit)="aceptar()">
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Contenido de la reseña</mat-label>
       <textarea matInput formControlName="contenido"></textarea>
     </mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Hora de publicación</mat-label>
+  <input matInput type="time" formControlName="hora">
+</mat-form-field>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Fecha de publicación</mat-label>
-      <input matInput type="date" formControlName="fecha" />
-    </mat-form-field>
 
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Usuario</mat-label>
-      <mat-select formControlName="usuarioId">
-        <mat-option *ngFor="let u of listaUsuarios" [value]="u.id">{{ resenia.usuario.id }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Viaje</mat-label>
-      <mat-select formControlName="viajeId">
-        <mat-option *ngFor="let v of listaViajes" [value]="v.idViaje">{{ resenia.viaje.idViaje }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar reseña</button>
+<mat-form-field>
+        <mat-label>Favorite food</mat-label>
+        <mat-select formControlName="usuarioId">
+          @for (food of listaUsuarios; track food) {
+            <mat-option [value]="food.id">{{food.id}}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('usuarioId')?.hasError('required')">
+          El usuario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+    <mat-form-field>
+        <mat-label>Favorite food</mat-label>
+        <mat-select formControlName="viajeId">
+          @for (food of listaViajes; track food) {
+            <mat-option [value]="food.idViaje">{{food.idViaje}}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.get('viajeId')?.hasError('required')">
+          El viaje es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+<br>
+      <button matButton="outlined">Guardar</button>
   </form>
+  </div>
 </div>
