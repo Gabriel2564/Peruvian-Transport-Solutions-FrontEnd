@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from "./components/menu/menu.component";
+import { GeminiChatComponent } from "./components/gemini-chat/gemini-chat.component";
 
 
 @Component({
@@ -10,7 +10,8 @@ import { MenuComponent } from "./components/menu/menu.component";
   imports: [
     MenuComponent,
     RouterOutlet,
-    MenuComponent
+    MenuComponent,
+    GeminiChatComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
