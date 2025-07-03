@@ -15,6 +15,6 @@ export class RutaService {
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Ruta[]>(this.url)
+    return this.http.get<Ruta[]>(`${this.url}/listar`)
   }
 }
