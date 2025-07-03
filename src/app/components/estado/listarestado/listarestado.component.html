@@ -1,11 +1,19 @@
-
 <h1 class="titulo">Lista de Estados</h1>
 
 <div class="buscar-container">
-  <label>Buscar Estado por Tipo:</label>
-  <input matInput placeholder="Ingrese el tipo de estado" />
-  <button class="buscar-btn">Buscar</button>
+  <span class="buscar-label"><strong>Búsqueda de estados:</strong></span>
+  <mat-form-field appearance="outline" class="buscar-input">
+    <mat-label>Filtrar</mat-label>
+    <input
+      matInput
+      placeholder="Ej. Disponible, Ocupado..."
+      [(ngModel)]="estadofiltro"
+      (ngModelChange)="aplicarFiltro()"
+    />
+  </mat-form-field>
 </div>
+
+
 
 <div class="agregar-container">
   <span>Deseas agregar un estado: Haz click aquí</span>
@@ -15,7 +23,13 @@
 </div>
 
 <div class="contenedor-tarjetas">
-  <div class="tarjeta" *ngFor="let element of dataSource.data">
+  <div
+    class="tarjeta"
+    *ngFor="let element of (dataSource.filteredData || []).slice(
+      (esPaginator?.pageIndex || 0) * (esPaginator?.pageSize || 4),
+      ((esPaginator?.pageIndex || 0) + 1) * (esPaginator?.pageSize || 4)
+    )"
+  >
     <p><strong>Codigo:</strong> {{ element.idEstado }}</p>
     <p>
       <strong>Tipo de Estado:</strong> {{ element.statusTypeEstado }}
@@ -29,12 +43,26 @@
     </p>
     <hr />
     <div class="acciones">
-      <button mat-icon-button color="primary" [routerLink]="['actualizaciones', element.idEstado]">
+      <button
+        mat-icon-button
+        color="primary"
+        [routerLink]="['actualizaciones', element.idEstado]"
+      >
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="eliminar(element.idEstado)">
+      <button
+        mat-icon-button
+        color="warn"
+        (click)="eliminar(element.idEstado)"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </div>
   </div>
 </div>
+
+<mat-paginator
+  [pageSizeOptions]="[4, 8, 10]"
+  showFirstLastButtons
+>
+</mat-paginator>

@@ -8,6 +8,20 @@
   text-align: center;
   margin: 20px;
 }
+.buscar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buscar-label {
+  white-space: nowrap;
+}
+
+.buscar-input {
+  flex: 1;
+}
 
 .buscar-btn {
   background-color: #8b6a2f;
