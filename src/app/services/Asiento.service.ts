@@ -16,6 +16,17 @@ export class AsientoService{
     constructor(private http:HttpClient){}
 
     list(){
-      return this.http.get<Asiento[]>(this.url)
+     return this.http.get<Asiento[]>(`${this.url}/listar`)
     }
+    insert(asiento: Asiento) {
+        return this.http.post(`${this.url}/insertar`, asiento);
+      }
+       getList() {
+        return this.listaCambio.asObservable();
+      }
+        setList(listaNueva: Asiento[]) {
+        this.listaCambio.next(listaNueva);
+      }
+    
+
 }

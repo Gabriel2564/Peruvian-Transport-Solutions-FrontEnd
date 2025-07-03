@@ -47,6 +47,13 @@
     Bus
   </button>
 
+  <!-- ASIENTO -->
+  <button mat-button [matMenuTriggerFor]="menuAsiento" class="btn-rojo">
+        <mat-icon>event_seat</mat-icon>
+       Asiento
+  </button>
+
+  <!-- REPORTES -->
   <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
         <mat-icon>library_books</mat-icon>
        Reportes
@@ -99,6 +106,12 @@
 <!-- MENU BUS -->
 <mat-menu #menuBus="matMenu">
   <button mat-menu-item routerLink="/rutaBus/listar">Listar</button>
+</mat-menu>
+
+<!-- MENU ASIENTO -->
+<mat-menu #menuAsiento="matMenu">
+  <button mat-menu-item routerLink="/rutaAsiento">Listar</button>
+   <button mat-menu-item routerLink="/rutaAsiento/insertar">Insertar</button>
 </mat-menu>
 
 <!-- MENU REPORTES -->

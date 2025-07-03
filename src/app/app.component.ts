@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenuComponent } from "./components/menu/menu.component";
 import { GeminiChatComponent } from "./components/gemini-chat/gemini-chat.component";
+import { LoginComponent } from "./components/login/login.component";
+import { MenuComponent } from "./components/menu/menu.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    MenuComponent,
     RouterOutlet,
     MenuComponent,
     GeminiChatComponent

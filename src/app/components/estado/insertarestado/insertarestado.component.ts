@@ -57,11 +57,15 @@ export class InsertarestadoComponent implements OnInit {
       this.edicion = this.id != null;
       this.init();
     });
+     this.form = this.formBuilder.group({
+      id:[''],
+      type: ['', Validators.required],
+    });
   }
 
   aceptar() {
     if (this.form.valid) {
-      this.estado.idEstado = this.form.getRawValue().id;
+      this.estado.idEstado = this.form.value.id;
       this.estado.statusTypeEstado = this.form.value.type;
 
       const request = this.edicion
@@ -81,15 +85,10 @@ export class InsertarestadoComponent implements OnInit {
     if (this.edicion) {
       this.aS.listId(this.id).subscribe((data) => {
         this.form = this.formBuilder.group({
-          id: [{ value: data.idEstado, disabled: true }],
+          id: [data.idEstado],
           type: [data.statusTypeEstado, Validators.required],
         });
       });
-    } else {
-      this.form = this.formBuilder.group({
-        id: [''],
-        type: ['', Validators.required],
-      });
-    }
+    } 
   }
 }

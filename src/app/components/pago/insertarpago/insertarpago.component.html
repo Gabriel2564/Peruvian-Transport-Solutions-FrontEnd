@@ -1,5 +1,5 @@
 <div class="container">
- <div style="text-align: center;margin: 5%;"><h1>Registro de aplicaciones</h1></div>
+ <div style="text-align: center;margin: 5%;"><h1>{{ edicion ? 'Actualizar' : 'Registrar' }} Pago</h1></div>
  <div style="text-align: center;margin: 5%;">
     <form [formGroup]="form" (submit)="aceptar()">
 
@@ -15,8 +15,11 @@
         </mat-error>
       </mat-form-field>
       <br />
-
-      <button matButton="outlined">Actualizar</button>
+      <div style="text-align: center; margin-top: 20px;">
+        <button mat-raised-button color="primary" type="submit">
+          {{ edicion ? 'Actualizar' : 'Registrar' }}
+        </button>
+      </div>
     </form>
   </div>
 </div>

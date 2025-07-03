@@ -18,14 +18,15 @@ import { ListarbusComponent } from './components/bus/listarbus/listarbus.compone
 import { InsertarusuarioComponent } from './components/usuario/insertarusuario/insertarusuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HomeComponent } from './components/home/home.component';
-
 import { ReseniaComponent } from './components/resenia/resenia.component';
 import { InsertarreseniaComponent } from './components/resenia/insertarresenia/insertarresenia.component';
 import { ListarreseniaComponent } from './components/resenia/listarresenia/listarresenia.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
-import { ReporteviajebyrutaComponent } from './components/reportes/reporteviajebyruta/reporteviajebyruta.component';
 import { ReporteuserbyrolComponent } from './components/reportes/reporteuserbyrol/reporteuserbyrol.component';
+import { InsertarasientoComponent } from './components/asiento/insertarasiento/insertarasiento.component';
+import { AsientoComponent } from './components/asiento/asiento.component';
+import { ListaritemComponent } from './components/item/listaritem/listaritem.component';
 
 
 
@@ -120,4 +121,28 @@ export const routes: Routes = [
     }
     ],
   },
+{
+  path:'rutaAsiento', component:AsientoComponent,
+  children:[
+    {
+      path:'insertar', component:InsertarasientoComponent
+    },
+
+    {
+      path:'actualizaciones/:id', component:InsertarasientoComponent
+    }
+  ]
+},
+{
+  path:'rutaItem', component:ItemComponent,
+  children:[
+    {
+      path:'insertar', component:InsertaritemComponent
+    },
+
+    {
+      path:'actualizaciones/:id', component:InsertaritemComponent
+    }
+  ]
+},
 ];

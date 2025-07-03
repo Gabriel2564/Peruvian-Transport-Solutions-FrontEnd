@@ -4,7 +4,7 @@
   </div>
 
   <div style="margin: 5%;">
-    <form [formGroup]="form" (ngSubmit)="aceptar()">
+    <form [formGroup]="form" (submit)="aceptar()">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Título</mat-label>
         <input matInput formControlName="title" />
@@ -32,9 +32,9 @@
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Formato</mat-label>
         <mat-select formControlName="format">
-        @for (food of formats; track food) {
+           @for (food of formats; track food) {
           <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
-        }
+          }
         </mat-select>
         <mat-error *ngIf="form.get('format')?.hasError('required')">
           El formato es obligatorio.
