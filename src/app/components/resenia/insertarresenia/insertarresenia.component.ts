@@ -62,8 +62,9 @@ export class InsertarreseniaComponent implements OnInit {
       this.resenia.contentResenia = this.form.value.contenido;
       this.resenia.publicationDateResenia = this.form.value.hora;
       this.resenia.likesResenia = this.form.value.likes;
-      this.resenia.usuario.id = this.form.value.usuarioId;
-      this.resenia.viaje.idViaje = this.form.value.viajeId;
+      this.resenia.usuario = { id: this.form.value.usuarioId } as Usuario;
+      this.resenia.viaje = { idViaje: this.form.value.viajeId } as Viaje;
+
 
       this.rS.insert(this.resenia).subscribe((data) => {
         this.rS.list().subscribe((data) => {

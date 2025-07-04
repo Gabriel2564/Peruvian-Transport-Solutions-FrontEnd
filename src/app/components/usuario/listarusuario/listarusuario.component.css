@@ -1,10 +1,50 @@
-.card-container {
-  display: flex;
-  flex-wrap: wrap; /* para que bajen de línea si no caben */
-  gap: 16px; /* espacio entre cards */
-  justify-content: center; /* opcional: centra horizontalmente */
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
+* {
+  font-family: 'Prompt', sans-serif;
 }
 
-.card_usuario {
-  width: 300px; /* puedes ajustar este ancho */
+.container {
+  padding: 16px;
+}
+
+.search-bar {
+  margin: 20px;
+}
+
+.search-bar p {
+  text-align: left;
+  margin: 0 0 8px 0;
+  font-weight: bold;
+}
+
+.search-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+mat-form-field {
+  width: 250px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+mat-card {
+  width: 300px;
+}
+
+mat-card-title,
+mat-card-subtitle,
+mat-card-content,
+mat-card-actions {
+  font-family: 'Prompt', sans-serif;
 }
