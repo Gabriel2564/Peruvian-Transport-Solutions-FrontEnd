@@ -1,4 +1,4 @@
-<mat-toolbar class="custom-toolbar"  [class.hidden]="!isVisible">
+<mat-toolbar class="custom-toolbar"  [class.hidden]="!isVisible" *ngIf="verificar()">
     <!-- HOME -->
   <button mat-button class="btn-rojo" [routerLink]="['/home']">
   <mat-icon>home</mat-icon>
@@ -6,79 +6,79 @@
 </button>
 
   <!-- USUARIO -->
-  <button mat-button [matMenuTriggerFor]="menuUsuario" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuUsuario" class="btn-rojo"*ngIf="isAdministrador()">
     <mat-icon>person</mat-icon>
     Usuario
   </button>
 
   <!-- PAGO -->
-  <button mat-button [matMenuTriggerFor]="menuPago" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuPago" class="btn-rojo"*ngIf="isAdministrador()">
     <mat-icon>attach_money</mat-icon>
     Pago
   </button>
 
   <!-- ITEM -->
-  <button mat-button [matMenuTriggerFor]="menuItem" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuItem" class="btn-rojo"*ngIf="isAdministrador()">
     <mat-icon>list</mat-icon>
     Item
   </button>
  <!-- RESENIA -->
-  <button mat-button [matMenuTriggerFor]="menuResenia" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuResenia" class="btn-rojo" *ngIf="isAdministrador()">
     <mat-icon>list</mat-icon>
     Resenia
   </button>
   <!-- ROL -->
-  <button mat-button [matMenuTriggerFor]="menuRol" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuRol" class="btn-rojo" *ngIf="isAdministrador()">
     <mat-icon>admin_panel_settings</mat-icon>
     Rol
   </button>
 
   <!-- ESTADO -->
-  <button mat-button [matMenuTriggerFor]="menuEstado" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuEstado" class="btn-rojo" *ngIf="isAdministrador()">
     <mat-icon>flag</mat-icon>
     Estado
   </button>
 
   <!-- VIAJE -->
-  <button mat-button [matMenuTriggerFor]="menuViaje" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuViaje" class="btn-rojo" *ngIf="isAdministrador()">
     <mat-icon>commute</mat-icon>
     Viaje
   </button>
 
   <!-- BUS -->
-  <button mat-button [matMenuTriggerFor]="menuBus" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuBus" class="btn-rojo" *ngIf="isAdministrador()">
     <mat-icon>directions_bus</mat-icon>
     Bus
   </button>
 
   <!-- ASIENTO -->
-  <button mat-button [matMenuTriggerFor]="menuAsiento" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuAsiento" class="btn-rojo" *ngIf="isAdministrador()">
         <mat-icon>event_seat</mat-icon>
        Asiento
   </button>
 
   <!-- RUTA -->
-  <button mat-button [matMenuTriggerFor]="menuRuta" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuRuta" class="btn-rojo" *ngIf="isAdministrador()">
         <mat-icon>directions_car</mat-icon>
        Ruta
   </button>
 
   <!-- RUTA -->
-  <button mat-button [matMenuTriggerFor]="menuItemUsuario" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuItemUsuario" class="btn-rojo" *ngIf="isAdministrador()">
         <mat-icon>assignment_ind</mat-icon>
        Item Usuario
   </button>
 
   <!-- REPORTES -->
-  <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
+  <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo" *ngIf="isAdministrador()">
         <mat-icon>library_books</mat-icon>
        Reportes
   </button>
 
-  <!-- EXIT -->
-  <button mat-button [routerLink]="['/login']" class="btn-rojo exit-btn">
-    <mat-icon>exit_to_app</mat-icon>
-    Cerrar Sesión
+  <!-- SALIR -->
+ <span class="mat-toolbar-spacer"></span>
+ <button mat-button [matMenuTriggerFor]="menuSalir" class="btn-rojo">
+    <mat-icon>person</mat-icon> Usuario
   </button>
 </mat-toolbar>
 
@@ -153,3 +153,15 @@
   <button mat-menu-item routerLink="/rutareportes">Reporte Viaje Por Ruta</button>
   <button mat-menu-item routerLink="/rutareportes/userbyrol">Reporte Usuario por Rol</button>
  </mat-menu>
+
+ <!-- MENU SALIR -->
+ <mat-menu #menuSalir="matMenu">
+  <button mat-menu-item routerLink="/login" (click)="cerrar()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+  <button mat-menu-item>
+    Rol:
+    <span>{{ role }}</span>
+  </button>
+</mat-menu>

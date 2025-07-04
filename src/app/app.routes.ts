@@ -35,6 +35,7 @@ import { RutaComponent } from './components/ruta/ruta.component';
 import { InsertarrutaComponent } from './components/ruta/insertarruta/insertarruta.component';
 import { ItemUsuarioComponent } from './components/item-usuario/item-usuario.component';
 import { InsertaritemUsiarioComponent } from './components/item-usuario/insertaritem-usiario/insertaritem-usiario.component';
+import { seguridadGuard } from './guard/seguridad.guard';
 
 
 
@@ -62,7 +63,8 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertarusuarioComponent
     }
-  ]
+  ],
+  canActivate: [seguridadGuard],
 },
   {
   path:'rutaPago', component:PagoComponent,
@@ -74,7 +76,8 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertarpagoComponent
     }
-  ]
+  ],
+  canActivate: [seguridadGuard],
 },
 {
   path: 'rutaResenia',
@@ -89,7 +92,8 @@ export const routes: Routes = [
       path: 'actualizaciones/:id',
       component: InsertarreseniaComponent
     }
-  ]
+  ],
+  canActivate: [seguridadGuard],
 },
 {
   path: 'rutaEstado',
@@ -103,7 +107,8 @@ export const routes: Routes = [
       path: 'actualizaciones/:id',
       component: InsertarestadoComponent
     }
-  ]
+  ],
+  canActivate: [seguridadGuard],
 },
 {
   path: 'rutaRol',
@@ -117,7 +122,8 @@ export const routes: Routes = [
       path: 'actualizaciones/:id',
       component: InsertarrolComponent
     }
-  ]
+  ],
+  canActivate: [seguridadGuard],
 },
 {
     path: 'rutareportes',
@@ -127,7 +133,7 @@ export const routes: Routes = [
       path: 'userbyrol',
       component: ReporteuserbyrolComponent
     }
-    ],
+    ],canActivate: [seguridadGuard],
   },
 {
   path:'rutaAsiento', component:AsientoComponent,
@@ -139,7 +145,7 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertarasientoComponent
     }
-  ]
+  ],canActivate: [seguridadGuard],
 },
 {
   path:'rutaItem', component:ItemComponent,
@@ -151,7 +157,7 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertaritemComponent
     }
-  ]
+  ],canActivate: [seguridadGuard],
 },
 {
   path:'rutaReservaBoleto', component:ReservaBoletoComponent,
@@ -163,7 +169,7 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:ListarreservanBoletoComponent
     }
-  ]
+  ],canActivate: [seguridadGuard],
 },
 {
   path:'rutaViaje', component:ViajeComponent,
@@ -175,7 +181,7 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertarviajeComponent
       }
-  ]
+  ],canActivate: [seguridadGuard],
 },
 {
   path:'rutaBus', component:BusComponent,
@@ -187,7 +193,7 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertarbusComponent
       }
-  ]
+  ],canActivate: [seguridadGuard],
 },
 {
   path:'rutaRuta', component:RutaComponent,
@@ -199,7 +205,7 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertarrutaComponent
       }
-  ]
+  ],canActivate: [seguridadGuard],
 },
 {
   path:'rutaItemUsuario', component:ItemUsuarioComponent,
@@ -211,6 +217,6 @@ export const routes: Routes = [
     {
       path:'actualizaciones/:id', component:InsertaritemUsiarioComponent
       }
-  ]
+  ],canActivate: [seguridadGuard],
 }
 ];
