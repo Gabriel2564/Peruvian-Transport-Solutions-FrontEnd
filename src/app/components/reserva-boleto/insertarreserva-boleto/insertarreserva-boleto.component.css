@@ -1,0 +1,76 @@
+/* Contenedor principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Formulario */
+form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Estilo para el mat-button */
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4caf50;  /* Color verde */
+  color: white;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #c8e6c9;
+  cursor: not-allowed;
+}
+
+/* Mejorar la apariencia de los campos de error */
+mat-error {
+  font-size: 0.875rem;
+  color: #f44336;  /* Color rojo */
+}
+
+/* Cambios en el select de mat */
+mat-select {
+  font-size: 1rem;
+}
+
+/* Diseño responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  mat-form-field {
+    margin-bottom: 15px;
+  }
+}

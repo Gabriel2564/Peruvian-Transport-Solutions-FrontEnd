@@ -1,1 +1,67 @@
-<p>insertarreserva-boleto works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 5%;">
+    <h1>Registrar Reserva de Boleto</h1>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 5%;">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Monto del Boleto</mat-label>
+      <input matInput formControlName="ticketAmountReservaBoleto" />
+      <mat-error *ngIf="form.get('ticketAmountReservaBoleto')?.hasError('required')">
+        Monto del Boleto      
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cantidad de asientos</mat-label>
+      <input matInput type="number" formControlName="seatQuantityReservaBoleto" />
+      <mat-error *ngIf="form.get('seatQuantityReservaBoleto')?.hasError('required')">
+        La cantidad de asientos es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Usuario -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Usuario</mat-label>
+      <mat-select formControlName="usuario">
+        <mat-option *ngFor="let user of listaUsuarios" [value]="user.id">
+          {{ user.username }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+        El usuario es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Pago -->
+    <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Tipo de Pago</mat-label>
+      <mat-select formControlName="pago">
+        <mat-option *ngFor="let p of listaPago" [value]="p.idPago">
+          {{ p.paymentTypePago }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('pago')?.hasError('required')">
+        El tipo de pago es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- Asiento -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Asiento</mat-label>
+      <mat-select formControlName="asiento">
+        <mat-option *ngFor="let a of listaAsiento" [value]="a.idAsiento">
+          {{ a.idAsiento }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('asiento')?.hasError('required')">
+        El asiento es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Registrar</button>
+    </div>
+  </form>
+</div>

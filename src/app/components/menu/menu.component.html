@@ -63,6 +63,12 @@
        Reportes
   </button>
 
+    <!-- Reserva Boleto -->
+  <button mat-button [matMenuTriggerFor]="menuReservaBoleto" class="btn-rojo">
+    <mat-icon>event_seat</mat-icon>
+    Reserva
+  </button>
+
   <!-- EXIT -->
   <button mat-button [routerLink]="['/login']" class="btn-rojo exit-btn">
     <mat-icon>exit_to_app</mat-icon>
@@ -127,4 +133,11 @@
 <mat-menu #menuReportes="matMenu">
   <button mat-menu-item routerLink="/rutareportes">Reporte Viaje Por Ruta</button>
   <button mat-menu-item routerLink="/rutareportes/userbyrol">Reporte Usuario por Rol</button>
+ </mat-menu>
+
+
+<!-- MENU ReservaBoleto -->
+<mat-menu #menuReservaBoleto="matMenu">
+  <button mat-menu-item routerLink="/rutaReservaBoleto">Listar</button>
+  <button mat-menu-item routerLink="/rutaReservaBoleto/insertar">Insertar</button>
  </mat-menu>
