@@ -1,4 +1,4 @@
-<mat-toolbar class="custom-toolbar">
+<mat-toolbar class="custom-toolbar"  [class.hidden]="!isVisible">
     <!-- HOME -->
   <button mat-button class="btn-rojo" [routerLink]="['/home']">
   <mat-icon>home</mat-icon>
@@ -55,6 +55,18 @@
   <button mat-button [matMenuTriggerFor]="menuAsiento" class="btn-rojo">
         <mat-icon>event_seat</mat-icon>
        Asiento
+  </button>
+
+  <!-- RUTA -->
+  <button mat-button [matMenuTriggerFor]="menuRuta" class="btn-rojo">
+        <mat-icon>directions_car</mat-icon>
+       Ruta
+  </button>
+
+  <!-- RUTA -->
+  <button mat-button [matMenuTriggerFor]="menuItemUsuario" class="btn-rojo">
+        <mat-icon>assignment_ind</mat-icon>
+       Item Usuario
   </button>
 
   <!-- REPORTES -->
@@ -114,13 +126,26 @@
 
 <!-- MENU BUS -->
 <mat-menu #menuBus="matMenu">
-  <button mat-menu-item routerLink="/rutaBus/listar">Listar</button>
+  <button mat-menu-item routerLink="/rutaBus">Listar</button>
+  <button mat-menu-item routerLink="/rutaBus/insertar">Insertar</button>
 </mat-menu>
 
 <!-- MENU ASIENTO -->
 <mat-menu #menuAsiento="matMenu">
   <button mat-menu-item routerLink="/rutaAsiento">Listar</button>
    <button mat-menu-item routerLink="/rutaAsiento/insertar">Insertar</button>
+</mat-menu>
+
+<!-- MENU RUTA -->
+<mat-menu #menuRuta="matMenu">
+  <button mat-menu-item routerLink="/rutaRuta">Listar</button>
+   <button mat-menu-item routerLink="/rutaRuta/insertar">Insertar</button>
+</mat-menu>
+
+<!-- MENU RUTA -->
+<mat-menu #menuItemUsuario="matMenu">
+  <button mat-menu-item routerLink="/rutaItemUsuario">Listar</button>
+   <button mat-menu-item routerLink="/rutaItemUsuario/insertar">Insertar</button>
 </mat-menu>
 
 <!-- MENU REPORTES -->

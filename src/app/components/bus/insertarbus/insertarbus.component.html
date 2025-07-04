@@ -1,1 +1,51 @@
-<p>insertarbus works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 5%;">
+    <h1>{{ edicion ? 'Actualizar' : 'Registrar' }} Bus</h1>
+  </div>
+
+  <div style="margin: 5%;">
+    <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Dirección de Llegada</mat-label>
+        <input matInput formControlName="arrivalAddressBus" />
+        <mat-error *ngIf="form.get('arrivalAddressBus')?.hasError('required')">
+          La dirección de llegada es obligatoria.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Capacidad del bus</mat-label>
+        <input matInput formControlName="capacityBus" />
+        <mat-error *ngIf="form.get('capacityBus')?.hasError('required')">
+          La capacidad del bus es obligatoria.
+        </mat-error>
+      </mat-form-field>
+      
+       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Duración del viaje</mat-label>
+        <input matInput formControlName="durationBus" />
+        <mat-error *ngIf="form.get('durationBus')?.hasError('required')">
+          La duración del viaje es obligatoria.
+        </mat-error>
+      </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Viaje</mat-label>
+        <mat-select formControlName="viaje">
+        <mat-option *ngFor="let a of listaViaje" [value]="a.idViaje">
+          {{ a.idViaje }}
+        </mat-option>
+      </mat-select>
+        <mat-error *ngIf="form.get('viaje')?.hasError('required')">
+          El viaje es obligatori.
+        </mat-error>
+      </mat-form-field>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button mat-raised-button color="primary" type="submit">
+          {{ edicion ? 'Actualizar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

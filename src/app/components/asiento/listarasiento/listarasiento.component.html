@@ -1,39 +1,28 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h1>Lista de viajes</h1>
-  </div>
-  <div style="text-align: center; margin: 5%">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
-      <ng-container matColumnDef="c1">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.idAsiento }}</td>
-      </ng-container>
+<h1>Lista de Asientos</h1>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef>Numero de Asientos</th>
-        <td mat-cell *matCellDef="let element">{{ element.seatNumberAsiento }}</td>
-      </ng-container>
+<div class="acciones-superiores">
+  <button mat-raised-button color="accent" [routerLink]="['/rutaAsiento/insertar']">
+  <mat-icon>add</mat-icon> Agregar Asiento
+</button>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef>Bus</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.bus.idBus }}
-        </td>
-      </ng-container>
+</div>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef>Tiempo</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.estado.statusTypeEstado }}
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+<div class="contenedor-tarjetas">
+  <div class="tarjeta" *ngFor="let element of dataSource.data">
+    <p><strong>ID:</strong> {{ element.idAsiento }}</p>
+    <p><strong>Numero de asiento</strong> {{ element.seatNumberAsiento }}</p>
+    <p><strong>Bus:</strong> {{ element.bus.idBus }}</p>
+    <p><strong>Estado del asiento:</strong> {{ element.estado.statusTypeEstado }}</p>
+
+    <div class="acciones">
+      <button mat-raised-button color="primary" [routerLink]="['actualizaciones', element.idAsiento]">
+        <mat-icon>edit</mat-icon> Actualizar
+      </button>
+
+      <button mat-raised-button color="warn" (click)="eliminar(element.idAsiento)">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+    </div>
   </div>
 </div>
 

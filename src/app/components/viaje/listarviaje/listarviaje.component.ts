@@ -6,14 +6,17 @@ import {  MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 
+
 @Component({
   selector: 'app-listarviaje',
+
   imports: [
     MatTableModule, 
     MatIconModule, 
@@ -24,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatButtonModule, 
     MatPaginatorModule],
+
   templateUrl: './listarviaje.component.html',
   styleUrl: './listarviaje.component.css'
 })
@@ -33,7 +37,7 @@ export class ListarviajeComponent implements AfterViewInit {
    viajeFiltro: string = '';
    @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
-   constructor(private vS: ViajeService) {}
+   constructor(private vS: ViajeService,     private snackBar: MatSnackBar   ) {}
 
    ngOnInit(): void {
     this.vS.list().subscribe((data:Viaje[]) => {
@@ -58,6 +62,7 @@ export class ListarviajeComponent implements AfterViewInit {
       };
     });
   }
+
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
@@ -72,6 +77,7 @@ export class ListarviajeComponent implements AfterViewInit {
       this.vS.list().subscribe(data => {
         this.vS.setList(data);
       });
+
     });
   }
 }

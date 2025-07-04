@@ -1,1 +1,77 @@
-<p>insertaritem-usiario works!</p>
+<div class="asiento-form-container">
+  <h1>{{ edicion ? 'Actualizar' : 'Registrar' }} Item Usuario</h1>
+
+  <form [formGroup]="form" (ngSubmit)="aceptar()">
+    <!-- Calificación con estrellas -->
+    <div class="star-rating-wrapper">
+      <label class="star-label">Calificación:</label>
+      <div class="star-rating">
+        <button
+          *ngFor="let star of estrellas"
+          type="button"
+          (click)="setRating(star)"
+          class="star-btn"
+          [attr.aria-label]="star + ' estrellas'"
+        >
+          <mat-icon aria-hidden="true">
+            {{ form.get('travelQualificationItemUsuario')!.value >= star ? 'star' : 'star_border' }}
+          </mat-icon>
+        </button>
+      </div>
+      <mat-error *ngIf="form.get('travelQualificationItemUsuario')?.touched
+                       && form.get('travelQualificationItemUsuario')?.hasError('required')">
+        La calificación es obligatoria.
+      </mat-error>
+    </div>
+
+    <!-- Fecha de viaje -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Fecha de viaje</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="travelDateItemUsuario"
+        placeholder="Seleccione la fecha"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('travelDateItemUsuario')?.touched
+                       && form.get('travelDateItemUsuario')?.hasError('required')">
+        La fecha de salida es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Selección de ítem -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Item</mat-label>
+      <mat-select formControlName="item">
+        <mat-option *ngFor="let a of listaitem" [value]="a.idItem">
+          {{ a.idItem }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('item')?.touched && form.get('item')?.hasError('required')">
+        El ítem es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Selección de usuario -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Usuario</mat-label>
+      <mat-select formControlName="usuario">
+        <mat-option *ngFor="let u of listausuarios" [value]="u.id">
+          {{ u.id }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('usuario')?.touched && form.get('usuario')?.hasError('required')">
+        El usuario es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botón de envío -->
+    <div class="submit-btn">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ edicion ? 'Actualizar' : 'Registrar' }}
+      </button>
+    </div>
+  </form>
+</div>

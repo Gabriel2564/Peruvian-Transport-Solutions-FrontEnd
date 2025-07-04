@@ -32,7 +32,24 @@
       <!-- Viaje (anidado) Column -->
       <ng-container matColumnDef="bus5">
         <th mat-header-cell *matHeaderCellDef>Viaje</th>
-        <td mat-cell *matCellDef="let element">{{ element.viaje.destinationTrip }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.viaje.idViaje }}</td>
+      </ng-container>
+
+       <ng-container matColumnDef="bus6">
+        <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton [routerLink]="['actualizaciones',element.idBus]" >
+             <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="bus7">
+        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton (click)="eliminar(element.idBus)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

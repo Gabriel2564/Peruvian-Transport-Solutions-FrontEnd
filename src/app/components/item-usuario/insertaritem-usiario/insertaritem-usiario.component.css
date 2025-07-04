@@ -1,0 +1,116 @@
+/* Contenedor principal */
+.asiento-form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* Nuevo: permitir que las estrellas sobresalgan */
+  overflow: visible !important;
+}
+
+/* Encabezado */
+.asiento-form-container h1 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #3f51b5;
+}
+
+/* Campos full-width */
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Wrapper de calificación */
+.star-rating-wrapper {
+  width: 100%;
+  margin: 24px 0;       /* espacio arriba y abajo */
+  text-align: center;
+  overflow: visible;    /* permitir sobresalir */
+}
+
+/* Etiqueta de calificación */
+.star-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+/* Estrellas */
+.star-rating {
+  display: inline-flex;
+  align-items: center;  /* centrar verticalmente los iconos */
+  gap: 12px;
+}
+
+/* Aseguramos que el mat-icon tenga suficiente línea */
+.star-rating mat-icon {
+  font-size: 32px;
+  line-height: 32px;    /* igual al font-size para que no se corte */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.star-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.star-btn mat-icon {
+  color: #FFD740;
+  transition: transform 0.1s;
+}
+
+.star-btn:hover mat-icon {
+  transform: scale(1.2);
+}
+
+/* Botón de envío centrado */
+.submit-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .asiento-form-container {
+    padding: 16px;
+  }
+  .asiento-form-container h1 {
+    font-size: 20px;
+  }
+  .submit-btn button {
+    width: 100%;
+  }
+}
+/* 1) Overflow visible en toda la cadena de padres de las estrellas */
+.asiento-form-container, 
+.star-rating-wrapper, 
+.star-rating, 
+.star-btn, 
+.star-btn mat-icon, 
+.star-btn mat-icon svg {
+  overflow: visible !important;
+}
+
+/* 2) Un poco de “colchón” bajo las estrellas para que no choquen con el siguiente elemento */
+.star-rating-wrapper {
+  padding-bottom: 16px;
+}
+
+/* 3) Eleva las estrellas por encima de cualquier contenedor */
+.star-btn {
+  position: relative;
+}
+.star-btn mat-icon {
+  position: relative;
+  z-index: 2;
+}

@@ -1,1 +1,29 @@
-<p>listaritemusuario works!</p>
+<h1>Lista de Asientos</h1>
+
+<div class="acciones-superiores">
+  <button mat-raised-button color="accent" [routerLink]="['/rutaItemUsuario/insertar']">
+  <mat-icon>add</mat-icon> Agregar Item Usuario
+</button>
+
+</div>
+
+<div class="contenedor-tarjetas">
+  <div class="tarjeta" *ngFor="let element of dataSource.data">
+    <p><strong>ID:</strong> {{ element.idItemUsuario }}</p>
+    <p><strong>Calificación</strong> {{ element.travelQualificationItemUsuario }}</p>
+    <p><strong>Fecha de viaje:</strong> {{ element.travelDateItemUsuario }}</p>
+    <p><strong>Item:</strong> {{ element.item.idItem}}</p>
+    <p><strong>Usuario:</strong> {{ element.usuario.id}}</p>
+
+    <div class="acciones">
+      <button mat-raised-button color="primary" [routerLink]="['actualizaciones', element.idItemUsuario]">
+        <mat-icon>edit</mat-icon> Actualizar
+      </button>
+
+      <button mat-raised-button color="warn" (click)="eliminar(element.idItemUsuario)">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
