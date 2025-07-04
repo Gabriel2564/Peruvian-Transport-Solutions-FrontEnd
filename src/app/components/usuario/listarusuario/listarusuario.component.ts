@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   standalone: true,
@@ -36,7 +37,7 @@ export class ListarusuarioComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private uS: UsuarioService) {}
+  constructor(private uS: UsuarioService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.uS.list().subscribe((data: Usuario[]) => {
@@ -68,10 +69,21 @@ export class ListarusuarioComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    this.uS.deleteA(id).subscribe(() => {
-      this.uS.list().subscribe((data) => {
-        this.usDataSource.data = data;
-      });
+    this.uS.deleteA(id).subscribe({
+      next: () => {
+        // Refresca la tabla tras borrado exitoso
+        this.uS.list().subscribe(list => {
+          this.uS.setList(list);
+        });
+      },
+      error: err => {
+        // Muestra snackbar en rojo si hay error de integridad referencial
+        this.snackBar.open(
+          'No se puede eliminar: este usuario está enlazado con otra entidad.',
+          'Cerrar',
+          { duration: 4000, panelClass: ['snack-error'] }
+        );
+      }
     });
   }
 }

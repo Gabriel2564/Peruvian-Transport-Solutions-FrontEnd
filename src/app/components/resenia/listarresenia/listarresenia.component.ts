@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listarresenia',
@@ -36,7 +37,7 @@ export class ListarreseniaComponent implements  AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private rS: ReseniaService) {}
+  constructor(private rS: ReseniaService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.rS.list().subscribe((data: Resenia[]) => {
@@ -73,11 +74,21 @@ export class ListarreseniaComponent implements  AfterViewInit {
   }
 
   eliminar(id: number) {
-    this.rS.deleteA(id).subscribe(() => {
-      this.rS.list().subscribe((data: Resenia[]) => {
-        this.resDataSource.data = data;
-        this.resAplicarFiltro();
-      });
+    this.rS.deleteA(id).subscribe({
+      next: () => {
+        // Refresca la tabla tras borrado exitoso
+        this.rS.list().subscribe(list => {
+          this.rS.setList(list);
+        });
+      },
+      error: err => {
+        // Muestra snackbar en rojo si hay error de integridad referencial
+        this.snackBar.open(
+          'No se puede eliminar: esta resenia está enlazado con otra entidad.',
+          'Cerrar',
+          { duration: 4000, panelClass: ['snack-error'] }
+        );
+      }
     });
   }
 }

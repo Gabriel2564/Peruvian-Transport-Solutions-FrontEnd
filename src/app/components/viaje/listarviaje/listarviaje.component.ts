@@ -11,6 +11,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -74,11 +75,21 @@ export class ListarviajeComponent implements AfterViewInit {
     }
  }
     eliminar(id: number) {
-    this.vS.deleteI(id).subscribe(data => {
-      this.vS.list().subscribe(data => {
-        this.vS.setList(data);
-      });
-
+    this.vS.deleteI(id).subscribe({
+      next: () => {
+        // Refresca la tabla tras borrado exitoso
+        this.vS.list().subscribe(list => {
+          this.vS.setList(list);
+        });
+      },
+      error: err => {
+        // Muestra snackbar en rojo si hay error de integridad referencial
+        this.snackBar.open(
+          'No se puede eliminar: este viaje está enlazado con otra entidad.',
+          'Cerrar',
+          { duration: 4000, panelClass: ['snack-error'] }
+        );
+      }
     });
   }
 }

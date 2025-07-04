@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listarrol',
@@ -17,7 +18,7 @@ export class ListarrolComponent {
   dataSource: MatTableDataSource<Rol> = new MatTableDataSource();
   displayedColumns: string[] = ['c1', 'c2','c3'];
 
-  constructor(private rolService: RolService) {}
+  constructor(private rolService: RolService, private snackBar: MatSnackBar) {}
   
   ngOnInit(): void {
     this.rolService.list().subscribe(data => {
@@ -30,10 +31,21 @@ export class ListarrolComponent {
   }
 
   eliminar(id: number) {
-    this.rolService.deleteI(id).subscribe((data) => {
-      this.rolService.list().subscribe((data) => {
-        this.rolService.setList(data);
-      });
+    this.rolService.deleteI(id).subscribe({
+      next: () => {
+        // Refresca la tabla tras borrado exitoso
+        this.rolService.list().subscribe(list => {
+          this.rolService.setList(list);
+        });
+      },
+      error: err => {
+        // Muestra snackbar en rojo si hay error de integridad referencial
+        this.snackBar.open(
+          'No se puede eliminar: este usuario está enlazado con otra entidad.',
+          'Cerrar',
+          { duration: 4000, panelClass: ['snack-error'] }
+        );
+      }
     });
   }
 }
