@@ -1,21 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
-
-* {
-  font-family: 'Prompt', sans-serif;
-}
-
 .container {
-  padding: 16px;
-}
-
-h1 {
-  font-weight: bold;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .full-width {
@@ -23,9 +8,5 @@ form {
 }
 
 .estado-radio {
-  margin-top: 16px;
-}
-
-button {
-  font-weight: bold;
+  margin-top: 15px;
 }

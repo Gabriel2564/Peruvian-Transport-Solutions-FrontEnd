@@ -30,7 +30,7 @@ export class UsuarioService {
     return this.listaCambio.asObservable()
   }
    listId(id: number) {
-    return this.http.get<Usuario>(`${this.url}/${id}`);
+    return this.http.get<Usuario>(`${this.url}/listar/${id}`);
   }
 
   update(u: Usuario) {
