@@ -160,5 +160,16 @@ export const routes: Routes = [
     }
   ]
 },
+{
+  path:'rutaViaje', component:ViajeComponent,
+  children:[
+    {
+      path:'insertar', component:InsertarviajeComponent
+    },
 
+    {
+      path:'actualizaciones/:id', component:InsertarviajeComponent
+      }
+  ]
+}
 ];
