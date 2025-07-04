@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Usuario } from '../../../models/Usuario';
+import { UsuarioService } from '../../../services/Usuario.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
-import { Usuario } from '../../../models/Usuario';
-import { UsuarioService } from '../../../services/Usuario.service';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   standalone: true,
@@ -14,28 +19,62 @@ import { UsuarioService } from '../../../services/Usuario.service';
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
     RouterLink,
-    MatCardModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
   ],
   templateUrl: './listarusuario.component.html',
-  styleUrl: './listarusuario.component.css'
+  styleUrls: ['./listarusuario.component.css']
 })
 export class ListarusuarioComponent implements OnInit {
 
-  usuarios: Usuario[] = [];  // ahora un simple array para ngFor
+  usDataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>();
+  usFiltro: string = '';
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private uS: UsuarioService) {}
 
   ngOnInit(): void {
-    this.uS.list().subscribe(data => {
-      this.usuarios = data;
+    this.uS.list().subscribe((usData: Usuario[]) => {
+      this.usDataSource = new MatTableDataSource<Usuario>(usData);
+      this.usDataSource.filterPredicate = (data: Usuario, filter: string) => {
+        const f = filter.trim().toLowerCase();
+        return data.username.toLowerCase().includes(f)
+          || data.roles[0].rol.toLowerCase().includes(f)
+          || (data.enabled ? 'activo' : 'inactivo').includes(f);
+      };
     });
+
+    this.uS.getList().subscribe((usData: Usuario[]) => {
+      this.usDataSource = new MatTableDataSource<Usuario>(usData);
+      this.usDataSource.filterPredicate = (data: Usuario, filter: string) => {
+        const f = filter.trim().toLowerCase();
+        return data.username.toLowerCase().includes(f)
+          || data.roles[0].rol.toLowerCase().includes(f);
+      };
+    });
+  }
+
+  ngAfterViewInit() {
+    this.usDataSource.paginator = this.paginator;
+  }
+
+  usAplicarFiltro() {
+    this.usDataSource.filter = this.usFiltro.trim().toLowerCase();
+    if (this.usDataSource.paginator) {
+      this.usDataSource.paginator.firstPage();
+    }
   }
 
   eliminar(id: number) {
     this.uS.deleteA(id).subscribe(() => {
-      this.uS.list().subscribe(data => {
-        this.usuarios = data;
+      this.uS.list().subscribe((usData: Usuario[]) => {
+        this.usDataSource.data = usData;
+        this.usAplicarFiltro();
       });
     });
   }

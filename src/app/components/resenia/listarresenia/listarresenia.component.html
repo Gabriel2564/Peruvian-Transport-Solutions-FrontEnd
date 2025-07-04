@@ -1,22 +1,24 @@
-<div class="resenia-container">
+<h2 style="text-align: center; margin-bottom: 1rem;">
+  Lista de Reseñas
+</h2>
+
+<div class="resenia-grid">
   <mat-card class="example-card" *ngFor="let element of resenias">
     <mat-card-header>
       <div
         mat-card-avatar
         class="example-header-image"
-        [style.background-image]="'url(https://randomuser.me/api/portraits/lego/' + element.usuario?.id + '.jpg)'"
+        [style.background-image]="'url(https://randomuser.me/api/portraits/lego/' + element.usuario.id + '.jpg)'"
       ></div>
       <mat-card-title>{{ element.usuario.username }}</mat-card-title>
       <mat-card-subtitle>{{ element.publicationDateResenia }}</mat-card-subtitle>
     </mat-card-header>
 
-    <!-- imagen superior del card -->
-<img
-  mat-card-image
-  src="assets/images/loki.jpg"
-  alt="Foto del perrito"
-/>
-
+    <img
+      mat-card-image
+      src="assets/images/loki.jpg"
+      alt="Foto del perrito"
+    />
 
     <mat-card-content>
       <p>{{ element.contentResenia }}</p>
@@ -29,11 +31,7 @@
         <mat-icon>thumb_up</mat-icon>
         Like
       </button>
-      <button
-        mat-stroked-button
-        color="warn"
-        (click)="eliminar(element.idResenia)"
-      >
+      <button mat-stroked-button color="warn" (click)="eliminar(element.idResenia)">
         <mat-icon>delete</mat-icon>
         Eliminar
       </button>
