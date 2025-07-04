@@ -19,11 +19,11 @@ export class BusService {
   }
 
   insert(b: Bus){
-    this.http.post(`${this.url}/insertar`, b);
+    return this.http.post(`${this.url}/insertar`, b);
   }
 
   setList(listaNueva: Bus[]){
-    this.listaCambio.next(listaNueva);
+    return  this.listaCambio.next(listaNueva);
   }
 
   getList(){
@@ -31,14 +31,14 @@ export class BusService {
   }
 
   listId(id: number){
-    return this.http.get<Bus>(`${this.url}/${id}`);
+      return this.http.get<Bus>(`${this.url}/listar/${id}`);
   }
 
   update(b: Bus){
-    return this.http.put(this.url, b);
+   return this.http.put(`${this.url}/modificar`, b);
   }
 
-  delete(id: number){
+  deleteI(id: number){
     return this.http.delete(`${this.url}/${id}`);
   }
 }

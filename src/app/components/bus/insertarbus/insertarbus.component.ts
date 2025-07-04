@@ -1,11 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Bus } from '../../../models/Bus';
+import { Viaje } from '../../../models/Viaje';
+import { BusService } from '../../../services/Bus.service';
+
+import { ViajeService } from '../../../services/Viaje.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-insertarbus',
-  imports: [],
+  imports: [ReactiveFormsModule,MatFormField,MatInputModule,CommonModule,MatButtonModule,MatSelectModule, MatIconModule],
   templateUrl: './insertarbus.component.html',
   styleUrl: './insertarbus.component.css'
 })
-export class InsertarbusComponent {
+export class InsertarbusComponent implements OnInit{
+   form:FormGroup = new FormGroup({});
+  id: number = 0
+  edicion: boolean = false;
+  bus:Bus=new Bus();
+  listaViaje:Viaje[]=[]
+  arrivalAddressBus: string = ""
+  capacityBus: number = 0
+  durationBus: string = ""
+  
+   constructor(
+    private formBuilder: FormBuilder,
+    private bS: BusService,
+    private router:Router,
+    private vS:ViajeService,
+    private route:ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+     this.route.params.subscribe((data:Params)=>{
+      this.id=data['id']
+      this.edicion=data['id']!=null //boleano
+      //actualiza y trae la data
+      this.init()
+    });
+    this.form = this.formBuilder.group({
+      arrivalAddressBus: ['', Validators.required],
+      capacityBus: ['', Validators.required],
+      durationBus: ['', Validators.required],
+      viaje: ['', Validators.required],
+    });
+    this.vS.list().subscribe(data=>{
+        this.listaViaje=data
+      })
+  }
+
+  aceptar() {
+    if (this.form.valid) {
+      this.bus.arrivalAddressBus = this.form.value.arrivalAddressBus;
+      this.bus.capacityBus = this.form.value.capacityBus;
+      this.bus.durationBus = this.form.value.durationBus;
+      this.bus.viaje.idViaje = this.form.value.viaje;
+      const request = this.edicion
+        ? this.bS.update(this.bus)
+        : this.bS.insert(this.bus);
+
+      request.subscribe(() => {
+        this.bS.list().subscribe(data => {
+          this.bS.setList(data);
+          this.router.navigate(['rutaBus']);
+        });
+      });
+    }
+  }
+
+  init() {
+    if (this.edicion) {
+      this.bS.listId(this.id).subscribe(data => {
+        this.form = this.formBuilder.group({
+          id: [data.idBus],
+          arrivalAddressBus: [data.arrivalAddressBus, Validators.required],
+          capacityBus: [data.capacityBus, Validators.required],
+          durationBus: [data.durationBus, Validators.required],
+          viaje: [data.viaje, Validators.required],
+
+        });
+      });
+    }
+  }
+
+
 
 }

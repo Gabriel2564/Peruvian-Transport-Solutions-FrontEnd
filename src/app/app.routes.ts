@@ -27,6 +27,9 @@ import { ReporteuserbyrolComponent } from './components/reportes/reporteuserbyro
 import { InsertarasientoComponent } from './components/asiento/insertarasiento/insertarasiento.component';
 import { AsientoComponent } from './components/asiento/asiento.component';
 import { ListaritemComponent } from './components/item/listaritem/listaritem.component';
+import { InsertarbusComponent } from './components/bus/insertarbus/insertarbus.component';
+import { RutaComponent } from './components/ruta/ruta.component';
+import { InsertarrutaComponent } from './components/ruta/insertarruta/insertarruta.component';
 
 
 
@@ -154,6 +157,30 @@ export const routes: Routes = [
 
     {
       path:'actualizaciones/:id', component:InsertarviajeComponent
+      }
+  ]
+},
+{
+  path:'rutaBus', component:BusComponent,
+  children:[
+    {
+      path:'insertar', component:InsertarbusComponent
+    },
+
+    {
+      path:'actualizaciones/:id', component:InsertarbusComponent
+      }
+  ]
+},
+{
+  path:'rutaRuta', component:RutaComponent,
+  children:[
+    {
+      path:'insertar', component:InsertarrutaComponent
+    },
+
+    {
+      path:'actualizaciones/:id', component:InsertarrutaComponent
       }
   ]
 }

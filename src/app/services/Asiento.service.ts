@@ -27,6 +27,16 @@ export class AsientoService{
         setList(listaNueva: Asiento[]) {
         this.listaCambio.next(listaNueva);
       }
-    
+    update(asiento: Asiento) {
+          return this.http.put(`${this.url}/modificar`, asiento);
+        }
+      
+        deleteI(id: number) {
+          return this.http.delete(`${this.url}/${id}`);
+        }
+      
+        listId(id: number) {
+          return this.http.get<Asiento>(`${this.url}/listar/${id}`);
+        }
 
 }
