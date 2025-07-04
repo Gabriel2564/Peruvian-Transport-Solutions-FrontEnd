@@ -37,7 +37,8 @@ export class ListarviajeComponent implements AfterViewInit {
    viajeFiltro: string = '';
    @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
-   constructor(private vS: ViajeService,     private snackBar: MatSnackBar   ) {}
+   constructor(private vS: ViajeService,    
+     private snackBar: MatSnackBar   ) {}
 
    ngOnInit(): void {
     this.vS.list().subscribe((data:Viaje[]) => {
