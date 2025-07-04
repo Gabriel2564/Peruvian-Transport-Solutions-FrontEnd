@@ -1,87 +1,112 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../../services/Usuario.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Usuario } from '../../../models/Usuario';
-import { Rol } from '../../../models/Rol';
-import { MatInputModule } from '@angular/material/input';
+import { UsuarioService } from '../../../services/Usuario.service';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertarusuario',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MatInputModule,
     MatFormFieldModule,
+    MatInputModule,
     CommonModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterLink,
   ],
   templateUrl: './insertarusuario.component.html',
   styleUrl: './insertarusuario.component.css',
 })
 export class InsertarusuarioComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
+  usuarioForm: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
-  id: number = 0;
+  usuarioId: number = 0;
   edicion: boolean = false;
 
   constructor(
     private uS: UsuarioService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      id: [null], // el id solo en edición
-      nombre: ['', Validators.required],
-      contrasenia: ['', Validators.required],
-      estado: [true, Validators.required],
+    this.route.params.subscribe((params: Params) => {
+      this.usuarioId = params['id'];
+      this.edicion = this.usuarioId != null;
+      this.init();
     });
 
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = this.id != null;
-      this.init();
+    this.usuarioForm = this.formBuilder.group({
+      id: [''], // opcional
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      enabled: [true, Validators.required],
     });
   }
 
-  aceptar() {
-    if (this.form.valid) {
-      this.usuario.id = this.form.value.id; // null o un valor en edición
-      this.usuario.username = this.form.value.nombre;
-      this.usuario.password = this.form.value.contrasenia;
-      this.usuario.enabled = this.form.value.estado;
-      this.usuario.roles = [] as Rol[];
-
-      const request = this.edicion
-        ? this.uS.update(this.usuario)
-        : this.uS.insert(this.usuario);
-
-      request.subscribe(() => {
-        this.uS.list().subscribe((data) => {
-          this.uS.setList(data);
-          this.router.navigate(['rutaUsuario']);
+  init() {
+    if (this.edicion) {
+      this.uS.listId(this.usuarioId).subscribe((data) => {
+        this.usuarioForm = this.formBuilder.group({
+          id: [data.id], // para pasar el id al actualizar
+          username: [data.username, [Validators.required, Validators.minLength(4)]],
+          password: [data.password, [Validators.required, Validators.minLength(6)]],
+          enabled: [data.enabled, Validators.required],
         });
       });
     }
   }
-  init() {
-    if (this.edicion) {
-      this.uS.listId(this.id).subscribe((data) => {
-        this.form = this.formBuilder.group({
-          id: [data.id],
-          username: [data.username, Validators.required],
-          password: [data.password, Validators.required],
-          enabled: [data.enabled, Validators.required],
+
+  aceptar() {
+    if (this.usuarioForm.valid) {
+      const nuevoUsuario: Usuario = {
+        id: this.edicion ? this.usuarioId : 0,
+        username: this.usuarioForm.value.username,
+        password: this.usuarioForm.value.password,
+        enabled: this.usuarioForm.value.enabled,
+        roles: [], // enviar vacío
+      };
+
+      if (this.edicion) {
+        this.uS.update(nuevoUsuario).subscribe(() => {
+          this.uS.list().subscribe((data) => {
+            this.uS.setList(data);
+            this.snackBar.open('Usuario actualizado correctamente', 'Cerrar', {
+              duration: 3000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'center',
+            });
+            this.router.navigate(['rutaUsuario']);
+          });
         });
-      });
+      } else {
+        this.uS.insert(nuevoUsuario).subscribe(() => {
+          this.uS.list().subscribe((data) => {
+            this.uS.setList(data);
+            this.snackBar.open('Usuario registrado correctamente', 'Cerrar', {
+              duration: 3000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'center',
+            });
+            this.router.navigate(['rutaUsuario']);
+          });
+        });
+      }
     }
   }
 }
