@@ -1,3 +1,49 @@
+
+.titulo-seccion h1 {
+  font-family: 'Abhaya Libre ExtraBold', serif;
+  color: black;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.cantidad-registros,
+.buscador-container,
+.tabla-contenedor {
+  font-family: 'Prompt', sans-serif;
+}
+
+.cantidad-registros {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.buscador-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.buscador-label {
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.boton-buscar {
+  background-color: #bdbdbd;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.buscador-input {
+  width: 250px;
+}
+
+.tabla-contenedor {
+  background-color: #948862;
+  padding: 20px;
+  border-radius: 8px;
+=======
 /* styles.css o listarviaje.component.css */
 .snack-error {
   background-color: #d32f2f;   /* rojo Material */

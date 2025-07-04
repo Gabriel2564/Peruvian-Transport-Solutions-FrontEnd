@@ -1,10 +1,10 @@
-/* Aplica la fuente a todo el sitio */
+/* ========== Fuente general ========== */
 body, .container, h1, h2, h3, h4, h5, h6, .usuario-card, .mensaje, button, mat-card-title, mat-card-subtitle {
   font-family: 'Abhaya Libre', serif;
   font-weight: 800; /* ExtraBold */
 }
 
-/* ======== Barra superior ======== */
+/* ========== Barra superior ========== */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -40,11 +40,9 @@ body, .container, h1, h2, h3, h4, h5, h6, .usuario-card, .mensaje, button, mat-c
   font-weight: bold;
 }
 
-.nav-links a,
-.nav-item {
+.nav-links a {
   color: white;
   text-decoration: none;
-  justify-content: space-between;
   margin: 0 8px;
   font-size: 14px;
   font-weight: bold;
@@ -53,36 +51,94 @@ body, .container, h1, h2, h3, h4, h5, h6, .usuario-card, .mensaje, button, mat-c
 .nav-links a:hover {
   text-decoration: underline;
 }
-/* Contenedor marrón que envuelve todo excepto barra superior */
+
+/* ========== Contenedor principal ========== */
 .contenedor-marron {
-  background-color: #948862;       /* Marrón dorado */
-  border-radius: 15px;             /* Bordes redondeados */
+  background-color: #948862;
+  border-radius: 15px;
   padding: 30px;
   margin: 0 auto 40px auto;
   width: 95%;
   max-width: 1100px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Fondo blanco a cada card dentro del marrón */
+/* ========== Cards de usuario dentro del contenedor ========== */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+.contenedor-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+}
+
+.tarjeta {
+  flex: 0 1 280px;  /* ancho flexible, base 280px */
+}
+
 .usuario-card {
   background-color: white;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
+mat-card-title,
+mat-card-subtitle {
+  color: #333;
+}
 
-/* ======== Línea + botón agregar usuario ======== */
+mat-card-content {
+  padding: 10px 20px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+}
+
+/* Imagen decorativa pequeña */
+.fotousuario {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Título principal ========== */
+h1.titulo {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ========== Línea + botón agregar usuario ========== */
 .linea-con-agregar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
-  margin: 20px auto;
   background-color: white;
   border-radius: 10px;
-  border-left: 6px solid #ffffff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px 30px;
+  margin: 20px auto;
   width: 95%;
   max-width: 900px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .linea-con-agregar .mensaje {
@@ -91,7 +147,6 @@ body, .container, h1, h2, h3, h4, h5, h6, .usuario-card, .mensaje, button, mat-c
   color: #444;
 }
 
-/* Línea blanca debajo de la sección "agregar usuario" */
 .linea-blanca {
   border: none;
   height: 2px;
@@ -99,104 +154,55 @@ body, .container, h1, h2, h3, h4, h5, h6, .usuario-card, .mensaje, button, mat-c
   margin: 0 40px;
 }
 
-
-/* ======== Cards de usuario ======== */
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
-.usuario-card {
-  width: 250px;
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para títulos dentro de la card */
-mat-card-title,
-mat-card-subtitle {
-  color: #444;
-}
-
-/* Espaciado dentro del contenido de la card */
-mat-card-content {
-  padding: 10px 20px;
-}
-
-/* Estilo para las acciones dentro de cada card (botones) */
-mat-card-actions {
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 10px;
-}
-
-/* Imagen decorativa pequeña en la esquina superior derecha de cada card */
-.corner-icon,
-.fotousuario {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Título principal */
-h1 {
-  font-size: 32px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Icono alineado con texto */
-mat-icon {
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-/* Estilo general de botones "outlined" */
-button[matButton="outlined"] {
-  background-color: rgb(82,67,20);
-  color: rgb(255, 255, 255);
-  border: none;
-  width: 50%;
-  box-shadow: none;
-  outline: none;
-}
-
-/* Personalización para botón de eliminar (color rojo) */
+/* ========== Botones de acciones ========== */
+mat-card-actions button[color="primary"],
 mat-card-actions button[color="warn"] {
   background-color: #ffffff;
   color: rgb(82,67,20);
+  border: 1px solid rgb(82,67,20);
+  border-radius: 5px;
 }
 
-/* Personalización para botón de actualizar (color primario) */
-mat-card-actions button[color="primary"] {
-  background-color: #ffffff;
-  color: rgb(82,67,20);
+mat-card-actions button[color="primary"]:hover,
+mat-card-actions button[color="warn"]:hover {
+  background-color: rgb(82,67,20);
+  color: white;
 }
 
-/* ======== Botón "Agregar Usuario" con color personalizado ======== */
+/* ========== Botón agregar personalizado ========== */
 .boton-agregar {
-  background-color: rgb(82,67,20);  /* Marrón oscuro */
-  color: rgb(255, 255, 255);
+  background-color: rgb(82,67,20);
+  color: white;
   font-weight: bold;
   border-radius: 5px;
   padding: 8px 16px;
+  cursor: pointer;
+  border: none;
 }
 
-/* Efecto hover para botón "Agregar Usuario" */
 .boton-agregar:hover {
-  background-color: rgb(102, 85, 30); /* Tonalidad más clara al pasar el mouse */
+  background-color: rgb(102, 85, 30);
 }
 
 .boton-agregar mat-icon {
   color: white;
 }
+
+/* ========== Buscador ========== */
+.buscar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  gap: 10px;
+}
+
+.buscar-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.buscar-input {
+  width: 300px;
+}
+

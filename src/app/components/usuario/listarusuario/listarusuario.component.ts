@@ -39,16 +39,16 @@ export class ListarusuarioComponent implements OnInit {
   constructor(private uS: UsuarioService) {}
 
   ngOnInit(): void {
-    this.uS.list().subscribe((usData: Usuario[]) => {
-      this.usDataSource = new MatTableDataSource<Usuario>(usData);
+    this.uS.list().subscribe((data: Usuario[]) => {
+      this.usDataSource = new MatTableDataSource<Usuario>(data);
       this.usDataSource.filterPredicate = (data: Usuario, filter: string) => {
         const f = filter.trim().toLowerCase();
         return data.username.toLowerCase().includes(f);
       };
     });
 
-    this.uS.getList().subscribe((usData: Usuario[]) => {
-      this.usDataSource = new MatTableDataSource<Usuario>(usData);
+    this.uS.getList().subscribe((data: Usuario[]) => {
+      this.usDataSource = new MatTableDataSource<Usuario>(data);
       this.usDataSource.filterPredicate = (data: Usuario, filter: string) => {
         const f = filter.trim().toLowerCase();
         return data.username.toLowerCase().includes(f);
@@ -57,21 +57,20 @@ export class ListarusuarioComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+     setTimeout(() => {
     this.usDataSource.paginator = this.paginator;
+    });
   }
 
   usAplicarFiltro() {
     this.usDataSource.filter = this.usFiltro.trim().toLowerCase();
-    if (this.usDataSource.paginator) {
-      this.usDataSource.paginator.firstPage();
-    }
+    
   }
 
   eliminar(id: number) {
     this.uS.deleteA(id).subscribe(() => {
-      this.uS.list().subscribe((usData: Usuario[]) => {
-        this.usDataSource.data = usData;
-        this.usAplicarFiltro();
+      this.uS.list().subscribe((data) => {
+        this.usDataSource.data = data;
       });
     });
   }

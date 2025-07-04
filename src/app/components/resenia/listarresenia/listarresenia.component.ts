@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './listarresenia.component.html',
   styleUrl: './listarresenia.component.css'
 })
-export class ListarreseniaComponent implements OnInit {
+export class ListarreseniaComponent implements  AfterViewInit {
 
   resDataSource: MatTableDataSource<Resenia> = new MatTableDataSource<Resenia>();
   resFiltro: string = '';
@@ -41,13 +41,24 @@ export class ListarreseniaComponent implements OnInit {
   ngOnInit(): void {
     this.rS.list().subscribe((data: Resenia[]) => {
       this.resDataSource = new MatTableDataSource<Resenia>(data);
-      this.resDataSource.filterPredicate = (res: Resenia, filter: string) => {
+      this.resDataSource.filterPredicate = (data: Resenia, filter: string) => {
         const f = filter.trim().toLowerCase();
-        return res.contentResenia.toLowerCase().includes(f)
-          || res.usuario.username.toLowerCase().includes(f);
+        return data.contentResenia.toLowerCase().includes(f)
+          || data.usuario.username.toLowerCase().includes(f);
       };
-      this.resDataSource.paginator = this.paginator;
     });
+    this.rS.getList().subscribe((data: Resenia[]) => {
+          this.resDataSource = new MatTableDataSource<Resenia>(data);
+          this.resDataSource.filterPredicate = (data: Resenia, filter: string) => {
+            const f = filter.trim().toLowerCase();
+            return data.contentResenia.toLowerCase().includes(f)
+             || data.usuario.username.toLowerCase().includes(f);
+          };
+        });
+  }
+
+  ngAfterViewInit() {
+    this.resDataSource.paginator = this.paginator;
   }
 
   resAplicarFiltro() {
@@ -59,7 +70,6 @@ export class ListarreseniaComponent implements OnInit {
 
   sumarLike(res: Resenia) {
     res.likesResenia++;
-    // Podrías agregar llamada al backend si lo deseas
   }
 
   eliminar(id: number) {
