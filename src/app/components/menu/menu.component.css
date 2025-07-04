@@ -44,4 +44,24 @@
   flex: 1 1 auto;
 }
 
+/* Escala y sombra al pasar por encima */
+.user-btn,
+.logout-btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.user-btn:hover,
+.logout-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Color de fondo extra al hover (opcional) */
+.user-btn:hover {
+  background-color: #032b0a;
+}
+.logout-btn:hover {
+  background-color: #032b0a;
+}
+
+
 

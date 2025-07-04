@@ -25,7 +25,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     MatRadioModule,
     MatButtonModule,
-    RouterLink,
   ],
   templateUrl: './insertarusuario.component.html',
   styleUrl: './insertarusuario.component.css',

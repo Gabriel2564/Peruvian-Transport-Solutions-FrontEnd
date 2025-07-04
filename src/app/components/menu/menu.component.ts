@@ -1,30 +1,72 @@
-import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink } from '@angular/router';
-import { HostListener } from '@angular/core';
-import { LoginService } from '../../services/login.service';
-import { CommonModule } from '@angular/common';
+import { Component, HostListener }     from '@angular/core';
+import { RouterLink }                  from '@angular/router';
+import { CommonModule }                from '@angular/common';
+import { MatToolbarModule }            from '@angular/material/toolbar';
+import { MatMenuModule }               from '@angular/material/menu';
+import { MatIconModule }               from '@angular/material/icon';
+import { MatButtonModule }             from '@angular/material/button';
+import { MatTooltipModule }            from '@angular/material/tooltip';
+import { LoginService }                from '../../services/login.service';
+import {
+  trigger, state, style,
+  transition, animate
+} from '@angular/animations';
 
 @Component({
   selector: 'app-menu',
-  imports: [MatToolbarModule,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatToolbarModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    RouterLink,CommonModule],
+    MatTooltipModule
+  ],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+  styleUrls: ['./menu.component.css'],
+  animations: [
+    trigger('menuAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+      transition(':leave', [
+        animate('150ms ease-in', style({ opacity: 0, transform: 'translateY(-10px)' }))
+      ]),
+    ]),
+    trigger('rotateIcon', [
+      state('closed', style({ transform: 'rotate(0deg)' })),
+      state('open',   style({ transform: 'rotate(180deg)' })),
+      transition('closed <=> open', animate('200ms ease-out')),
+    ]),
+  ]
 })
 export class MenuComponent {
-  role: string = '';
+  role = '';
+  public logoutMenuOpen = false;
+
   constructor(private loginService: LoginService) {}
-  cerrar() { sessionStorage.clear();
+
+  cerrar() {
+    sessionStorage.clear();
   }
-   isVisible = true;
-  private lastScroll = 0;
+
+  verificar() {
+    this.role = this.loginService.showRole();
+    return this.loginService.verificar();
+  }
+
+  isAdministrador() {
+    return this.role === 'ADMINISTRADOR';
+  }
+  isTurista() {
+    return this.role === 'TURISTA';
+  }
+  isConductor() {
+    return this.role === 'CONDUCTOR';
+  }
 
   @HostListener('window:scroll', [])
   onScroll() {
@@ -32,19 +74,7 @@ export class MenuComponent {
     this.isVisible = current < this.lastScroll;
     this.lastScroll = current;
   }
-   verificar() {
-    this.role = this.loginService.showRole();
-    return this.loginService.verificar();
-  }
-  isAdministrador() {
-    return this.role === 'ADMINISTRADOR';
-  }
 
-  isTurista() {
-    return this.role === 'TURISTA';
-  }
-
-  isConductor() {
-    return this.role === 'CONDUCTOR';
-  }
+  isVisible = true;
+  private lastScroll = 0;
 }

@@ -10,7 +10,8 @@ import { MenuComponent } from "./components/menu/menu.component";
   imports: [
     RouterOutlet,
     MenuComponent,
-    GeminiChatComponent
+    GeminiChatComponent,
+    
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
