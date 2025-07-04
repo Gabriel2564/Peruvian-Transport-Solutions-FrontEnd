@@ -27,9 +27,6 @@ import { ReporteuserbyrolComponent } from './components/reportes/reporteuserbyro
 import { InsertarasientoComponent } from './components/asiento/insertarasiento/insertarasiento.component';
 import { AsientoComponent } from './components/asiento/asiento.component';
 import { ListaritemComponent } from './components/item/listaritem/listaritem.component';
-import { InsertarbusComponent } from './components/bus/insertarbus/insertarbus.component';
-import { RutaComponent } from './components/ruta/ruta.component';
-import { InsertarrutaComponent } from './components/ruta/insertarruta/insertarruta.component';
 
 
 
@@ -145,6 +142,18 @@ export const routes: Routes = [
 
     {
       path:'actualizaciones/:id', component:InsertaritemComponent
+    }
+  ]
+},
+{
+  path:'rutaReservaBoleto', component:ReservaBoletoComponent,
+  children:[
+    {
+      path:'insertar', component:InsertarreservaBoletoComponent
+    },
+
+    {
+      path:'actualizaciones/:id', component:ListarreservanBoletoComponent
     }
   ]
 },

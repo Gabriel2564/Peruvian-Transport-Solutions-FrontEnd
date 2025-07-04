@@ -10,11 +10,31 @@ const base_url = environment.base
   providedIn: 'root',
 })
 export class ReservaBoletoService {
-  private url = `${base_url}/reserva_boletos`;
+  private url = `${base_url}/reservas`;
   private listaCambio = new Subject<Reserva_boleto[]>();
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Reserva_boleto[]>(this.url)
+    return this.http.get<Reserva_boleto[]>(`${this.url}/listar`)
   }
+   insert(r:Reserva_boleto){
+      return this.http.post(`${this.url}/insertar`, r);
+    }
+    setList(listaNueva:Reserva_boleto[]){
+      this.listaCambio.next(listaNueva)
+    }
+    getList(){
+      return this.listaCambio.asObservable()
+    }
+     listId(id: number) {
+      return this.http.get<Reserva_boleto>(`${this.url}/listar/${id}`);
+    }
+  
+    update(r:Reserva_boleto) {
+      return this.http.put(`${this.url}/modificar`, r);
+    }
+  
+    deleteA(id: number) {
+      return this.http.delete(`${this.url}/${id}`);
+    }
 }
