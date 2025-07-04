@@ -23,6 +23,16 @@ h1 {
   color: #3f51b5;
 }
 
+mat-radio-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+mat-radio-button {
+  margin: 0 8px;
+}
+
 button {
   min-width: 160px;
 }

@@ -1,41 +1,51 @@
 <div class="container">
-  <div style="text-align: center;margin: 5%;"><h1>Cuentanos tu experiencia</h1></div>
-  <div style="text-align: center;margin: 5%;">
-  <form [formGroup]="form" (ngSubmit)="aceptar()">
-    <mat-form-field appearance="fill" class="full-width">
+  <div style="text-align: center; margin: 5%;">
+    <h1>Registrar Reseña</h1>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 5%;">
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Contenido de la reseña</mat-label>
-      <textarea matInput formControlName="contenido"></textarea>
+      <textarea matInput formControlName="contentResenia"></textarea>
+      <mat-error *ngIf="form.get('contentResenia')?.hasError('required')">
+        El contenido es obligatorio
+      </mat-error>
     </mat-form-field>
 
-<mat-form-field appearance="fill">
-  <mat-label>Hora de publicación</mat-label>
-  <input matInput type="time" formControlName="hora">
-</mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Hora de publicación</mat-label>
+      <input matInput type="time" formControlName="publicationDateResenia" />
+      <mat-error *ngIf="form.get('publicationDateResenia')?.hasError('required')">
+        La hora de publicación es obligatoria
+      </mat-error>
+    </mat-form-field>
 
-<mat-form-field>
-        <mat-label>Favorite food</mat-label>
-        <mat-select formControlName="usuarioId">
-          @for (food of listaUsuarios; track food) {
-            <mat-option [value]="food.id">{{food.id}}</mat-option>
-          }
-        </mat-select>
-        <mat-error *ngIf="form.get('usuarioId')?.hasError('required')">
-          El usuario es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-    <mat-form-field>
-        <mat-label>Favorite food</mat-label>
-        <mat-select formControlName="viajeId">
-          @for (food of listaViajes; track food) {
-            <mat-option [value]="food.idViaje">{{food.idViaje}}</mat-option>
-          }
-        </mat-select>
-        <mat-error *ngIf="form.get('viajeId')?.hasError('required')">
-          El viaje es obligatorio!!
-        </mat-error>
-      </mat-form-field>
-<br>
-      <button matButton="outlined">Guardar</button>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Usuario</mat-label>
+      <mat-select formControlName="usuario">
+        <mat-option *ngFor="let user of listaUsuarios" [value]="user.id">
+          {{ user.username }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+        El usuario es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Viaje</mat-label>
+      <mat-select formControlName="viaje">
+        <mat-option *ngFor="let v of listaViajes" [value]="v.idViaje">
+          {{ v.idViaje }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('viaje')?.hasError('required')">
+        El viaje es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button mat-raised-button color="primary" type="submit">Registrar</button>
+    </div>
   </form>
-  </div>
 </div>

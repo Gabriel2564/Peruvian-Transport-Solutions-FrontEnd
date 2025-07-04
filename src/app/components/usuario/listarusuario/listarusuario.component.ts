@@ -43,9 +43,7 @@ export class ListarusuarioComponent implements OnInit {
       this.usDataSource = new MatTableDataSource<Usuario>(usData);
       this.usDataSource.filterPredicate = (data: Usuario, filter: string) => {
         const f = filter.trim().toLowerCase();
-        return data.username.toLowerCase().includes(f)
-          || data.roles[0].rol.toLowerCase().includes(f)
-          || (data.enabled ? 'activo' : 'inactivo').includes(f);
+        return data.username.toLowerCase().includes(f);
       };
     });
 
@@ -53,8 +51,7 @@ export class ListarusuarioComponent implements OnInit {
       this.usDataSource = new MatTableDataSource<Usuario>(usData);
       this.usDataSource.filterPredicate = (data: Usuario, filter: string) => {
         const f = filter.trim().toLowerCase();
-        return data.username.toLowerCase().includes(f)
-          || data.roles[0].rol.toLowerCase().includes(f);
+        return data.username.toLowerCase().includes(f);
       };
     });
   }
