@@ -18,13 +18,18 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   styleUrl: './listarreservan-boleto.component.css'
 })
 export class ListarreservanBoletoComponent implements OnInit {
-  dataSource: MatTableDataSource<Reserva_boleto> = new MatTableDataSource();
+  dataSource: MatTableDataSource<Reserva_boleto> = new MatTableDataSource<Reserva_boleto>();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
 
   constructor(private rB: ReservaBoletoService) {}
 
   ngOnInit(): void {
-    this.rB.list().subscribe((data) => {
+  
+    this.rB.list().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+        //Actualiza la tabla automaticamente
+    this.rB.getList().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
   }
