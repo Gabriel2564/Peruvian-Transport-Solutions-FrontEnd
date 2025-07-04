@@ -27,7 +27,19 @@
   background-color: #7c734f; /* un tono un poco más oscuro al pasar el mouse */
 }
 
-/* empuja el botón de Cerrar Sesión al extremo derecho */
+.btn-rojo {
+  transition: background-color 0.2s, transform 0.1s;
+}
+.btn-rojo:hover {
+  background-color: #032b0a;
+  transform: translateY(-2px);
+}
 .exit-btn {
   margin-left: auto;
 }
+
+.custom-toolbar.hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+

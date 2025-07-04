@@ -27,6 +27,14 @@ import { ReporteuserbyrolComponent } from './components/reportes/reporteuserbyro
 import { InsertarasientoComponent } from './components/asiento/insertarasiento/insertarasiento.component';
 import { AsientoComponent } from './components/asiento/asiento.component';
 import { ListaritemComponent } from './components/item/listaritem/listaritem.component';
+import { ReservaBoletoComponent } from './components/reserva-boleto/reserva-boleto.component';
+import { InsertarreservaBoletoComponent } from './components/reserva-boleto/insertarreserva-boleto/insertarreserva-boleto.component';
+import { ListarreservanBoletoComponent } from './components/reserva-boleto/listarreserva-boleto/listarreservan-boleto.component';
+import { InsertarbusComponent } from './components/bus/insertarbus/insertarbus.component';
+import { RutaComponent } from './components/ruta/ruta.component';
+import { InsertarrutaComponent } from './components/ruta/insertarruta/insertarruta.component';
+import { ItemUsuarioComponent } from './components/item-usuario/item-usuario.component';
+import { InsertaritemUsiarioComponent } from './components/item-usuario/insertaritem-usiario/insertaritem-usiario.component';
 
 
 
@@ -190,6 +198,18 @@ export const routes: Routes = [
 
     {
       path:'actualizaciones/:id', component:InsertarrutaComponent
+      }
+  ]
+},
+{
+  path:'rutaItemUsuario', component:ItemUsuarioComponent,
+  children:[
+    {
+      path:'insertar', component:InsertaritemUsiarioComponent
+    },
+
+    {
+      path:'actualizaciones/:id', component:InsertaritemUsiarioComponent
       }
   ]
 }

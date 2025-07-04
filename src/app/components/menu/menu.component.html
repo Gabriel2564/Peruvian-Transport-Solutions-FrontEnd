@@ -1,4 +1,4 @@
-<mat-toolbar class="custom-toolbar">
+<mat-toolbar class="custom-toolbar"  [class.hidden]="!isVisible">
     <!-- HOME -->
   <button mat-button class="btn-rojo" [routerLink]="['/home']">
   <mat-icon>home</mat-icon>
@@ -61,6 +61,12 @@
   <button mat-button [matMenuTriggerFor]="menuRuta" class="btn-rojo">
         <mat-icon>directions_car</mat-icon>
        Ruta
+  </button>
+
+  <!-- RUTA -->
+  <button mat-button [matMenuTriggerFor]="menuItemUsuario" class="btn-rojo">
+        <mat-icon>assignment_ind</mat-icon>
+       Item Usuario
   </button>
 
   <!-- REPORTES -->
@@ -134,6 +140,12 @@
 <mat-menu #menuRuta="matMenu">
   <button mat-menu-item routerLink="/rutaRuta">Listar</button>
    <button mat-menu-item routerLink="/rutaRuta/insertar">Insertar</button>
+</mat-menu>
+
+<!-- MENU RUTA -->
+<mat-menu #menuItemUsuario="matMenu">
+  <button mat-menu-item routerLink="/rutaItemUsuario">Listar</button>
+   <button mat-menu-item routerLink="/rutaItemUsuario/insertar">Insertar</button>
 </mat-menu>
 
 <!-- MENU REPORTES -->

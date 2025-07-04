@@ -44,41 +44,63 @@ export class InsertarviajeComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-     this.route.params.subscribe((data:Params)=>{
-      this.id=data['id']
-      this.edicion=data['id']!=null //boleano
-      //actualiza y trae la data
-      this.init()
-    });
-    this.form = this.formBuilder.group({
-      departureDateViaje: ['', Validators.required],
-      priceViaje: ['', Validators.required],
-      departureTimeViaje: ['', Validators.required],
-      ruta: ['', Validators.required],
-    });
-    this.rS.list().subscribe(data=>{
-        this.listaRuta=data
-      })
-  }
+  // 1) Inicializas el form (¡una sola vez!)
+  this.form = this.formBuilder.group({
+    departureDateViaje: ['', Validators.required],
+    priceViaje:         ['', Validators.required],
+    departureTimeViaje: ['', Validators.required],
+    ruta:               ['', Validators.required]
+  });
 
-  aceptar() {
-    if (this.form.valid) {
-      this.viaje.departureDateViaje = this.form.value.departureDateViaje;
-      this.viaje.priceViaje = this.form.value.priceViaje;
-      this.viaje.departureTimeViaje = this.form.value.departureTimeViaje;
-      this.viaje.ruta.idRuta = this.form.value.ruta;
-      const request = this.edicion
-        ? this.vS.update(this.viaje)
-        : this.vS.insert(this.viaje);
+  // 2) Cargas la lista de rutas
+  this.rS.list().subscribe(lista => this.listaRuta = lista);
 
-      request.subscribe(() => {
-        this.vS.list().subscribe(data => {
-          this.vS.setList(data);
-          this.router.navigate(['rutaViaje']);
+  // 3) Te suscribes a params y, si es edición, haces patch
+  this.route.params.subscribe((params: Params) => {
+    this.id = params['id'];
+    this.edicion = this.id != null;
+    if (this.edicion) {
+      this.vS.listId(this.id).subscribe(data => {
+        this.form.patchValue({
+          departureDateViaje: data.departureDateViaje,
+          priceViaje:         data.priceViaje,
+          departureTimeViaje: data.departureTimeViaje,
+          ruta:               data.ruta.idRuta    // <- aquí sólo el ID
         });
       });
     }
-  }
+  });
+}
+
+
+  aceptar() {
+  if (this.form.invalid) return;
+
+  const fv = this.form.value;
+  // Inicializo el objeto viaje (con su ID si es edición)
+  this.viaje = new Viaje();
+  if (this.edicion) { this.viaje.idViaje = this.id; }
+
+  this.viaje.departureDateViaje = fv.departureDateViaje;
+  this.viaje.priceViaje         = fv.priceViaje;
+  this.viaje.departureTimeViaje = fv.departureTimeViaje;
+
+  // Inicializo la ruta y le asigno el id
+  this.viaje.ruta = new Ruta();
+  this.viaje.ruta.idRuta = fv.ruta;
+
+  const request = this.edicion
+    ? this.vS.update(this.viaje)
+    : this.vS.insert(this.viaje);
+
+  request.subscribe(() => {
+    this.vS.list().subscribe(data => {
+      this.vS.setList(data);
+      this.router.navigate(['rutaViaje']);
+    });
+  });
+}
+
 
   init() {
     if (this.edicion) {

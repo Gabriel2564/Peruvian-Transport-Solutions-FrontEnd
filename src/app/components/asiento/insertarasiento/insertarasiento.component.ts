@@ -20,61 +20,84 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './insertarasiento.component.html',
   styleUrl: './insertarasiento.component.css'
 })
-export class InsertarasientoComponent implements OnInit{
-   form:FormGroup=new FormGroup({})
-  asiento:Asiento=new Asiento()
-   edicion: boolean = false;
-  id: number = 0
-  listabuses:Bus[]=[]
-  listaestados:Estado[]=[]
-  seatNumberAsiento: number=0
+export class InsertarasientoComponent implements OnInit {
+  form: FormGroup = new FormGroup({});
+  asiento: Asiento = new Asiento();
+  edicion: boolean = false;
+  id: number = 0;
+  listabuses: Bus[] = [];
+  listaestados: Estado[] = [];
 
-   constructor(
-    private formBuilder:FormBuilder,
-    private aS:AsientoService,
-    private router:Router,
-    private bS:BusService,
-    private eS:EstadoService,
-      private route:ActivatedRoute
-  ){}
+  constructor(
+    private formBuilder: FormBuilder,
+    private aS: AsientoService,
+    private router: Router,
+    private bS: BusService,
+    private eS: EstadoService,
+    private route: ActivatedRoute
+  ) {}
 
-   ngOnInit(): void {
-      this.route.params.subscribe((data:Params)=>{
-      this.id=data['id']
-      this.edicion=data['id']!=null //boleano
-      //actualiza y trae la data
-      this.init()
-    });
+  ngOnInit(): void {
+    // 1) Inicializa el form UNA vez
     this.form = this.formBuilder.group({
-      id:[''],
+      id: [''],
       seatNumberAsiento: ['', Validators.required],
       bus: ['', Validators.required],
-      estado:['', Validators.required],
+      estado: ['', Validators.required],
     });
-    this.bS.list().subscribe(data=>{
-        this.listabuses=data
-      })
-    this.eS.list().subscribe(data=>{
-        this.listaestados=data
-      })
-  } 
-  aceptar(){
-    if(this.form.valid){
-      this.asiento.seatNumberAsiento=this.form.value.seatNumberAsiento
-      this.asiento.bus=this.form.value.bus
-      this.asiento.estado=this.form.value.estado     
-      const request = this.edicion
-        ? this.aS.update(this.asiento)
-        : this.aS.insert(this.asiento);
 
-      request.subscribe(() => {
-        this.aS.list().subscribe(data => {
-          this.aS.setList(data);
-          this.router.navigate(['rutaAsiento']);
+    // 2) Carga buses y estados
+    this.bS.list().subscribe(data => this.listabuses = data);
+    this.eS.list().subscribe(data => this.listaestados = data);
+
+    // 3) Parámetros de ruta: guardamos id y edicion, y parcheamos sólo IDs
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.edicion = this.id != null;
+      if (this.edicion) {
+        this.aS.listId(this.id).subscribe(data => {
+          this.form.patchValue({
+            id: data.idAsiento,
+            seatNumberAsiento: data.seatNumberAsiento,
+            bus: data.bus.idBus,         // <— sólo el ID
+            estado: data.estado.statusTypeEstado // <— sólo el ID
+          });
         });
-      });    
+      }
+    });
+  }
+
+  aceptar() {
+    if (this.form.invalid) return;
+
+    const fv = this.form.value;
+
+    // 1) Inicializa el modelo
+    this.asiento = new Asiento();
+    if (this.edicion) {
+      this.asiento.idAsiento = this.id;
     }
-   
+
+    // 2) Asigna los campos
+    this.asiento.seatNumberAsiento = fv.seatNumberAsiento;
+
+    // 3) Inicializa y asigna sólo el ID a bus y estado
+    this.asiento.bus = new Bus();
+    this.asiento.bus.idBus = fv.bus;
+    this.asiento.estado = new Estado();
+    this.asiento.estado.statusTypeEstado = fv.estado;
+
+    // 4) Llamada a servicio
+    const request = this.edicion
+      ? this.aS.update(this.asiento)
+      : this.aS.insert(this.asiento);
+
+    request.subscribe(() => {
+      this.aS.list().subscribe(list => {
+        this.aS.setList(list);
+        this.router.navigate(['rutaAsiento']);
+      });
+    });
   }
 
    init() {

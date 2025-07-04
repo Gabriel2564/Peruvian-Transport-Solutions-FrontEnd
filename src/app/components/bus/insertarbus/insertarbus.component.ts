@@ -38,29 +38,46 @@ export class InsertarbusComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-     this.route.params.subscribe((data:Params)=>{
-      this.id=data['id']
-      this.edicion=data['id']!=null //boleano
-      //actualiza y trae la data
-      this.init()
-    });
-    this.form = this.formBuilder.group({
+     this.form = this.formBuilder.group({
       arrivalAddressBus: ['', Validators.required],
       capacityBus: ['', Validators.required],
       durationBus: ['', Validators.required],
       viaje: ['', Validators.required],
     });
-    this.vS.list().subscribe(data=>{
+     this.vS.list().subscribe(data=>{
         this.listaViaje=data
       })
+      this.route.params.subscribe((params: Params) => {
+    this.id = params['id'];
+    this.edicion = this.id != null;
+    if (this.edicion) {
+      this.bS.listId(this.id).subscribe(data => {
+        this.form.patchValue({
+          arrivalAddressBus: data.arrivalAddressBus,
+          capacityBus:         data.capacityBus,
+          durationBus: data.durationBus,
+          viaje:               data.viaje.idViaje    // <- aquí sólo el ID
+        });
+      });
+    }
+  });
+    
   }
 
   aceptar() {
-    if (this.form.valid) {
+    if (this.form.invalid) return;
+
+  const fv = this.form.value;
+  // Inicializo el objeto viaje (con su ID si es edición)
+  this.bus = new Bus();
+  if (this.edicion) { this.bus.idBus = this.id; }
       this.bus.arrivalAddressBus = this.form.value.arrivalAddressBus;
       this.bus.capacityBus = this.form.value.capacityBus;
       this.bus.durationBus = this.form.value.durationBus;
-      this.bus.viaje.idViaje = this.form.value.viaje;
+
+      this.bus.viaje = new Viaje();
+        this.bus.viaje.idViaje = fv.viaje;
+
       const request = this.edicion
         ? this.bS.update(this.bus)
         : this.bS.insert(this.bus);
@@ -71,8 +88,8 @@ export class InsertarbusComponent implements OnInit{
           this.router.navigate(['rutaBus']);
         });
       });
-    }
-  }
+   }
+  
 
   init() {
     if (this.edicion) {
