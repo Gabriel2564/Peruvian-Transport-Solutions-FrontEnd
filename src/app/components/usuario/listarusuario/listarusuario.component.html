@@ -32,7 +32,9 @@
           alt="Avatar"
         />
         <mat-card-title>{{ element.username }}</mat-card-title>
-        <mat-card-subtitle>{{ element.roles[0].rol }}</mat-card-subtitle>
+        <mat-card-subtitle>
+  {{ element.roles && element.roles.length > 0 ? element.roles[0].rol : 'Sin rol' }}
+</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>

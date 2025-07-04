@@ -11,30 +11,27 @@ import { Viaje } from '../../../models/Viaje';
 import { ReseniaService } from '../../../services/Resenia.service';
 import { UsuarioService } from '../../../services/Usuario.service';
 import { ViajeService } from '../../../services/Viaje.service';
-import { Router } from '@angular/router';
-import {MatTimepickerModule} from '@angular/material/timepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-insertarresenia',
-  templateUrl: './insertarresenia.component.html',
-  styleUrl: './insertarresenia.component.css',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
+    CommonModule,
     MatFormFieldModule,
     MatInputModule,
-    CommonModule,
     MatSelectModule,
-    MatButtonModule,
-    MatTimepickerModule
-  ]
+    MatButtonModule
+  ],
+  templateUrl: './insertarresenia.component.html',
+  styleUrl: './insertarresenia.component.css'
 })
 export class InsertarreseniaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   resenia: Resenia = new Resenia();
-
-  listaUsuarios: Usuario[] = []
-  listaViajes: Viaje[] = []
+  listaUsuarios: Usuario[] = [];
+  listaViajes: Viaje[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,11 +43,11 @@ export class InsertarreseniaComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      contenido: ['', Validators.required],
-      hora: ['', Validators.required],
-      likes: [0],
-      usuarioId: ['', Validators.required],
-      viajeId: ['', Validators.required],
+      contentResenia: ['', Validators.required],
+      publicationDateResenia: ['', Validators.required],
+      likesResenia: [0],
+      usuario: ['', Validators.required],
+      viaje: ['', Validators.required],
     });
 
     this.uS.list().subscribe(data => this.listaUsuarios = data);
@@ -59,19 +56,18 @@ export class InsertarreseniaComponent implements OnInit {
 
   aceptar() {
     if (this.form.valid) {
-      this.resenia.contentResenia = this.form.value.contenido;
-      this.resenia.publicationDateResenia = this.form.value.hora;
-      this.resenia.likesResenia = this.form.value.likes;
-      this.resenia.usuario = { id: this.form.value.usuarioId } as Usuario;
-      this.resenia.viaje = { idViaje: this.form.value.viajeId } as Viaje;
+      this.resenia.contentResenia = this.form.value.contentResenia;
+      this.resenia.publicationDateResenia = this.form.value.publicationDateResenia;
+      this.resenia.likesResenia = this.form.value.likesResenia;
+      this.resenia.usuario = { id: this.form.value.usuario } as Usuario;
+      this.resenia.viaje = { idViaje: this.form.value.viaje } as Viaje;
 
-
-      this.rS.insert(this.resenia).subscribe((data) => {
-        this.rS.list().subscribe((data) => {
+      this.rS.insert(this.resenia).subscribe(() => {
+        this.rS.list().subscribe(data => {
           this.rS.setList(data);
+          this.router.navigate(['rutaResenia']);
         });
       });
-      this.router.navigate(['rutaResenia'])
     }
   }
 }
