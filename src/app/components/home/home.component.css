@@ -183,21 +183,39 @@
   padding: 3rem 1rem;
   color: #fff;
 }
+/* Estilo común para ambas clases de texto */
 .services-body .services-intro,
 .services-body .services-subintro {
   text-align: center;
-  max-width: 700px;
-  margin: 0.5rem auto 2rem;
-  line-height: 1.5;
+  max-width: 750px;  /* Aumento el max-width para permitir un poco más de espacio */
+  margin: 0 auto 2rem;
+  line-height: 1.7;  /* Aumento el espaciado entre líneas para mejorar la legibilidad */
+  padding: 0 1rem;   /* Añadimos un poco de espacio a los lados */
 }
+
+/* Estilo específico para el texto de introducción */
 .services-body .services-intro {
-  font-size: 1rem;
-  color: #f5f5f5;
+  font-size: 1.125rem; /* Aumento el tamaño de fuente para que se vea más grande y legible */
+  color: #f5f5f5;      /* Color blanco suave */
+  font-weight: 500;     /* Un poco de peso a la fuente para mayor énfasis */
+  letter-spacing: 0.5px; /* Espaciado entre letras para hacerla más estilizada */
 }
+
+/* Estilo para la subintroducción */
 .services-body .services-subintro {
-  font-size: 0.9rem;
-  color: #ddd;
+  font-size: 1rem;     /* Un tamaño de fuente ligeramente mayor para mayor legibilidad */
+  color: #ddd;         /* Color gris suave para contraste */
+  font-weight: 400;     /* Peso de la fuente más liviano */
+  font-style: italic;   /* Agregar cursiva para dar un toque distinto */
+  letter-spacing: 0.5px; /* Agregar un poco de espaciado entre letras para mejorar la legibilidad */
 }
+
+/* Efecto para las palabras clave dentro de la introducción */
+.services-body .services-intro strong {
+  color: #f4e04d; /* Color amarillo para resaltar las palabras clave */
+  font-weight: 600; /* Negrita para resaltar aún más */
+}
+
 
 /* Grid de tarjetas */
 .services-grid {
@@ -214,20 +232,33 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* importante: ocupa toda la altura de la fila de grid */
   height: 100%;
-  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  background-color: #fff;
+  text-align: center;
+  color: #333;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 .service-card h3 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #222;
+  color: #333;
 }
 .service-card img {
-  max-width: 80%;
+ max-width: 80%;
   margin: auto;
   height: auto;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 /* Colores de fondo de cada tarjeta */
@@ -285,3 +316,35 @@
 }
 */
 
+/* Responsive: Ajuste de cuadrícula para pantallas medianas y pequeñas */
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Ajustar a 2 columnas */
+    grid-auto-rows: auto;
+  }
+  .service-card {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .services-grid {
+    grid-template-columns: 1fr; /* Una sola columna en dispositivos muy pequeños */
+  }
+}
+
+/* Estilo adicional para mejorar la accesibilidad y contraste en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .services-body .services-intro {
+    font-size: 1rem; /* Ajustamos el tamaño de la fuente para pantallas más pequeñas */
+  }
+  .services-body .services-subintro {
+    font-size: 0.95rem; /* Reducimos el tamaño de la subintro en pantallas pequeñas */
+  }
+}
