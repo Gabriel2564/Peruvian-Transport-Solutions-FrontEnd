@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
+  ReactiveFormsModule,
   Validators,
-  ReactiveFormsModule
 } from '@angular/forms';
 import { Asiento } from '../../../models/Asiento';
+import { AsientoService } from '../../../services/Asiento.service';
 import { Bus } from '../../../models/Bus';
 import { Estado } from '../../../models/Estado';
-import { AsientoService } from '../../../services/Asiento.service';
 import { BusService } from '../../../services/Bus.service';
 import { EstadoService } from '../../../services/Estado.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -38,20 +38,25 @@ export class InsertarasientoComponent implements OnInit {
   edicion: boolean = false;
   id: number = 0;
 
-  buses: Bus[] = [];
-  estados: Estado[] = [];
+  listaBuses: Bus[] = [];
+  listaEstados: Estado[] = [];
 
   constructor(
     private aS: AsientoService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private bS: BusService,
-    private eS: EstadoService
+    private busService: BusService,
+    private estadoService: EstadoService
   ) {}
 
   ngOnInit(): void {
-    // inicializar formulario
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       id: [''],
       seatNumberAsiento: ['', Validators.required],
@@ -59,29 +64,13 @@ export class InsertarasientoComponent implements OnInit {
       estado: ['', Validators.required],
     });
 
-    // cargar buses y estados
-    this.bS.list().subscribe(data => this.buses = data);
-    this.eS.list().subscribe(data => this.estados = data);
-
-    // editar
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      this.edicion = !!this.id;
-      this.init();
+    this.busService.list().subscribe((data) => {
+      this.listaBuses = data;
     });
-  }
 
-  init() {
-    if (this.edicion) {
-      this.aS.listId(this.id).subscribe(data => {
-        this.form.setValue({
-          id: data.idAsiento,
-          seatNumberAsiento: data.seatNumberAsiento,
-          bus: data.bus?.idBus,
-          estado: data.estado?.idEstado
-        });
-      });
-    }
+    this.estadoService.list().subscribe((data) => {
+      this.listaEstados = data;
+    });
   }
 
   aceptar() {
@@ -100,11 +89,24 @@ export class InsertarasientoComponent implements OnInit {
         : this.aS.insert(this.asiento);
 
       request.subscribe(() => {
-        this.aS.list().subscribe(data => {
+        this.aS.list().subscribe((data) => {
           this.aS.setList(data);
           this.router.navigate(['rutaAsiento']);
         });
       });
     }
   }
+
+  init() {
+  if (this.edicion) {
+    this.aS.listId(this.id).subscribe((data) => {
+      this.form = this.formBuilder.group({
+        id: [data.idAsiento],  // sin Validators
+        seatNumberAsiento: [data.seatNumberAsiento, Validators.required],
+        bus: [data.bus?.idBus, Validators.required],
+        estado: [data.estado?.idEstado, Validators.required],
+      });
+    });
+  }
+}
 }
