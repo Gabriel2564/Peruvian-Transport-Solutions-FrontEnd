@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 import { Reserva_boleto } from "../models/Reserva_boleto";
 import { HttpClient } from "@angular/common/http";
 
@@ -37,4 +37,12 @@ export class ReservaBoletoService {
     deleteA(id: number) {
       return this.http.delete(`${this.url}/${id}`);
     }
+
+    // src/app/services/reserva-boleto.service.ts
+    listByAmount(amount: number) {
+      return this.http.get<Reserva_boleto[]>(
+        `${this.url}/monto-mayor-a/${amount}`
+      );
+    }
+
 }

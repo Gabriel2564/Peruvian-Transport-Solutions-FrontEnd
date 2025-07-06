@@ -1,7 +1,48 @@
-<div class="container">
-  <div style="text-align: center; margin:5%">
-    <h1>Lista de Reservas</h1>
-  </div>
+  <div class="container">
+    <div style="text-align: center; margin:5%">
+      <h1>Lista de Reservas</h1>
+    </div>
+
+  <!----- Barra de filtro ----->
+  <section class="filtro-linea">
+    <span class="label">Filtrar&nbsp;Por</span>
+
+  <!-- Botón que abre el menú -->
+  <button mat-raised-button color="primary"
+          [matMenuTriggerFor]="menuFiltro">
+    {{ filtroLabel }}
+  </button>
+
+  <!-- Menú de opciones -->
+  <mat-menu #menuFiltro="matMenu">
+    <button mat-menu-item
+            *ngFor="let f of filtrosDisponibles"
+            (click)="filtro = f.key">
+      {{ f.label }}
+    </button>
+  </mat-menu>
+
+  <!-- Campo de entrada -->
+  <mat-form-field appearance="fill" class="campo">
+    <input matInput
+          [type]="filtro === 'monto' ? 'number' : 'text'"
+          [placeholder]="placeholder()"
+          [(ngModel)]="entrada"
+          (keyup.enter)="buscar()" />
+  </mat-form-field>
+
+  <!-- Botón buscar -->
+  <button mat-raised-button color="primary" (click)="buscar()">
+    Buscar
+  </button>
+
+  <button mat-stroked-button color="warn" (click)="reset()">
+    Limpiar
+  </button>
+
+</section>
+
+
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       
@@ -13,7 +54,7 @@
 
       <!-- Ticket Amount -->
       <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef> Cantidad de Boletos </th>
+        <th mat-header-cell *matHeaderCellDef> Monto del Boleto </th>
         <td mat-cell *matCellDef="let element"> {{element.ticketAmountReservaBoleto}} </td>
       </ng-container>
 

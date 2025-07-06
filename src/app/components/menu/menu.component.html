@@ -71,6 +71,12 @@
     Item Usuario
   </button>
 
+  <!-- RESERVA BOLETO -->
+  <button mat-button [matMenuTriggerFor]="menuReservaBoleto" class="btn-rojo" *ngIf="isAdministrador()">
+    <mat-icon>receipt</mat-icon>
+    Reserva Boleto
+  </button>
+
   <!-- REPORTES -->
   <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo" *ngIf="isAdministrador()">
     <mat-icon>library_books</mat-icon>
@@ -149,6 +155,11 @@
 <mat-menu #menuReportes="matMenu">
   <button mat-menu-item routerLink="/rutareportes">Reporte Viaje Por Ruta</button>
   <button mat-menu-item routerLink="/rutareportes/userbyrol">Reporte Usuario por Rol</button>
+</mat-menu>
+
+<mat-menu #menuReservaBoleto="matMenu">
+  <button mat-menu-item routerLink="/rutaReservaBoleto">Listar</button>
+  <button mat-menu-item routerLink="/rutaReservaBoleto/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuSalir="matMenu" [@menuAnimation]>

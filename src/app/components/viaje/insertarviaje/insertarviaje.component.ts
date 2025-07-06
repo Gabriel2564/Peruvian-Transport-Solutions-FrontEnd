@@ -30,6 +30,7 @@ export class InsertarviajeComponent implements OnInit{
   id: number = 0
   edicion: boolean = false;
   viaje:Viaje=new Viaje();
+  arrivalAddressBus: string = ""
   departureDateViaje:string=""
   priceViaje:number=0
   departureTimeViaje:string=""
@@ -63,6 +64,7 @@ export class InsertarviajeComponent implements OnInit{
       this.vS.listId(this.id).subscribe(data => {
         this.form.patchValue({
           departureDateViaje: data.departureDateViaje,
+          arrivalAddressBus: data.arrivalAddressBus,
           priceViaje:         data.priceViaje,
           departureTimeViaje: data.departureTimeViaje,
           ruta:               data.ruta.idRuta    // <- aquí sólo el ID
@@ -84,6 +86,8 @@ export class InsertarviajeComponent implements OnInit{
   this.viaje.departureDateViaje = fv.departureDateViaje;
   this.viaje.priceViaje         = fv.priceViaje;
   this.viaje.departureTimeViaje = fv.departureTimeViaje;
+  this.viaje.arrivalAddressBus = this.form.value.arrivalAddressBus;
+
 
   // Inicializo la ruta y le asigno el id
   this.viaje.ruta = new Ruta();
@@ -110,6 +114,7 @@ export class InsertarviajeComponent implements OnInit{
           departureDateViaje: [data.departureDateViaje, Validators.required],
           priceViaje: [data.priceViaje, Validators.required],
           departureTimeViaje: [data.departureTimeViaje, Validators.required],
+          arrivalAddressBus: [data.arrivalAddressBus, Validators.required],
           ruta: [data.ruta, Validators.required],
 
         });
