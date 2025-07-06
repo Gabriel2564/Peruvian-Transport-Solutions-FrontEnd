@@ -105,7 +105,6 @@ export class InsertarviajeComponent implements OnInit{
   });
 }
 
-
   init() {
     if (this.edicion) {
       this.vS.listId(this.id).subscribe(data => {

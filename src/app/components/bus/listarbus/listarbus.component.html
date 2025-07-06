@@ -2,7 +2,7 @@
   <div style="text-align: center; margin: 5%">
     <h1>Lista de buses</h1>
   </div>
-  <div style="text-align: center; margin: 5%">
+  <div class="panel-tabla">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <!-- ID Column -->
@@ -32,7 +32,7 @@
        <ng-container matColumnDef="bus5">
         <th mat-header-cell *matHeaderCellDef>Actualizar</th>
         <td mat-cell *matCellDef="let element">
-          <button matButton [routerLink]="['actualizaciones',element.idBus]" >
+          <button mat-button [routerLink]="['actualizaciones',element.idBus]" >
              <mat-icon>edit</mat-icon>
           </button>
         </td>
@@ -40,7 +40,7 @@
       <ng-container matColumnDef="bus6">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
-          <button matButton (click)="eliminar(element.idBus)" >
+          <button mat-button (click)="eliminar(element.idBus)" >
             <mat-icon>delete</mat-icon>
           </button>
         </td>

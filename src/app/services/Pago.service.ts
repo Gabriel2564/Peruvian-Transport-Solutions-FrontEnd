@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Pago } from "../models/Pago";
 import { HttpClient } from "@angular/common/http";
+import { PaymentsByTypeDTO } from "../models/PaymentsByTypeDTO";
 
 const base_url = environment.base
 
@@ -39,5 +40,8 @@ export class PagoService {
 
   getList() {
     return this.listaCambio.asObservable();
+  }
+  getPaymentsByType():Observable<PaymentsByTypeDTO[]>{
+    return this.http.get<PaymentsByTypeDTO[]>(`${this.url}/paymentsByType`);
   }
 }
