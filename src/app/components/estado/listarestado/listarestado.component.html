@@ -1,68 +1,66 @@
 <h1 class="titulo">Lista de Estados</h1>
 
-<div class="buscar-container">
-  <span class="buscar-label"><strong>Búsqueda de estados:</strong></span>
-  <mat-form-field appearance="outline" class="buscar-input">
-    <mat-label>Filtrar</mat-label>
-    <input
-      matInput
-      placeholder="Ej. Disponible, Ocupado..."
-      [(ngModel)]="estadofiltro"
-      (ngModelChange)="aplicarFiltro()"
-    />
-  </mat-form-field>
-</div>
-
-
-
-<div class="agregar-container">
-  <span>Deseas agregar un estado: Haz click aquí</span>
-  <button class="agregar-btn" [routerLink]="['/rutaEstado/insertar']">
-    <mat-icon>add</mat-icon> Agregar estado
+<div class="acciones-superiores">
+  <button mat-raised-button color="accent" [routerLink]="['/rutaEstado/insertar']">
+    <mat-icon>add</mat-icon> Agregar Estado
   </button>
 </div>
 
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Filtrar estados</mat-label>
+  <input
+    matInput
+    [(ngModel)]="filtro"
+    (ngModelChange)="aplicarFiltro()"
+    placeholder="Buscar por tipo de estado"
+  />
+</mat-form-field>
+
+<!-- contador -->
+<p class="contador">
+  Mostrando {{ dataSource.filteredData.length }} de {{ totalRegistros }} registros
+</p>
+
+<!-- tarjetas -->
 <div class="contenedor-tarjetas">
-  <div
+  <mat-card
     class="tarjeta"
     *ngFor="let element of (dataSource.filteredData || []).slice(
-      (esPaginator?.pageIndex || 0) * (esPaginator?.pageSize || 4),
-      ((esPaginator?.pageIndex || 0) + 1) * (esPaginator?.pageSize || 4)
+      (paginator?.pageIndex || 0) * (paginator?.pageSize || 4),
+      ((paginator?.pageIndex || 0) + 1) * (paginator?.pageSize || 4)
     )"
   >
-    <p><strong>Codigo:</strong> {{ element.idEstado }}</p>
-    <p>
-      <strong>Tipo de Estado:</strong> {{ element.statusTypeEstado }}
+    <mat-card-header>
+      <mat-card-title>Estado: {{ element.statusTypeEstado }}</mat-card-title>
+      <mat-card-subtitle>Código: {{ element.idEstado }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
       <span
         class="cuadro-estado"
         [ngStyle]="{
           'background-color':
-            element.statusTypeEstado === 'Ocupado' ? 'red' : 'limegreen'
+            element.statusTypeEstado.toLowerCase() === 'ocupado'
+              ? 'red'
+              : 'limegreen'
         }"
-      ></span>
-    </p>
-    <hr />
-    <div class="acciones">
-      <button
-        mat-icon-button
-        color="primary"
-        [routerLink]="['actualizaciones', element.idEstado]"
       >
+      </span>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button color="primary" [routerLink]="['actualizaciones', element.idEstado]">
         <mat-icon>edit</mat-icon>
       </button>
-      <button
-        mat-icon-button
-        color="warn"
-        (click)="eliminar(element.idEstado)"
-      >
+      <button mat-icon-button color="warn" (click)="eliminar(element.idEstado)">
         <mat-icon>delete</mat-icon>
       </button>
-    </div>
-  </div>
+    </mat-card-actions>
+  </mat-card>
 </div>
 
 <mat-paginator
-  [pageSizeOptions]="[4, 8, 10]"
+  [length]="dataSource.filteredData.length"
+  [pageSize]="4"
+  [pageSizeOptions]="[4, 8, 12]"
   showFirstLastButtons
 >
 </mat-paginator>
