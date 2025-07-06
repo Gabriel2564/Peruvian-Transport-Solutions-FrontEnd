@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +11,7 @@ import { MatInputModule }      from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-listarreservan-boleto',
@@ -25,7 +26,8 @@ import { RouterLink } from '@angular/router';
     MatInputModule,
     MatMenuModule,
     RouterLink,
-             
+    MatPaginatorModule,
+
     ],  
   templateUrl: './listarreservan-boleto.component.html',
   styleUrl: './listarreservan-boleto.component.css'
@@ -33,9 +35,10 @@ import { RouterLink } from '@angular/router';
 export class ListarreservanBoletoComponent implements OnInit {
   dataSource: MatTableDataSource<Reserva_boleto> = new MatTableDataSource<Reserva_boleto>();
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
-  filtro = 'monto';    
+  filtro = 'monto'; 
   entrada = '';       
   cache:   Reserva_boleto[] = [];
+  @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
   constructor(private rB: ReservaBoletoService, private snackBar: MatSnackBar) {}
 
@@ -60,27 +63,26 @@ export class ListarreservanBoletoComponent implements OnInit {
       case 'id':        return 'Ingrese el ID';
       case 'monto':     return 'Monto mínimo';
       case 'asientos':  return 'Cantidad mínima de asientos';
-      case 'usuario':   return 'ID o nombre de usuario';
-      case 'pago':      return 'ID de pago';
-      case 'asiento':   return 'ID de asiento';
+      case 'usuario':   return 'Nombre de usuario';
+      case 'pago':      return 'Tipo de Pago';
+      case 'asiento':   return 'Numero de asiento';
       default:          return '';
     }
   }
 
   ngOnInit(): void {
-    this.rB.list().subscribe(d => {
-      console.log('list() retorno', d.length);
-      this.cache = d;
-      this.dataSource = new MatTableDataSource(d);
+    this.rB.list().subscribe((data:Reserva_boleto[]) => {
+      this.dataSource = new MatTableDataSource<Reserva_boleto>(data);
+      console.log('list() retorno', data.length);
+      this.cache = data;
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
 
-    this.rB.getList().subscribe(d => {
-      if (d?.length) {
-        console.log('getList() retorno', d.length);
-        this.cache = d;
-        this.dataSource = new MatTableDataSource(d);
-      }
-    });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   eliminar(id: number) {
@@ -93,7 +95,7 @@ export class ListarreservanBoletoComponent implements OnInit {
     error: err => {
         // Muestra snackbar en rojo si hay error de integridad referencial
         this.snackBar.open(
-          'No se puede eliminar: este viaje está enlazado con otra entidad.',
+          'No se puede eliminar: esta Reserva Boleto está enlazado con otra entidad.',
           'Cerrar',
           { duration: 4000, panelClass: ['snack-error'] }
         );
@@ -121,11 +123,11 @@ export class ListarreservanBoletoComponent implements OnInit {
       case 'asientos':
         return r.seatQuantityReservaBoleto === +term;
       case 'usuario':
-        return r.usuario.id === +term;
+        return r.usuario.username.toLowerCase().includes(term.toLowerCase());
       case 'pago':
-        return r.pago.idPago === +term;
+        return r.pago.paymentTypePago.toLowerCase().includes(term.toLowerCase());
       case 'asiento':
-        return r.asiento.idAsiento === +term;
+        return r.asiento.seatNumberAsiento === +term;
       default:
         return false;
     }
