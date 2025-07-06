@@ -78,7 +78,10 @@ export class ListarreservanBoletoComponent implements OnInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
-
+    this.rB.getList().subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -89,7 +92,7 @@ export class ListarreservanBoletoComponent implements OnInit {
     this.rB.deleteA(id).subscribe({
     next: () => {
       this.rB.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+          this.rB.setList(data);
       });
     },
     error: err => {

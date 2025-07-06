@@ -44,5 +44,4 @@ export class ReservaBoletoService {
         `${this.url}/monto-mayor-a/${amount}`
       );
     }
-
 }
