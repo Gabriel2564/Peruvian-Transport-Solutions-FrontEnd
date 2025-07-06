@@ -6,16 +6,16 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-listarpago',
   standalone: true,
   imports: [
+    FormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
@@ -23,9 +23,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatFormFieldModule,
     MatInputModule,
     CommonModule,
-    RouterModule,
-    FormsModule,
-    NgxPaginationModule
+    RouterModule
   ],
   templateUrl: './listarpago.component.html',
   styleUrl: './listarpago.component.css'
@@ -33,10 +31,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class ListarpagoComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<Pago> = new MatTableDataSource();
-  displayedColumns: string[] = ['idPago', 'paymentTypePago', 'opciones'];
   filtro: string = '';
-
   totalRegistros: number = 0;
+
+  paginaActual = 0;
+  pageSize = 4;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -47,20 +46,19 @@ export class ListarpagoComponent implements AfterViewInit {
     this.pagoService.list().subscribe((data: Pago[]) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (pago: Pago, filter: string) => {
-  const f = filter.trim().toLowerCase();
-  return pago.idPago.toString().includes(f) ||
-         pago.paymentTypePago.toLowerCase().includes(f);
-        };
+        const f = filter.trim().toLowerCase();
+        return pago.idPago.toString().includes(f) ||
+               pago.paymentTypePago.toLowerCase().includes(f);
+      };
       this.totalRegistros = data.length;
     });
 
-    // actualización automática
     this.pagoService.getList().subscribe((data: Pago[]) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.filterPredicate = (pago: Pago, filter: string) => {
-  const f = filter.trim().toLowerCase();
-  return pago.idPago.toString().includes(f) ||
-         pago.paymentTypePago.toLowerCase().includes(f);
+        const f = filter.trim().toLowerCase();
+        return pago.idPago.toString().includes(f) ||
+               pago.paymentTypePago.toLowerCase().includes(f);
       };
       this.totalRegistros = data.length;
     });
@@ -72,6 +70,7 @@ export class ListarpagoComponent implements AfterViewInit {
 
   aplicarFiltro() {
     this.dataSource.filter = this.filtro.trim().toLowerCase();
+    this.totalRegistros = this.dataSource.filteredData.length;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -86,4 +85,15 @@ export class ListarpagoComponent implements AfterViewInit {
     });
   }
 
+  // para paginar tarjetas
+  get pagosPaginados() {
+    const start = this.paginaActual * this.pageSize;
+    const end = start + this.pageSize;
+    return this.dataSource.filteredData.slice(start, end);
+  }
+
+  cambiarPagina(event: PageEvent) {
+    this.paginaActual = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
 }

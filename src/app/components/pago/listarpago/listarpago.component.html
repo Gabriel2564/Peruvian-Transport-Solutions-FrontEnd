@@ -14,7 +14,7 @@
 <p>Total registros: {{ totalRegistros }}</p>
 
 <div class="contenedor-tarjetas">
-  <div class="tarjeta" *ngFor="let element of dataSource.filteredData">
+  <div class="tarjeta" *ngFor="let element of pagosPaginados">
     <p><strong>ID:</strong> {{ element.idPago }}</p>
     <p><strong>Tipo de Pago:</strong> {{ element.paymentTypePago }}</p>
 
@@ -29,4 +29,10 @@
   </div>
 </div>
 
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-paginator
+  [length]="dataSource.filteredData.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[4, 10, 20]"
+  showFirstLastButtons
+  (page)="cambiarPagina($event)">
+</mat-paginator>
