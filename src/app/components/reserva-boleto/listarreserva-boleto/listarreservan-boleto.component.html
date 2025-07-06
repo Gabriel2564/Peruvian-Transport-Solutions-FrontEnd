@@ -67,25 +67,25 @@
       <!-- Usuario -->
       <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef> Usuario </th>
-        <td mat-cell *matCellDef="let element"> {{element.usuario.id}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.usuario.username}} </td>
       </ng-container>
 
       <!-- Pago -->
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef> Pago </th>
-        <td mat-cell *matCellDef="let element"> {{element.pago.idPago}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.pago.paymentTypePago}} </td>
       </ng-container>
 
       <!-- Asiento -->
       <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef> Asiento </th>
-        <td mat-cell *matCellDef="let element"> {{element.asiento.idAsiento}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.asiento.seatNumberAsiento}} </td>
       </ng-container>
 
       <ng-container matColumnDef="c7">
         <th mat-header-cell *matHeaderCellDef>Actualizar</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button [routerLink]="['actualizaciones', element.idReservaBoleto]">
+          <button  class="boton-Tabla" mat-button [routerLink]="['actualizaciones', element.idReservaBoleto]">
             <mat-icon>edit</mat-icon>
           </button>
         </td>
@@ -94,7 +94,7 @@
       <ng-container matColumnDef="c8">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button (click)="eliminar(element.idViaje)">
+          <button class="boton-Tabla" mat-button (click)="eliminar(element.idViaje)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
