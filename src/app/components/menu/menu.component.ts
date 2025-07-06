@@ -1,4 +1,4 @@
-import { Component, HostListener }     from '@angular/core';
+import { Component, HostListener, OnInit }     from '@angular/core';
 import { RouterLink }                  from '@angular/router';
 import { CommonModule }                from '@angular/common';
 import { MatToolbarModule }            from '@angular/material/toolbar';
@@ -43,8 +43,9 @@ import {
     ]),
   ]
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit{
   role = '';
+  usuario: string | null = null;
   public logoutMenuOpen = false;
 
   constructor(private loginService: LoginService) {}
@@ -52,9 +53,17 @@ export class MenuComponent {
   cerrar() {
     sessionStorage.clear();
   }
+   ngOnInit() {
+    if (this.loginService.verificar()) {
+      this.role    = this.loginService.showRole()    ?? '';
+      this.usuario = this.loginService.showUser();
+      console.log('MenuComponent → usuario:', this.usuario, 'role:', this.role);
+    }
+  }
 
   verificar() {
-    this.role = this.loginService.showRole();
+     this.role    = this.loginService.showRole() ?? '';
+    this.usuario = this.loginService.showUser();
     return this.loginService.verificar();
   }
 

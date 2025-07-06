@@ -8,11 +8,12 @@ import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtRequest } from '../../models/jwtRequest';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
-  imports: [MatFormFieldModule,FormsModule,MatInputModule,MatButtonModule,MatIconModule],
+  imports: [MatFormFieldModule,FormsModule,MatInputModule,MatButtonModule,MatIconModule, RouterLink, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

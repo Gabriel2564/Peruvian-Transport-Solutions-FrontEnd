@@ -83,3 +83,205 @@
     max-width: 60%;
   }
 }
+/* Contenedor principal del header */
+.site-header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 0.5rem 0;       /* <-- padding vertical reducido */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Alineación interna */
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Logo */
+.site-header .logo img {
+  height: 0px;
+  display: block;
+}
+
+/* Navegación principal */
+.site-header .main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.site-header .main-nav a {
+  text-decoration: none;
+  color: #555555;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.site-header .main-nav a:hover {
+  color: #333333;
+}
+
+/* Botón de Iniciar Sesión */
+.site-header .btn-login {
+  background-color: #4a3e1b;
+  color: #ffffff;
+  border: none;
+  padding: 0.rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.site-header .btn-login:hover {
+  background-color: #392e15;
+}
+
+/* Responsive: menú hamburguesa en móvil */
+@media (max-width: 768px) {
+  .site-header .main-nav {
+    display: none;
+  }
+  /* Si quisieras añadir un botón de menú: */
+  /* .site-header .menu-toggle { display: block; } */
+}
+
+/* home.component.css */
+
+/* ---------------------------------------------------
+   Contenedor general de servicios
+--------------------------------------------------- */
+.services {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Franja blanca superior */
+.services-header {
+  background-color: #fff;
+  padding: 2rem 0;    /* ajusta alto de la franja */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.services-header .services-title {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #222;
+  margin: 0;
+}
+
+/* Bloque oliva con el contenido */
+.services-body {
+  background-color: #5C5218;
+  padding: 3rem 1rem;
+  color: #fff;
+}
+.services-body .services-intro,
+.services-body .services-subintro {
+  text-align: center;
+  max-width: 700px;
+  margin: 0.5rem auto 2rem;
+  line-height: 1.5;
+}
+.services-body .services-intro {
+  font-size: 1rem;
+  color: #f5f5f5;
+}
+.services-body .services-subintro {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* Grid de tarjetas */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;       /* todas las filas tienen la misma altura */
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+
+/* Tarjetas */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* importante: ocupa toda la altura de la fila de grid */
+  height: 100%;
+  border-radius: 0.5rem;
+}
+.service-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #222;
+}
+.service-card img {
+  max-width: 80%;
+  margin: auto;
+  height: auto;
+}
+
+/* Colores de fondo de cada tarjeta */
+.service-card.yellow     { background-color: #FFC107; }
+.service-card.olive      { background-color: #C5A608; }
+.service-card.beige      { background-color: #C39A52; color: #fff; }
+.service-card.green-dark { background-color: #A4953C; color: #fff; }
+.service-card.green      { background-color: #C09C30; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-auto-rows: auto;  /* deja que cada tarjeta ajuste su altura */
+  }
+  .service-card {
+    height: auto;
+  }
+}
+.site-header .logo img {
+  height: 60px;   /* o el tamaño que necesites */
+  display: block;
+}
+/* home.component.css */
+/* 1) importa la tipografía */
+@import url('https://fonts.googleapis.com/css2?family=Sansita+One&display=swap');
+
+/* 2) alinea logo + texto */
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* 3) estilo del texto */
+.logo-text {
+  font-family: 'Sansita One';
+  font-size: 1.5rem;      /* ajusta según tu diseño */
+  margin-left: 0.5rem;
+  color: #5C5218;
+  white-space: nowrap;
+}
+
+/* 4) parte “Solutions” en color secundario */
+.logo-highlight {
+  color: #826720;
+}
+
+/* 5) (opcional) si quieres degradar el texto entero */
+/*
+.logo-text {
+  background: linear-gradient(90deg, #5C5218, #826720);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+*/
+

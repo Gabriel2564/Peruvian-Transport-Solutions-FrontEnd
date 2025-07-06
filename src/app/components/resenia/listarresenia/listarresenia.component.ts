@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Resenia } from '../../../models/Resenia';
 import { ReseniaService } from '../../../services/Resenia.service';
 import { RouterLink } from '@angular/router';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource } from '@angular/material/table';
@@ -30,10 +30,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './listarresenia.component.html',
   styleUrl: './listarresenia.component.css'
 })
-export class ListarreseniaComponent implements  AfterViewInit {
+export class ListarreseniaComponent implements AfterViewInit {
 
   resDataSource: MatTableDataSource<Resenia> = new MatTableDataSource<Resenia>();
   resFiltro: string = '';
+  totalRegistros: number = 0;
+
+  paginaActual = 0;
+  pageSize = 4;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -47,15 +51,18 @@ export class ListarreseniaComponent implements  AfterViewInit {
         return data.contentResenia.toLowerCase().includes(f)
           || data.usuario.username.toLowerCase().includes(f);
       };
+      this.totalRegistros = data.length;
     });
+
     this.rS.getList().subscribe((data: Resenia[]) => {
-          this.resDataSource = new MatTableDataSource<Resenia>(data);
-          this.resDataSource.filterPredicate = (data: Resenia, filter: string) => {
-            const f = filter.trim().toLowerCase();
-            return data.contentResenia.toLowerCase().includes(f)
-             || data.usuario.username.toLowerCase().includes(f);
-          };
-        });
+      this.resDataSource = new MatTableDataSource<Resenia>(data);
+      this.resDataSource.filterPredicate = (data: Resenia, filter: string) => {
+        const f = filter.trim().toLowerCase();
+        return data.contentResenia.toLowerCase().includes(f)
+          || data.usuario.username.toLowerCase().includes(f);
+      };
+      this.totalRegistros = data.length;
+    });
   }
 
   ngAfterViewInit() {
@@ -64,6 +71,7 @@ export class ListarreseniaComponent implements  AfterViewInit {
 
   resAplicarFiltro() {
     this.resDataSource.filter = this.resFiltro.trim().toLowerCase();
+    this.totalRegistros = this.resDataSource.filteredData.length;
     if (this.resDataSource.paginator) {
       this.resDataSource.paginator.firstPage();
     }
@@ -76,19 +84,29 @@ export class ListarreseniaComponent implements  AfterViewInit {
   eliminar(id: number) {
     this.rS.deleteA(id).subscribe({
       next: () => {
-        // Refresca la tabla tras borrado exitoso
         this.rS.list().subscribe(list => {
           this.rS.setList(list);
+          this.totalRegistros = list.length;
         });
       },
       error: err => {
-        // Muestra snackbar en rojo si hay error de integridad referencial
         this.snackBar.open(
-          'No se puede eliminar: esta resenia está enlazado con otra entidad.',
+          'No se puede eliminar: esta reseña está enlazada con otra entidad.',
           'Cerrar',
           { duration: 4000, panelClass: ['snack-error'] }
         );
       }
     });
+  }
+
+  get reseniasPaginadas() {
+    const start = this.paginaActual * this.pageSize;
+    const end = start + this.pageSize;
+    return this.resDataSource.filteredData.slice(start, end);
+  }
+
+  cambiarPagina(event: PageEvent) {
+    this.paginaActual = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 }

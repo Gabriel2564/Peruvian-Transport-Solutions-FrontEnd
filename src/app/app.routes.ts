@@ -42,7 +42,7 @@ import { seguridadGuard } from './guard/seguridad.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
