@@ -22,8 +22,8 @@
   <div class="tarjeta" *ngFor="let element of asientosPaginados">
     <p><strong>ID:</strong> {{ element.idAsiento }}</p>
     <p><strong>Número de asiento:</strong> {{ element.seatNumberAsiento }}</p>
-    <p><strong>Bus:</strong> {{ element.bus?.idBus }}</p>
-    <p><strong>Estado:</strong> {{ element.estado?.statusTypeEstado }}</p>
+    <p><strong>Bus:</strong> {{ element.bus.idBus }}</p>
+    <p><strong>Estado:</strong> {{ element.estado.statusTypeEstado }}</p>
 
     <div class="acciones">
       <button mat-raised-button color="primary" [routerLink]="['actualizaciones', element.idAsiento]">
