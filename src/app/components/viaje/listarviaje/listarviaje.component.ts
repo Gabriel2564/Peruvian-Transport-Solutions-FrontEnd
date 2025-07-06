@@ -34,7 +34,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListarviajeComponent implements AfterViewInit {
    dataSource: MatTableDataSource<Viaje> = new MatTableDataSource<Viaje>();
-   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5','c6','c7'];
+   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5','c6','c7', 'c8'];
    viajeFiltro: string = '';
    @ViewChild(MatPaginator) paginator!: MatPaginator; 
 

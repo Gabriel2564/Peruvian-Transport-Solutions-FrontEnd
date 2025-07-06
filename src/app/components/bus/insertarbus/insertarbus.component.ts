@@ -25,7 +25,6 @@ export class InsertarbusComponent implements OnInit{
   edicion: boolean = false;
   bus:Bus=new Bus();
   listaViaje:Viaje[]=[]
-  arrivalAddressBus: string = ""
   capacityBus: number = 0
   durationBus: string = ""
   
@@ -53,7 +52,6 @@ export class InsertarbusComponent implements OnInit{
     if (this.edicion) {
       this.bS.listId(this.id).subscribe(data => {
         this.form.patchValue({
-          arrivalAddressBus: data.arrivalAddressBus,
           capacityBus:         data.capacityBus,
           durationBus: data.durationBus,
           viaje:               data.viaje.idViaje    // <- aquí sólo el ID
@@ -71,7 +69,6 @@ export class InsertarbusComponent implements OnInit{
   // Inicializo el objeto viaje (con su ID si es edición)
   this.bus = new Bus();
   if (this.edicion) { this.bus.idBus = this.id; }
-      this.bus.arrivalAddressBus = this.form.value.arrivalAddressBus;
       this.bus.capacityBus = this.form.value.capacityBus;
       this.bus.durationBus = this.form.value.durationBus;
 
@@ -96,7 +93,6 @@ export class InsertarbusComponent implements OnInit{
       this.bS.listId(this.id).subscribe(data => {
         this.form = this.formBuilder.group({
           id: [data.idBus],
-          arrivalAddressBus: [data.arrivalAddressBus, Validators.required],
           capacityBus: [data.capacityBus, Validators.required],
           durationBus: [data.durationBus, Validators.required],
           viaje: [data.viaje, Validators.required],

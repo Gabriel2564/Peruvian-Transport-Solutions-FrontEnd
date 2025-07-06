@@ -16,7 +16,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class ListarbusComponent implements OnInit{
   dataSource: MatTableDataSource<Bus> = new MatTableDataSource();
-  displayedColumns: string[]=["bus1","bus2","bus3","bus4","bus5","bus6","bus7"]
+  displayedColumns: string[]=["bus1","bus2","bus3","bus4","bus5","bus6"]
 
   constructor(private bS:BusService,     private snackBar: MatSnackBar){}
 
