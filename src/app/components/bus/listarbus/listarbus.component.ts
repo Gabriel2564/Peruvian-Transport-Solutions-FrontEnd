@@ -65,20 +65,26 @@ export class ListarbusComponent implements OnInit{
  }
 
 
-     eliminar(id: number) {
-    this.bS.deleteI(id).subscribe({
-      next: () => {
-        this.bS.list().subscribe(list => {
-          this.bS.setList(list);
+    eliminar(id: number) {
+  this.bS.deleteI(id).subscribe({
+    next: () => {
+      // Vuelvo a pedir la lista completa
+      this.bS.list().subscribe(data => {
+        this.dataSource.data = data;
+        this.snackBar.open('Bus eliminado correctamente', 'Cerrar', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
         });
-      },
-      error: err => {
-        this.snackBar.open(
-          'No se puede eliminar, este bus está enlazado con otra entidad.',
-          'Cerrar',
-          { duration: 4000, panelClass: ['snack-error'] }
-        );
-      }
-    });
-  }
+      });
+    },
+    error: err => {
+      this.snackBar.open(
+        'No se puede eliminar, este bus está enlazado con otra entidad.',
+        'Cerrar',
+        { duration: 4000, panelClass: ['snack-error'] }
+      );
+    }
+  });
+}
 }
