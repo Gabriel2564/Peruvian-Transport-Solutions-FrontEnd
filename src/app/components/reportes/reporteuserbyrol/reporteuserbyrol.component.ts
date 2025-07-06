@@ -11,7 +11,8 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class ReporteuserbyrolComponent implements OnInit{
   barChartOptions:ChartOptions={
-    responsive:true
+    responsive:true,
+    maintainAspectRatio: false,
   }
   barChartLabels:string[]=[]
   barCharType:ChartType='doughnut'
