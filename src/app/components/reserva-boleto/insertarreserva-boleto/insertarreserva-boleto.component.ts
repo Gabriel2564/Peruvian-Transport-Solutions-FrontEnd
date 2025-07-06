@@ -39,19 +39,20 @@ import { NgxCurrencyDirective } from 'ngx-currency';
 export class InsertarreservaBoletoComponent implements OnInit {
   form!: FormGroup;
   id = 0;
-  edicion = false;
-
+  edicion: boolean = false;
+  reserva:Reserva_boleto = new Reserva_boleto();
+  ticketAmountReservaBoleto: number=0;
+  seatQuantityReservaBoleto: number=0;
   listaUsuarios: Usuario[] = [];
   listaPago:     Pago[]    = [];
   listaAsiento:  Asiento[] = [];
 
-  tiposPago = [
+  types: { value: string; viewValue: string }[] = [
     { value: 'Efectivo', viewValue: 'Efectivo' },
-    { value: 'Tarjeta',  viewValue: 'Tarjeta'  },
-    { value: 'Plin',     viewValue: 'Plin'     },
-    { value: 'Yape',     viewValue: 'Yape'     }
+    { value: 'Tarjeta', viewValue: 'Tarjeta' },
+    { value: 'Plin', viewValue: 'Plin' },
+    { value: 'Yape', viewValue: 'Yape' }
   ];
-
   constructor(
     private fb: FormBuilder,
     private rB: ReservaBoletoService,
@@ -75,12 +76,11 @@ export class InsertarreservaBoletoComponent implements OnInit {
     /* 2. Tablas para selects */
     this.uS.list().subscribe(d => (this.listaUsuarios = d));
     this.aS.list().subscribe(d => (this.listaAsiento = d));
-    this.pS.list().subscribe(d => (this.listaPago = d));
 
     /* 3. ¿Modo edición? */
     this.route.params.subscribe((params: Params) => {
       this.id      = params['id'];
-      this.edicion = !!this.id;
+      this.edicion = this.id != null;
 
       if (this.edicion) {
         this.rB.listId(this.id).subscribe(data => {
@@ -88,7 +88,7 @@ export class InsertarreservaBoletoComponent implements OnInit {
             ticketAmountReservaBoleto: data.ticketAmountReservaBoleto,
             seatQuantityReservaBoleto: data.seatQuantityReservaBoleto,
             usuario:  data.usuario.id,          // usa la clave real de Usuario
-            pago:     data.pago.idPago,
+            pago:     data.pago.paymentTypePago,
             asiento:  data.asiento.idAsiento
           });
         });
@@ -102,18 +102,26 @@ export class InsertarreservaBoletoComponent implements OnInit {
     const fv = this.form.value;
 
     /* Ensambla la entidad */
-    const reserva = new Reserva_boleto();
-    if (this.edicion) reserva.idReservaBoleto = this.id;
+    this.reserva = new Reserva_boleto();
+    if (this.edicion) { this.reserva.idReservaBoleto = this.id; }
 
-    reserva.ticketAmountReservaBoleto = fv.ticketAmountReservaBoleto;
-    reserva.seatQuantityReservaBoleto = fv.seatQuantityReservaBoleto;
-    reserva.usuario  = { id:        fv.usuario }  as Usuario;
-    reserva.pago     = { idPago:    fv.pago }     as Pago;
-    reserva.asiento  = { idAsiento: fv.asiento }  as Asiento;
+    this.reserva.ticketAmountReservaBoleto = fv.ticketAmountReservaBoleto;
+    this.reserva.seatQuantityReservaBoleto = fv.seatQuantityReservaBoleto;
+
+    this.reserva.usuario  = new Usuario();
+    this.reserva.usuario.id = fv.usuario
+
+    this.reserva.pago = new Pago();
+    this.reserva.pago.idPago = this.edicion ? fv.pago.idPago : 0;  // Si es edición, asigna fv.pago.idPago, sino asigna 0
+    this.reserva.pago.paymentTypePago = fv.pago;  // Asigna el paymentTypePago tal como está
+
+    
+    this.reserva.asiento  = new Asiento();
+    this.reserva.asiento.idAsiento  = fv.asiento
 
     const req$ = this.edicion
-      ? this.rB.update(reserva)
-      : this.rB.insert(reserva);
+      ? this.rB.update(this.reserva)
+      : this.rB.insert(this.reserva);
 
     req$.subscribe(() => {
       this.rB.list().subscribe(lista => {

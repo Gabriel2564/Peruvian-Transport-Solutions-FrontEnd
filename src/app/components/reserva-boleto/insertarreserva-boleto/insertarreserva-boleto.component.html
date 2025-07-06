@@ -1,6 +1,6 @@
 <div class="container">
   <div style="text-align: center; margin: 5%;">
-    <h1>Registrar Reserva de Boleto</h1>
+    <h1>{{ edicion ? 'Actualizar' : 'Registrar' }} Reserva Boleto</h1>
   </div>
 
   <form class="form-card" [formGroup]="form" (ngSubmit)="aceptar()">
@@ -39,19 +39,18 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Pago -->
-    <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Tipo de Pago</mat-label>
-      <mat-select formControlName="pago">
-        <mat-option *ngFor="let p of listaPago" [value]="p.idPago">
-          {{ p.paymentTypePago }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.get('pago')?.hasError('required')">
-        El tipo de pago es obligatorio
-      </mat-error>
-    </mat-form-field>
-
+  <!-- Pago -->
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Tipo de Pago</mat-label>
+  <mat-select formControlName="pago">
+    <mat-option *ngFor="let p of types" [value]="p.value">
+      {{ p.viewValue }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="form.get('pago')?.hasError('required')">
+    El tipo de pago es obligatorio
+  </mat-error>
+</mat-form-field>
 
     <!-- Asiento -->
     <mat-form-field appearance="outline" class="full-width">
@@ -67,7 +66,9 @@
     </mat-form-field>
 
     <div style="text-align: center; margin-top: 20px;">
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Registrar</button>
+      <button mat-raised-button color="primary" type="submit">
+          {{ edicion ? 'Actualizar' : 'Registrar' }}
+        </button>
     </div>
   </form>
 </div>
