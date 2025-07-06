@@ -3,25 +3,30 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Bus } from '../../../models/Bus';
 import { BusService } from '../../../services/Bus.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-listarbus',
-  imports: [MatTableModule, 
-    CommonModule, 
-    MatIconModule, 
-    MatPaginatorModule,
+  imports: [
     RouterLink,
-    FormsModule,
+    CommonModule,
+    MatTableModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatIconModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatFormFieldModule
+    FormsModule,
   
   ],
   templateUrl: './listarbus.component.html',
@@ -33,17 +38,18 @@ export class ListarbusComponent implements OnInit{
   BusFiltro: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
-  constructor(private bS:BusService,     private snackBar: MatSnackBar){}
+  constructor(private bS:BusService,     
+    private snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     this.bS.list().subscribe((data:Bus[]) => {
       this.dataSource = new MatTableDataSource<Bus>(data);
       this.dataSource.filterPredicate = (data: Bus, filter: string) => {
         const f =filter.trim().toLowerCase();
-            return data.capacityBus.toString().includes(f)
-                || data.durationBus.toLowerCase().includes(f)
-                || data.viaje.idViaje.toString().includes(f)
-            };
+        return data.capacityBus.toString().includes(f)
+          || data.durationBus.toLowerCase().includes(f)
+          || data.viaje.idViaje.toString().includes(f)
+      };
       this.dataSource.paginator = this.paginator;
       });
     }
