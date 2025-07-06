@@ -3,7 +3,7 @@
     <h1>Registrar Reserva de Boleto</h1>
   </div>
 
-  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 5%;">
+  <form class="form-card" [formGroup]="form" (ngSubmit)="aceptar()">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Monto del Boleto</mat-label>
       <input matInput formControlName="ticketAmountReservaBoleto" />
