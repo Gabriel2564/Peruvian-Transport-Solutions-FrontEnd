@@ -28,16 +28,16 @@ export class ViajeService {
     this.listaCambio.next(listaNueva);
   }
   update(viaje: Viaje) {
-      return this.http.put(`${this.url}/modificar`, viaje);
-    }
+    return this.http.put(`${this.url}/modificar`, viaje);
+  }
   
-    deleteI(id: number) {
-      return this.http.delete(`${this.url}/${id}`);
-    }
+  deleteI(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
   
-    listId(id: number) {
-      return this.http.get<Viaje>(`${this.url}/listar/${id}`);
-    }
+  listId(id: number) {
+    return this.http.get<Viaje>(`${this.url}/listar/${id}`);
+  }
 
   getQuantity():Observable<ViajeByRutaDTO[]>{
     return this.http.get<ViajeByRutaDTO[]>(`${this.url}/viajePorRuta`);

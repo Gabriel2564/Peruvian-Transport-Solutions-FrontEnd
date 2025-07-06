@@ -1,11 +1,11 @@
-<h1>Lista de Items</h1>
+<h1>Lista de Rutas</h1>
 
 <div class="acciones-superiores">
   <button mat-raised-button color="accent" [routerLink]="['/rutaRuta/insertar']">
     <mat-icon>add</mat-icon> Agregar Ruta
   </button>
 </div>
-
+  
 <mat-form-field style="width: 100%; margin-top: 1rem;">
   <input matInput placeholder="Buscar" [(ngModel)]="filtro" (keyup)="aplicarFiltro()">
 </mat-form-field>

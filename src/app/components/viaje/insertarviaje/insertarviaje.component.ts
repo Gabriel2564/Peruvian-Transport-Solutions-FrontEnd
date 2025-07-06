@@ -48,6 +48,7 @@ export class InsertarviajeComponent implements OnInit{
   // 1) Inicializas el form (¡una sola vez!)
   this.form = this.formBuilder.group({
     departureDateViaje: ['', Validators.required],
+    arrivalAddressBus: ['', Validators.required],
     priceViaje:         ['', Validators.required],
     departureTimeViaje: ['', Validators.required],
     ruta:               ['', Validators.required]
