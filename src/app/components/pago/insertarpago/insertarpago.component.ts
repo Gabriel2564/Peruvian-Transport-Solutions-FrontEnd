@@ -34,6 +34,7 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './insertarpago.component.css'
 })
 export class InsertarpagoComponent implements OnInit{
+  
   form: FormGroup = new FormGroup({});
   pago: Pago = new Pago();
   edicion: boolean = false;
