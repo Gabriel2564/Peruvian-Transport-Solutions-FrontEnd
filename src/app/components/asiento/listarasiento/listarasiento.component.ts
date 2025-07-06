@@ -1,13 +1,12 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Asiento } from '../../../models/Asiento';
 import { AsientoService } from '../../../services/Asiento.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -16,45 +15,45 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-listarasiento',
   standalone: true,
   imports: [
-    CommonModule,
-    RouterModule,
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
     MatButtonModule,
     MatIconModule,
-    MatPaginatorModule,
-    MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    CommonModule,
+    RouterModule
   ],
   templateUrl: './listarasiento.component.html',
   styleUrl: './listarasiento.component.css'
 })
-export class ListarasientoComponent implements OnInit, AfterViewInit {
+export class ListarasientoComponent implements AfterViewInit {
   dataSource: MatTableDataSource<Asiento> = new MatTableDataSource();
   filtro: string = '';
   totalRegistros: number = 0;
-
   paginaActual = 0;
   pageSize = 4;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(
-    private asientoService: AsientoService,
-    private snackBar: MatSnackBar
-  ) {}
+  constructor(private aS: AsientoService) {}
 
   ngOnInit(): void {
-    this.asientoService.list().subscribe((data: Asiento[]) => {
+    this.aS.list().subscribe((data: Asiento[]) => {
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.filterPredicate = (asiento, filter) => {
+      this.dataSource.filterPredicate = (asiento: Asiento, filter: string) => {
         const f = filter.trim().toLowerCase();
-        return asiento.idAsiento.toString().includes(f) ||
-               asiento.seatNumberAsiento.toString().includes(f) ||
-               asiento.bus?.idBus.toString().includes(f) ||
-               asiento.estado?.statusTypeEstado.toLowerCase().includes(f);
+        return asiento.seatNumberAsiento.toString().includes(f) ||
+          asiento.bus?.idBus.toString().includes(f) ||
+          asiento.estado?.statusTypeEstado.toLowerCase().includes(f);
       };
+      this.totalRegistros = data.length;
+    });
+
+    this.aS.getList().subscribe((data: Asiento[]) => {
+      this.dataSource = new MatTableDataSource(data);
       this.totalRegistros = data.length;
     });
   }
@@ -72,24 +71,11 @@ export class ListarasientoComponent implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number) {
-    this.asientoService.deleteI(id).subscribe({
-      next: () => {
-        this.asientoService.list().subscribe((data) => {
-          this.dataSource.data = data;
-          this.totalRegistros = data.length;
-          this.snackBar.open('Asiento eliminado correctamente', 'Cerrar', {
-            duration: 3000,
-            panelClass: ['snack-success']
-          });
-        });
-      },
-      error: () => {
-        this.snackBar.open(
-          'No se puede eliminar: este asiento está enlazado con otra entidad.',
-          'Cerrar',
-          { duration: 4000, panelClass: ['snack-error'] }
-        );
-      }
+    this.aS.deleteI(id).subscribe(() => {
+      this.aS.list().subscribe((data: Asiento[]) => {
+        this.aS.setList(data);
+        this.totalRegistros = data.length;
+      });
     });
   }
 

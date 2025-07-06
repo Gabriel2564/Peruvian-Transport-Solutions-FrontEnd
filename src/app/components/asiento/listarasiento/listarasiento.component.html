@@ -6,14 +6,8 @@
   </button>
 </div>
 
-<mat-form-field appearance="outline" style="width: 100%; margin-top: 1rem;">
-  <mat-label>Filtrar asientos</mat-label>
-  <input
-    matInput
-    placeholder="Buscar por id, número, bus, estado..."
-    [(ngModel)]="filtro"
-    (keyup)="aplicarFiltro()"
-  />
+<mat-form-field style="width: 100%; margin-top: 1rem;">
+  <input matInput placeholder="Buscar" [(ngModel)]="filtro" (keyup)="aplicarFiltro()">
 </mat-form-field>
 
 <p>Total registros: {{ totalRegistros }}</p>
