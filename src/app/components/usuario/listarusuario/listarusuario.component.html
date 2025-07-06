@@ -40,11 +40,22 @@
       </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
-      <p><strong>ID:</strong> {{ element.id }}</p>
-      <p><strong>Password:</strong> {{ element.password }}</p>
-      <p><strong>Estado:</strong> {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
-    </mat-card-content>
+   <mat-card-content>
+  <p><strong>ID:</strong> {{ element.id }}</p>
+  <p>
+    <strong>Password:</strong> ***** 
+    <button
+      mat-icon-button
+      color="primary"
+      class="btn-eye"
+      (click)="showPasswordWarning()"
+    >
+      <mat-icon>remove_red_eye</mat-icon>
+    </button>
+  </p>
+  <p><strong>Estado:</strong> {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
+</mat-card-content>
+
 
     <mat-card-actions>
       <button mat-stroked-button color="primary" [routerLink]="['actualizaciones', element.id]">
