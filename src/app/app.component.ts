@@ -12,7 +12,6 @@ import { HomeComponent } from "./components/home/home.component";
     RouterOutlet,
     MenuComponent,
     GeminiChatComponent,
-    HomeComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

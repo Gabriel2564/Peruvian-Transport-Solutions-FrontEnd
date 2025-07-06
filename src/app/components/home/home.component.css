@@ -1,4 +1,7 @@
-/* Hero completo con background */
+
+@import url('https://fonts.googleapis.com/css2?family=Sansita+One');
+
+
 .hero {
   height: 80vh;
   background: url('/assets/images/fondo.png') no-repeat center center;
