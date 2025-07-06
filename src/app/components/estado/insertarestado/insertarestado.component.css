@@ -1,42 +1,31 @@
-.container {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 24px;
-  background-color: #fafafa;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.titulo-seccion h1 {
+  font-family: 'Abhaya Libre', serif;
+  font-weight: 800;
+  color: #000;
+  text-align: center;
+  margin: 5% 0;
+  font-size: 2.5rem;
+}
+
+.formulario {
+  margin: 5%;
 }
 
 .full-width {
   width: 100%;
-  margin-bottom: 16px;
+  margin-top: 20px;
 }
 
-mat-form-field {
-  display: block;
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: #3f51b5;
+.acciones-formulario {
+  text-align: center;
+  margin-top: 20px;
 }
 
 button {
-  min-width: 160px;
+  background-color: #826720 !important;
+  color: #fff !important;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 16px;
-  }
-
-  h1 {
-    font-size: 20px;
-  }
-
-  button {
-    width: 100%;
-  }
+button:hover {
+  background-color: #5f4d17 !important;
 }
