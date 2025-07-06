@@ -53,6 +53,10 @@ export class ListarviajeComponent implements AfterViewInit {
       };
       this.dataSource.paginator = this.paginator;
     });
+    this.vS.getList().subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   ngAfterViewInit(): void {
