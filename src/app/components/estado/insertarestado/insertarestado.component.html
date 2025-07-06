@@ -1,27 +1,25 @@
 <div class="container">
-  <div style="text-align: center; margin: 5%;">
-    <h1>{{ edicion ? 'Actualizar' : 'Registrar' }} Item</h1>
+  <div class="titulo-seccion">
+    <h1>{{ edicion ? 'Actualizar Estado' : 'Registrar Estado' }}</h1>
   </div>
 
-  <div style="margin: 5%;">
-    <form [formGroup]="form" (submit)="aceptar()">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Estado</mat-label>
-        <mat-select formControlName="type">
-           @for (food of types; track food) {
-          <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
-          }
-        </mat-select>
-        <mat-error *ngIf="form.get('type')?.hasError('required')">
-          El estado es obligatorio.
-        </mat-error>
-      </mat-form-field>
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="formulario">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tipo de Estado</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let option of types" [value]="option.value">
+          {{ option.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('type')?.hasError('required')">
+        El tipo de estado es obligatorio.
+      </mat-error>
+    </mat-form-field>
 
-      <div style="text-align: center; margin-top: 20px;">
-        <button mat-raised-button color="primary" type="submit">
-          {{ edicion ? 'Actualizar' : 'Registrar' }}
-        </button>
-      </div>
-    </form>
-  </div>
+    <div class="acciones-formulario">
+      <button mat-raised-button color="primary" type="submit">
+        {{ edicion ? 'Actualizar' : 'Registrar' }}
+      </button>
+    </div>
+  </form>
 </div>
