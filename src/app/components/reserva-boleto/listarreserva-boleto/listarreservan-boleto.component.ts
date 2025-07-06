@@ -28,7 +28,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     RouterLink,
     MatPaginatorModule,
 
-
     ],  
   templateUrl: './listarreservan-boleto.component.html',
   styleUrl: './listarreservan-boleto.component.css'
@@ -64,9 +63,9 @@ export class ListarreservanBoletoComponent implements OnInit {
       case 'id':        return 'Ingrese el ID';
       case 'monto':     return 'Monto mínimo';
       case 'asientos':  return 'Cantidad mínima de asientos';
-      case 'usuario':   return 'ID o nombre de usuario';
-      case 'pago':      return 'ID de pago';
-      case 'asiento':   return 'ID de asiento';
+      case 'usuario':   return 'Nombre de usuario';
+      case 'pago':      return 'Tipo de Pago';
+      case 'asiento':   return 'Numero de asiento';
       default:          return '';
     }
   }
@@ -124,11 +123,11 @@ export class ListarreservanBoletoComponent implements OnInit {
       case 'asientos':
         return r.seatQuantityReservaBoleto === +term;
       case 'usuario':
-        return r.usuario.id === +term;
+        return r.usuario.username.toLowerCase().includes(term.toLowerCase());
       case 'pago':
-        return r.pago.idPago === +term;
+        return r.pago.paymentTypePago.toLowerCase().includes(term.toLowerCase());
       case 'asiento':
-        return r.asiento.idAsiento === +term;
+        return r.asiento.seatNumberAsiento === +term;
       default:
         return false;
     }
