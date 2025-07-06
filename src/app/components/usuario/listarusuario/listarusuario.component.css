@@ -206,3 +206,28 @@ mat-card-actions button[color="warn"]:hover {
   width: 300px;
 }
 
+/* Si tu componente usa ViewEncapsulation.Emulated, ponlo en el styles global o usa ::ng-deep */
+.btn-eye {
+  /* tamaño del botón */
+  width: 32px;
+  height: 32px;
+
+  /* elimina padding extra */
+  padding: 0;
+
+  /* alínealo verticalmente con el texto */
+  vertical-align: middle;
+  margin-left: 8px;
+
+  /* opcional: reducir el hover ripple */
+  .mat-icon-button-ripple .mat-ripple-element {
+    opacity: 0.15;
+  }
+
+  /* ajusta el tamaño del icono */
+  mat-icon {
+    font-size: 18px;
+    line-height: 32px; /* centra el icono dentro del botón */
+  }
+}
+

@@ -17,12 +17,13 @@ export class GeminiChatService {
   constructor(private http: HttpClient) {}
 
   sendMessage(message: string): Observable<string> {
+    const prompt = "Eres un asistente virtual de una pagina de reserva de rutas, no das respuestas que no sean relacionadas a turismo, quis de viaje, rutas, entre otros. ";
     const body = {
       contents: [
         {
           parts: [
             {
-              text: message
+              text: `${prompt} ${message}`
             }
           ]
         }

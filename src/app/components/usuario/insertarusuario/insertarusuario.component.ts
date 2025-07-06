@@ -14,6 +14,9 @@ import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Rol } from '../../../models/Rol';
+import { RolService } from '../../../services/Rol.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-insertarusuario',
@@ -25,18 +28,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     MatRadioModule,
     MatButtonModule,
+    MatSelectModule
   ],
   templateUrl: './insertarusuario.component.html',
   styleUrl: './insertarusuario.component.css',
 })
 export class InsertarusuarioComponent implements OnInit {
   usuarioForm: FormGroup = new FormGroup({});
+  roles: Rol[] = [];
   usuario: Usuario = new Usuario();
   usuarioId: number = 0;
   edicion: boolean = false;
 
+  opciones = [
+    { value: 'TURISTA', viewValue: 'TURISTA' },
+    { value: 'CONDUCTOR', viewValue: 'CONDUCTOR' } 
+  ];
+
   constructor(
     private uS: UsuarioService,
+    private rS: RolService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -50,10 +61,15 @@ export class InsertarusuarioComponent implements OnInit {
       this.init();
     });
 
+    this.rS.list().subscribe((rolesData) => {
+       this.roles = rolesData;
+    });
+
     this.usuarioForm = this.formBuilder.group({
       id: [''], // opcional
       username: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      roles: [[], Validators.required],
       enabled: [true, Validators.required],
     });
   }
@@ -65,6 +81,7 @@ export class InsertarusuarioComponent implements OnInit {
           id: [data.id], // para pasar el id al actualizar
           username: [data.username, [Validators.required, Validators.minLength(4)]],
           password: [data.password, [Validators.required, Validators.minLength(6)]],
+          roles: [data.roles, Validators.required],
           enabled: [data.enabled, Validators.required],
         });
       });
@@ -73,12 +90,15 @@ export class InsertarusuarioComponent implements OnInit {
 
   aceptar() {
     if (this.usuarioForm.valid) {
+      const rolesSeleccionados = this.usuarioForm.value.roles.map((rol: string) => ({
+        rol: rol
+      }))
       const nuevoUsuario: Usuario = {
         id: this.edicion ? this.usuarioId : 0,
         username: this.usuarioForm.value.username,
         password: this.usuarioForm.value.password,
+        roles: this.usuarioForm.value.roles,
         enabled: this.usuarioForm.value.enabled,
-        roles: [], // enviar vacío
       };
 
       if (this.edicion) {

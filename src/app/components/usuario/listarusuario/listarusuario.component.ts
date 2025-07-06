@@ -86,4 +86,14 @@ export class ListarusuarioComponent implements OnInit {
       }
     });
   }
+
+   showPasswordWarning() {
+    this.snackBar.open(
+      'Mostrar la contraseña va en contra la política de Peruvian Transport Solutions, en caso sea administrador, recuerde ingresar la acción en el registro de auditoría primero',
+      'Cerrar',
+      {
+        duration: 4000, panelClass: ['snack-error'] 
+      }
+    );
+  }
 }
