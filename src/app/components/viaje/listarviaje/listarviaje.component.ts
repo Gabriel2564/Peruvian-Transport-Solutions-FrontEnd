@@ -1,8 +1,8 @@
-import { Component, OnInit,AfterViewInit,viewChild, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Viaje } from '../../../models/Viaje';
 import { ViajeService } from '../../../services/Viaje.service';
-import {  MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,8 +12,6 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 
 @Component({
   selector: 'app-listarviaje',
@@ -27,7 +25,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule, 
-    MatPaginatorModule],
+    MatPaginatorModule
+  
+  ],
 
   templateUrl: './listarviaje.component.html',
   styleUrl: './listarviaje.component.css'
@@ -44,7 +44,6 @@ export class ListarviajeComponent implements AfterViewInit {
    ngOnInit(): void {
     this.vS.list().subscribe((data:Viaje[]) => {
       this.dataSource = new MatTableDataSource<Viaje>(data);
-      this.dataSource=new MatTableDataSource<Viaje>(data);
       this.dataSource.filterPredicate = (data: Viaje, filter: string) => {
         const f =filter.trim().toLowerCase();
         return data.priceViaje.toString().includes(f)
@@ -52,16 +51,7 @@ export class ListarviajeComponent implements AfterViewInit {
           || data.idViaje.toString().includes(f)
           || data.ruta.idRuta.toString().includes(f);  
       };
-    });
-    this.vS.getList().subscribe((data:Viaje[]) => {
-      this.dataSource = new MatTableDataSource<Viaje>(data);
-      this.dataSource.filterPredicate = (data: Viaje, filter: string) => {
-        const f =filter.trim().toLowerCase();
-        return data.priceViaje.toString().includes(f)
-          || data.departureDateViaje.toLowerCase().includes(f)
-          || data.idViaje.toString().includes(f)
-          || data.ruta.idRuta.toString().includes(f);  
-      };
+      this.dataSource.paginator = this.paginator;
     });
   }
 
