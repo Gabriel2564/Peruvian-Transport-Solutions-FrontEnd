@@ -21,6 +21,14 @@
 </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Dirección de Llegada</mat-label>
+        <input matInput formControlName="arrivalAddressBus" />
+        <mat-error *ngIf="form.get('arrivalAddressBus')?.hasError('required')">
+          La dirección de llegada es obligatoria.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
   <mat-label>Precio del viaje</mat-label>
   <input
     matInput
