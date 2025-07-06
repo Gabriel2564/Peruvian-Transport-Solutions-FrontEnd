@@ -37,6 +37,7 @@ import { ItemUsuarioComponent } from './components/item-usuario/item-usuario.com
 import { InsertaritemUsiarioComponent } from './components/item-usuario/insertaritem-usiario/insertaritem-usiario.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { ReporteasientoporbusComponent } from './components/reportes/reporteasientoporbus/reporteasientoporbus.component';
+import { ReportepaymentsbytypeComponent } from './components/reportes/reportepaymentsbytype/reportepaymentsbytype.component';
 
 
 
@@ -137,6 +138,10 @@ export const routes: Routes = [
     {
       path: 'seatsperbus',
       component: ReporteasientoporbusComponent
+    },
+    {
+      path: 'paymentsbytype',
+      component: ReportepaymentsbytypeComponent
     }
     ],canActivate: [seguridadGuard],
   },
