@@ -3,7 +3,7 @@
     <h1>{{ edicion ? 'Actualizar' : 'Registrar' }} Viaje</h1>
   </div>
 
-  <div style="margin: 5%;">
+  <div class="form-card">
     <form [formGroup]="form" (submit)="aceptar()">
       <mat-form-field appearance="outline" class="full-width">
   <mat-label>Fecha de salida del viaje</mat-label>

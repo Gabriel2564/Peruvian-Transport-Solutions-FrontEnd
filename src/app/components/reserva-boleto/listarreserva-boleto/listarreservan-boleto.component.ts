@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule }  from '@angular/material/form-field';
 import { MatInputModule }      from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listarreservan-boleto',
@@ -22,19 +24,20 @@ import { MatMenuModule } from '@angular/material/menu';
     MatFormFieldModule, 
     MatInputModule,
     MatMenuModule,
-           
+    RouterLink,
+             
     ],  
   templateUrl: './listarreservan-boleto.component.html',
   styleUrl: './listarreservan-boleto.component.css'
 })
 export class ListarreservanBoletoComponent implements OnInit {
   dataSource: MatTableDataSource<Reserva_boleto> = new MatTableDataSource<Reserva_boleto>();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
   filtro = 'monto';    
   entrada = '';       
   cache:   Reserva_boleto[] = [];
 
-  constructor(private rB: ReservaBoletoService) {}
+  constructor(private rB: ReservaBoletoService, private snackBar: MatSnackBar) {}
 
   filtrosDisponibles = [
     { key: 'id', label: 'ID' },
@@ -81,10 +84,20 @@ export class ListarreservanBoletoComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    this.rB.deleteA(id).subscribe(() => {
+    this.rB.deleteA(id).subscribe({
+    next: () => {
       this.rB.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       });
+    },
+    error: err => {
+        // Muestra snackbar en rojo si hay error de integridad referencial
+        this.snackBar.open(
+          'No se puede eliminar: este viaje está enlazado con otra entidad.',
+          'Cerrar',
+          { duration: 4000, panelClass: ['snack-error'] }
+        );
+      }
     });
   }
 

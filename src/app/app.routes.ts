@@ -167,7 +167,7 @@ export const routes: Routes = [
     },
 
     {
-      path:'actualizaciones/:id', component:ListarreservanBoletoComponent
+      path:'actualizaciones/:id', component:InsertarreservaBoletoComponent
     }
   ],canActivate: [seguridadGuard],
 },

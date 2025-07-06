@@ -93,6 +93,18 @@ th.mat-header-cell {
   border-bottom: 2px solid #ececec;
 }
 
+/* ---------- panel que enmarca la tabla ---------- */
+.panel-tabla {
+  background: var(--brown-main);                 /* fondo blanco de la tabla   */
+  padding: 1.6rem 1.2rem;              /* aire interior              */
+  border-radius: 12px;                 /* esquinas suaves            */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  max-width: 1020px;                   /* ancho controlado           */
+  margin: 1.5rem auto 3rem;            /* centrado y separación      */
+  overflow-x: auto;                    /* scroll horizontal seguro   */
+}
+
+/* mantiene tus stripes / hover definidos antes */
 td.mat-cell { padding: .7rem .6rem; }
 
 tr.mat-row:nth-child(even) { background: var(--stripe); }
