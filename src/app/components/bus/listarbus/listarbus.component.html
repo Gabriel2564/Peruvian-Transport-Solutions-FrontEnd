@@ -2,6 +2,24 @@
   <div style="text-align: center; margin: 5%">
     <h1>Lista de buses</h1>
   </div>
+
+    <div class="buscador-container">
+    <span class="buscador-label">Buscar:</span>
+    <button class="mat-button">
+      <mat-icon>search</mat-icon>
+    </button>
+    
+    <mat-form-field class="buscador-input">
+      <input
+        matInput
+        placeholder="Ej. ruta o precio"
+        [(ngModel)]="BusFiltro"
+        (ngModelChange)="aplicarFiltro()"
+        name="filtroNombre"
+      />
+    </mat-form-field>
+  </div>
+
   <div class="panel-tabla">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -49,5 +67,12 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[4, 8, 10]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
   </div>
 </div>
