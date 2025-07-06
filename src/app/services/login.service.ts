@@ -25,5 +25,18 @@ export class LoginService {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     return decodedToken?.role;
+  
   }
+  showUser(): string | null {
+    const token = sessionStorage.getItem('token');
+    if (!token) return null;
+    const helper = new JwtHelperService();
+    const decoded: any = helper.decodeToken(token);
+    // Cambia 'username' por la claim correcta si es otra:
+    return decoded?.username 
+        || decoded?.sub 
+        || decoded?.name 
+        || null;
+  }
+ 
 }
