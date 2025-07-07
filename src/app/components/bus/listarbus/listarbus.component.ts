@@ -52,6 +52,10 @@ export class ListarbusComponent implements OnInit{
       };
       this.dataSource.paginator = this.paginator;
       });
+    this.bS.getList().subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+    });
     }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
