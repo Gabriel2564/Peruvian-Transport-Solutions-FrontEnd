@@ -13,6 +13,7 @@ export class UsuarioService {
   private url = `${base_url}/usuarios`;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   private listaCambio = new Subject<Usuario[]>();
   constructor(private http: HttpClient) {}
 
@@ -21,6 +22,8 @@ export class UsuarioService {
   }
 }
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 

@@ -27,7 +27,10 @@ export class ListarusuarioComponent {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   usDataSource: MatTableDataSource<Usuarios> = new MatTableDataSource<Usuarios>();

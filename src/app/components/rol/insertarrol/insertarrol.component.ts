@@ -13,6 +13,9 @@ import {
 import { Roles } from '../../../models/Roles';
 import { RolService } from '../../../services/Rol.service';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -66,6 +69,9 @@ export class InsertarrolComponent implements OnInit{
     private route: ActivatedRoute,
    
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -91,6 +97,9 @@ export class InsertarrolComponent implements OnInit{
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -147,6 +156,9 @@ export class InsertarrolComponent implements OnInit{
           id: [data.id],
           nombre: [data.rol, Validators.required],
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

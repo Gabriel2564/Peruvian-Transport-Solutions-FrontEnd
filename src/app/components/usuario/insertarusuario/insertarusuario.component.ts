@@ -21,6 +21,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { Roles } from '../../../models/Roles';
 import { Usuarios } from '../../../models/Usuarios';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

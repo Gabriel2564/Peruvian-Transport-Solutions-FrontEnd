@@ -1,7 +1,12 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { Component } from '@angular/core';
 import { Rol } from '../../../models/Rol';
+=======
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Roles } from '../../../models/Roles';
+>>>>>>> Stashed changes
 =======
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Roles } from '../../../models/Roles';
@@ -49,6 +54,7 @@ export class ListarrolComponent implements AfterViewInit {
   ngOnInit(): void {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     this.rolService.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
@@ -59,6 +65,8 @@ export class ListarrolComponent implements AfterViewInit {
   }
 
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     this.rolService.list().subscribe((data: Roles[]) => {
