@@ -1,42 +1,51 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { JwtRequest } from '../models/jwtRequest';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
- constructor(private http: HttpClient) {}
   login(request: JwtRequest) {
     return this.http.post('http://localhost:8084/login', request);
   }
+
   verificar() {
-    let token = sessionStorage.getItem('token');
-    return token != null;
-  }
-  showRole() {
-    let token = sessionStorage.getItem('token');
-    if (!token) {
-      // Manejar el caso en el que el token es nulo.
-      return null; // O cualquier otro valor predeterminado dependiendo del contexto.
+    if (isPlatformBrowser(this.platformId)) {
+      let token = sessionStorage.getItem('token');
+      return token != null;
     }
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(token);
-    return decodedToken?.role;
-  
+    return false; // en SSR asumimos que no está logueado
   }
+
+  showRole() {
+    if (isPlatformBrowser(this.platformId)) {
+      let token = sessionStorage.getItem('token');
+      if (!token) {
+        return null;
+      }
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      return decodedToken?.role;
+    }
+    return null;
+  }
+
   showUser(): string | null {
-    const token = sessionStorage.getItem('token');
-    if (!token) return null;
-    const helper = new JwtHelperService();
-    const decoded: any = helper.decodeToken(token);
-    // Cambia 'username' por la claim correcta si es otra:
-    return decoded?.username 
-        || decoded?.sub 
-        || decoded?.name 
-        || null;
+    if (isPlatformBrowser(this.platformId)) {
+      const token = sessionStorage.getItem('token');
+      if (!token) return null;
+      const helper = new JwtHelperService();
+      const decoded: any = helper.decodeToken(token);
+      return decoded?.username || decoded?.sub || decoded?.name || null;
+    }
+    return null;
   }
- 
 }

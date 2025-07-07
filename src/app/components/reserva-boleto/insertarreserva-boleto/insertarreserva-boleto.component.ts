@@ -18,6 +18,7 @@ import { ReservaBoletoService } from '../../../services/Reserva_boleto.service';
 import { UsuarioService }       from '../../../services/Usuario.service';
 import { PagoService }          from '../../../services/Pago.service';
 import { AsientoService }       from '../../../services/Asiento.service';
+import { NgxCurrencyDirective } from 'ngx-currency';
 
 @Component({
   selector: 'app-insertarreserva-boleto',
@@ -30,7 +31,7 @@ import { AsientoService }       from '../../../services/Asiento.service';
     MatRadioModule,
     MatButtonModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule, NgxCurrencyDirective
   ],
   templateUrl: './insertarreserva-boleto.component.html',
   styleUrls: ['./insertarreserva-boleto.component.css']

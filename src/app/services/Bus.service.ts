@@ -23,7 +23,7 @@ export class BusService {
   }
 
   setList(listaNueva: Bus[]){
-    return  this.listaCambio.next(listaNueva);
+    this.listaCambio.next(listaNueva);
   }
 
   getList(){

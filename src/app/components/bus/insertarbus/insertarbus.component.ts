@@ -38,7 +38,6 @@ export class InsertarbusComponent implements OnInit{
 
   ngOnInit(): void {
      this.form = this.formBuilder.group({
-      arrivalAddressBus: ['', Validators.required],
       capacityBus: ['', Validators.required],
       durationBus: ['', Validators.required],
       viaje: ['', Validators.required],
@@ -46,7 +45,7 @@ export class InsertarbusComponent implements OnInit{
      this.vS.list().subscribe(data=>{
         this.listaViaje=data
       })
-      this.route.params.subscribe((params: Params) => {
+    this.route.params.subscribe((params: Params) => {
     this.id = params['id'];
     this.edicion = this.id != null;
     if (this.edicion) {
@@ -63,29 +62,32 @@ export class InsertarbusComponent implements OnInit{
   }
 
   aceptar() {
-    if (this.form.invalid) return;
+  if (this.form.invalid) return;
 
   const fv = this.form.value;
-  // Inicializo el objeto viaje (con su ID si es edición)
   this.bus = new Bus();
-  if (this.edicion) { this.bus.idBus = this.id; }
-      this.bus.capacityBus = this.form.value.capacityBus;
-      this.bus.durationBus = this.form.value.durationBus;
+  if (this.edicion) {
+    this.bus.idBus = this.id;
+  }
+  this.bus.capacityBus = fv.capacityBus;
+  this.bus.durationBus = fv.durationBus;
+  this.bus.viaje = new Viaje();
+  this.bus.viaje.idViaje = fv.viaje;
 
-      this.bus.viaje = new Viaje();
-        this.bus.viaje.idViaje = fv.viaje;
+  const request$ = this.edicion
+    ? this.bS.update(this.bus)
+    : this.bS.insert(this.bus);
 
-      const request = this.edicion
-        ? this.bS.update(this.bus)
-        : this.bS.insert(this.bus);
+  request$.subscribe(() => {
+    // *** Aquí refrescas la lista igual que en el insert ***
+    this.bS.list().subscribe(lista => {
+      this.bS.setList(lista);
+      // Una vez hecho el setList, ya navegas
+      this.router.navigate(['rutaBus']);
+    });
+  });
+}
 
-      request.subscribe(() => {
-        this.bS.list().subscribe(data => {
-          this.bS.setList(data);
-          this.router.navigate(['rutaBus']);
-        });
-      });
-   }
   
 
   init() {
