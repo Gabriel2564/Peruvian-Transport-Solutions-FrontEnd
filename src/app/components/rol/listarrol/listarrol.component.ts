@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { Rol } from '../../../models/Rol';
+import { Roles } from '../../../models/Role';
 import { RolService } from '../../../services/Rol.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,8 +31,8 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class ListarrolComponent implements AfterViewInit {
 
-  roles: Rol[] = [];
-  rolesFiltrados: Rol[] = [];
+  roles: Roles[] = [];
+  rolesFiltrados: Roles[] = [];
   filtro: string = '';
 
   totalRegistros: number = 0;
@@ -45,13 +45,13 @@ export class ListarrolComponent implements AfterViewInit {
   constructor(private rolService: RolService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.rolService.list().subscribe((data: Rol[]) => {
+    this.rolService.list().subscribe((data: Roles[]) => {
       this.roles = data;
       this.rolesFiltrados = data;
       this.totalRegistros = data.length;
     });
 
-    this.rolService.getList().subscribe((data: Rol[]) => {
+    this.rolService.getList().subscribe((data: Roles[]) => {
       this.roles = data;
       this.rolesFiltrados = data;
       this.totalRegistros = data.length;
@@ -68,8 +68,8 @@ export class ListarrolComponent implements AfterViewInit {
     const f = this.filtro.trim().toLowerCase();
     this.rolesFiltrados = this.roles.filter(r =>
       r.id?.toString().includes(f) ||
-      r.rol.toLowerCase().includes(f) ||
-      r.usuario?.id?.toString().includes(f)
+      r.rol.toLowerCase().includes(f) 
+
     );
     this.totalRegistros = this.rolesFiltrados.length;
     this.paginaActual = 0;

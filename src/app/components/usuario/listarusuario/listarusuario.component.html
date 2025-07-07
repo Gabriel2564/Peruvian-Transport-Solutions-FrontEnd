@@ -31,37 +31,47 @@
     <mat-card-header>
       <img
         mat-card-avatar
-        [src]="'https://randomuser.me/api/portraits/lego/' + element.id + '.jpg'"
+        [src]="'https://randomuser.me/api/portraits/lego/' + element.idUsuario + '.jpg'"
         alt="Avatar"
       />
-      <mat-card-title>{{ element.username }}</mat-card-title>
+      <mat-card-title>{{ element.usNombre }} {{ element.usApellido }}</mat-card-title>
       <mat-card-subtitle>
-        {{ element.roles && element.roles.length > 0 ? element.roles[0].rol : 'Sin rol' }}
+        {{ element.role.rol }}
       </mat-card-subtitle>
     </mat-card-header>
 
-   <mat-card-content>
-  <p><strong>ID:</strong> {{ element.id }}</p>
-  <p>
-    <strong>Password:</strong> ***** 
-    <button
-      mat-icon-button
-      color="primary"
-      class="btn-eye"
-      (click)="showPasswordWarning()"
-    >
-      <mat-icon>remove_red_eye</mat-icon>
-    </button>
-  </p>
-  <p><strong>Estado:</strong> {{ element.enabled ? 'Activo' : 'Inactivo' }}</p>
-</mat-card-content>
-
+    <mat-card-content>
+      <p><strong>ID:</strong> {{ element.idUsuario }}</p>
+      <p><strong>Fecha de Nacimiento:</strong> {{ element.usFecNacimiento | date:'longDate' }}</p>
+      <p><strong>Correo:</strong> {{ element.usCorreo }}</p>
+      <p><strong>Usuario:</strong> {{ element.username }}</p>
+      <p>
+        <strong>Password:</strong> *****
+        <button
+          mat-icon-button
+          color="primary"
+          class="btn-eye"
+          (click)="showPasswordWarning()"
+        >
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+      </p>
+      <p><strong>Estado:</strong> {{ element.usEnable ? 'Activo' : 'Inactivo' }}</p>
+    </mat-card-content>
 
     <mat-card-actions>
-      <button mat-stroked-button color="primary" [routerLink]="['actualizaciones', element.id]">
+      <button
+        mat-stroked-button
+        color="primary"
+        [routerLink]="['/rutaUsuario/actualizaciones', element.idUsuario]"
+      >
         <mat-icon>edit</mat-icon> Editar
       </button>
-      <button mat-stroked-button color="warn" (click)="eliminar(element.id)">
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="eliminar(element.idUsuario)"
+      >
         <mat-icon>delete</mat-icon> Eliminar
       </button>
     </mat-card-actions>

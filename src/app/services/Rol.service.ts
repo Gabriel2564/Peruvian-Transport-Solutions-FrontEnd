@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { Observable, Subject } from "rxjs";
-import { Rol } from "../models/Rol";
+import { Roles } from "../models/Role";
 import { HttpClient } from "@angular/common/http";
 import { UserByRolDTO } from "../models/UserByRol";
 
@@ -12,22 +12,22 @@ const base_url = environment.base
 })
 export class RolService {
   private url = `${base_url}/roles`;
-  private listaCambio = new Subject<Rol[]>();
+  private listaCambio = new Subject<Roles[]>();
   constructor(private http: HttpClient) {}
 
   list(){
-    return this.http.get<Rol[]>(`${this.url}/listar`)
+    return this.http.get<Roles[]>(`${this.url}/listar`)
   }
 
-  insert(rol: Rol){
+  insert(rol: Roles){
       return this.http.post(`${this.url}/insertar`, rol);
   }
 
-  setList(listaNueva:Rol[]){
+  setList(listaNueva:Roles[]){
     this.listaCambio.next(listaNueva)
   }
 
-  update(rol: Rol) {
+  update(rol: Roles) {
     return this.http.put(`${this.url}/modificar`, rol);
   }
 
@@ -36,7 +36,7 @@ export class RolService {
   }
 
   listId(id: number) {
-    return this.http.get<Rol>(`${this.url}/listar${id}`);
+    return this.http.get<Roles>(`${this.url}/listar${id}`);
   }
 
   getList() {

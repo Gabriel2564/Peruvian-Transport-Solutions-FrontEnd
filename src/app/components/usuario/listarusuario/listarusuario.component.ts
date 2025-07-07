@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Usuario } from '../../../models/Usuario';
+import { Usuario } from '../../../models/Usuarios';
 import { UsuarioService } from '../../../services/Usuario.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -25,7 +25,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule, ReactiveFormsModule
   ],
   templateUrl: './listarusuario.component.html',
   styleUrls: ['./listarusuario.component.css']

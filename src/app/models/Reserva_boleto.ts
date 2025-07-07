@@ -1,6 +1,6 @@
 import { Asiento } from "./Asiento"
 import { Pago } from "./Pago"
-import { Usuario } from "./Usuario"
+import { Usuario } from "./Usuarios"
 
 export class Reserva_boleto{
     idReservaBoleto: number = 0

@@ -5,7 +5,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Usuario } from '../../../models/Usuario';
+import { Usuario } from '../../../models/Usuarios';
 import { UsuarioService } from '../../../services/Usuario.service';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,9 +14,13 @@ import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Rol } from '../../../models/Rol';
+import { Roles } from '../../../models/Role';
 import { RolService } from '../../../services/Rol.service';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // en AppModule
+
 
 @Component({
   selector: 'app-insertarusuario',
@@ -28,22 +32,25 @@ import { MatSelectModule } from '@angular/material/select';
     CommonModule,
     MatRadioModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule, MatDatepickerModule, MatNativeDateModule, BrowserAnimationsModule
   ],
   templateUrl: './insertarusuario.component.html',
   styleUrl: './insertarusuario.component.css',
 })
 export class InsertarusuarioComponent implements OnInit {
   usuarioForm: FormGroup = new FormGroup({});
-  roles: Rol[] = [];
+  roles: Roles[] = [];
   usuario: Usuario = new Usuario();
   usuarioId: number = 0;
   edicion: boolean = false;
-
-  opciones = [
-    { value: 'TURISTA', viewValue: 'TURISTA' },
-    { value: 'CONDUCTOR', viewValue: 'CONDUCTOR' } 
-  ];
+  listaRol:Roles[]=[]
+  usNombre: string="";
+    usApellido: string="";
+    usFecNacimiento:Date=new Date();
+    usCorreo: string="";
+    username: string="";
+    password: string="";
+    usEnable: boolean=false;
 
   constructor(
     private uS: UsuarioService,
@@ -55,77 +62,90 @@ export class InsertarusuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.usuarioId = params['id'];
-      this.edicion = this.usuarioId != null;
-      this.init();
+    this.usuarioForm = this.formBuilder.group({
+      id: [''], // opcional
+      usNombre: [[], Validators.required],
+      usApellido: [[], Validators.required],
+      usFecNacimiento: [[], Validators.required],
+      usCorreo: [[], Validators.required],
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      roles: [[], Validators.required],
+      usEnable: [true, Validators.required],
     });
 
     this.rS.list().subscribe((rolesData) => {
        this.roles = rolesData;
     });
 
-    this.usuarioForm = this.formBuilder.group({
-      id: [''], // opcional
-      username: ['', [Validators.required, Validators.minLength(4)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      roles: [[], Validators.required],
-      enabled: [true, Validators.required],
-    });
-  }
+    this.route.params.subscribe((params: Params) => {
+      this.usuarioId = params['id'];
+      this.edicion = this.usuarioId != null;
+    if (this.edicion) {
+      this.uS.listId(this.usuarioId).subscribe(data => {
+        this.usuarioForm.patchValue({
+          usNombre: data.usNombre,
+          usApellido: data.usApellido,
+          usFecNacimiento:         data.usFecNacimiento,
+          usCorreo: data.usCorreo,
+          username: data.username,
+          password: data.password,
+          roles: data.role.rol,
+          usEnable: data.usEnable   // <- aquí sólo el ID
+        });
+      });
+    }
+  });
+}
+
 
   init() {
     if (this.edicion) {
       this.uS.listId(this.usuarioId).subscribe((data) => {
         this.usuarioForm = this.formBuilder.group({
-          id: [data.id], // para pasar el id al actualizar
+          id: [data.idUsuario], // para pasar el id al actualizar
+          usNombre: [data.usNombre, Validators.required],
+      usApellido: [data.usApellido, Validators.required],
+      usFecNacimiento:[data.usFecNacimiento, Validators.required],
+      usCorreo:[data.usCorreo, Validators.required],
           username: [data.username, [Validators.required, Validators.minLength(4)]],
           password: [data.password, [Validators.required, Validators.minLength(6)]],
-          roles: [data.roles, Validators.required],
-          enabled: [data.enabled, Validators.required],
+          roles: [data.role, Validators.required],
+          usEnable: [data.usEnable, Validators.required],
         });
       });
     }
   }
 
   aceptar() {
-    if (this.usuarioForm.valid) {
-      const rolesSeleccionados = this.usuarioForm.value.roles.map((rol: string) => ({
-        rol: rol
-      }))
-      const nuevoUsuario: Usuario = {
-        id: this.edicion ? this.usuarioId : 0,
-        username: this.usuarioForm.value.username,
-        password: this.usuarioForm.value.password,
-        roles: this.usuarioForm.value.roles,
-        enabled: this.usuarioForm.value.enabled,
-      };
+    if (this.usuarioForm.invalid) return;
 
-      if (this.edicion) {
-        this.uS.update(nuevoUsuario).subscribe(() => {
-          this.uS.list().subscribe((data) => {
-            this.uS.setList(data);
-            this.snackBar.open('Usuario actualizado correctamente', 'Cerrar', {
-              duration: 3000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'center',
-            });
-            this.router.navigate(['rutaUsuario']);
-          });
-        });
-      } else {
-        this.uS.insert(nuevoUsuario).subscribe(() => {
-          this.uS.list().subscribe((data) => {
-            this.uS.setList(data);
-            this.snackBar.open('Usuario registrado correctamente', 'Cerrar', {
-              duration: 3000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'center',
-            });
-            this.router.navigate(['rutaUsuario']);
-          });
-        });
-      }
-    }
-  }
+    const fv = this.usuarioForm.value;
+      // Inicializo el objeto viaje (con su ID si es edición)
+      this.usuario = new Usuario();
+      if (this.edicion) { this.usuario.idUsuario = this.usuarioId; }
+
+      this.usuario.usNombre = fv.usNombre;
+  this.usuario.usApellido = fv.departureDateViaje;
+  this.usuario.usFecNacimiento = fv.usFecNacimiento;
+  this.usuario.usCorreo = fv.usCorreo;
+  this.usuario.username = fv.username;
+  this.usuario.password = fv.password;
+  this.usuario.usEnable = fv.usEnable;
+
+  // Inicializo la ruta y le asigno el id
+    this.usuario.role = new Roles();
+    this.usuario.role.rol = fv.roles;
+  
+const request = this.edicion
+    ? this.uS.update(this.usuario)
+    : this.uS.insert(this.usuario);
+
+  request.subscribe(() => {
+    this.uS.list().subscribe(data => {
+      this.uS.setList(data);
+      this.router.navigate(['rutaUsuario']);
+    });
+  });
+}
 }

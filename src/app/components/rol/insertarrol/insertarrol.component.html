@@ -14,16 +14,6 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Usuario</mat-label>
-      <mat-select formControlName="usuario">
-        <mat-option *ngFor="let u of listaUsuarios" [value]="u.id">{{ u.username }}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.get('usuario')?.hasError('required')">
-        El usuario es obligatorio.
-      </mat-error>
-    </mat-form-field>
-
     <div style="text-align: center; margin-top: 20px;">
       <button mat-raised-button color="primary" type="submit">
         {{ edicion ? 'Actualizar' : 'Registrar' }}

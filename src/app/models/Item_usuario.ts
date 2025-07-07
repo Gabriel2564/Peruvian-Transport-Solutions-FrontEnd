@@ -1,5 +1,5 @@
 import { Item } from "./Item"
-import { Usuario } from "./Usuario"
+import { Usuario } from "./Usuarios"
 
 export class Item_usuario{
     idItemUsuario: number = 0

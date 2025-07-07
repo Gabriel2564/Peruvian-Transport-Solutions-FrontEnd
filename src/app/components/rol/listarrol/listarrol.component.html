@@ -21,7 +21,6 @@
   <mat-card class="tarjeta" *ngFor="let element of rolesPaginados">
     <mat-card-header>
       <mat-card-title>{{ element.rol }}</mat-card-title>
-      <mat-card-subtitle>ID Usuario: {{ element.usuario.id }}</mat-card-subtitle> <!-- Antes: <mat-card-subtitle>ID Usuario: {{ element.usuario?.id }}</mat-card-subtitle> -->
     </mat-card-header>
     <mat-card-content>
       <p><strong>ID Rol:</strong> {{ element.id }}</p> 

@@ -5,8 +5,8 @@ import {
   Validators,
   ReactiveFormsModule
 } from '@angular/forms';
-import { Rol } from '../../../models/Rol';
-import { Usuario } from '../../../models/Usuario';
+import { Roles } from '../../../models/Role';
+import { Usuario } from '../../../models/Usuarios';
 import { RolService } from '../../../services/Rol.service';
 import { UsuarioService } from '../../../services/Usuario.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -32,7 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class InsertarrolComponent implements OnInit {
   form: FormGroup = new FormGroup({});
-  rol: Rol = new Rol();
+  rol: Roles = new Roles();
   edicion: boolean = false;
   id: number = 0;
 
@@ -73,7 +73,6 @@ export class InsertarrolComponent implements OnInit {
     if (this.form.valid) {
       this.rol.id = this.form.value.id;
       this.rol.rol = this.form.value.nombre;
-      this.rol.usuario = { id: this.form.value.usuario } as Usuario;
 
       const request = this.edicion
         ? this.rS.update(this.rol)
@@ -94,7 +93,6 @@ export class InsertarrolComponent implements OnInit {
         this.form = this.formBuilder.group({
           id: [data.id],
           nombre: [data.rol, Validators.required],
-          usuario: [data.usuario.id, Validators.required]
         });
       });
     }

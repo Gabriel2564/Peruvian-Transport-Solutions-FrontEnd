@@ -17,7 +17,7 @@ import { MatTimepickerModule } from '@angular/material/timepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Resenia } from '../../../models/Resenia';
-import { Usuario } from '../../../models/Usuario';
+import { Usuario } from '../../../models/Usuarios';
 import { Viaje } from '../../../models/Viaje';
 import { ReseniaService } from '../../../services/Resenia.service';
 import { UsuarioService } from '../../../services/Usuario.service';
@@ -122,7 +122,7 @@ export class InsertarreseniaComponent implements OnInit {
     }
 
     this.resenia.likesResenia = this.resForm.value.likesResenia;
-    this.resenia.usuario = { id: this.resForm.value.usuario } as Usuario;
+    this.resenia.usuario = { idUsuario: this.resForm.value.usuario } as Usuario;
     this.resenia.viaje = { idViaje: this.resForm.value.viaje } as Viaje;
 
     const request = this.edicion
@@ -155,7 +155,7 @@ export class InsertarreseniaComponent implements OnInit {
             futureTimeValidator()
           ]],
           likesResenia: [data.likesResenia],
-          usuario: [data.usuario?.id, Validators.required],
+          usuario: [data.usuario?.idUsuario, Validators.required],
           viaje: [data.viaje?.idViaje, Validators.required],
         });
       });
