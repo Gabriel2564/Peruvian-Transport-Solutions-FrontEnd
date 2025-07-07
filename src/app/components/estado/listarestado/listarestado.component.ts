@@ -43,6 +43,10 @@ export class ListarestadoComponent implements OnInit, AfterViewInit {
       this.dataSource.filterPredicate = (estado, filter) =>
         estado.statusTypeEstado.toLowerCase().includes(filter.trim().toLowerCase());
     });
+    this.estadoService.getList().subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   ngAfterViewInit() {
