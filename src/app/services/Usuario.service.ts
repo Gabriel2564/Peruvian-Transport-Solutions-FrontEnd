@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { Subject } from "rxjs";
-import { Usuario } from "../models/Usuario";
+import { Usuario } from "../models/Usuarios";
 import { HttpClient } from "@angular/common/http";
 
 const base_url = environment.base

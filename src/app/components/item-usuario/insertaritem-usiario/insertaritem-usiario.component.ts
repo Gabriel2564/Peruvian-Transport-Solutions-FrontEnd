@@ -16,7 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Item_usuario } from '../../../models/Item_usuario';
-import { Usuario } from '../../../models/Usuario';
+import { Usuario } from '../../../models/Usuarios';
 import { Item } from '../../../models/Item';
 import { Item_usuarioService } from '../../../services/Item_usuario.service';
 import { UsuarioService } from '../../../services/Usuario.service';
@@ -34,7 +34,7 @@ import { ItemService } from '../../../services/Item.service';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule,
+    MatIconModule
   ],
   templateUrl: './insertaritem-usiario.component.html',
   styleUrl: './insertaritem-usiario.component.css',
@@ -93,7 +93,7 @@ export class InsertaritemusuarioComponent implements OnInit {
       this.item_usuario.travelDateItemUsuario = this.form.value.travelDateItemUsuario;
 
       this.item_usuario.item.idItem = this.form.value.item;
-      this.item_usuario.usuario.id = this.form.value.usuario;
+      this.item_usuario.usuario.idUsuario = this.form.value.usuario;
 
       const request = this.edicion
         ? this.iuS.update(this.item_usuario)
@@ -116,7 +116,7 @@ export class InsertaritemusuarioComponent implements OnInit {
           travelQualificationItemUsuario: [data.travelQualificationItemUsuario, Validators.required],
           travelDateItemUsuario: [data.travelDateItemUsuario, Validators.required],
           item: [data.item.idItem, Validators.required],
-          usuario: [data.usuario.id, Validators.required],
+          usuario: [data.usuario.idUsuario, Validators.required],
         });
       });
     }

@@ -99,100 +99,64 @@
 <!-- MENÚS -->
 <mat-menu #menuUsuario="matMenu">
   <!-- Listar: solo para ADMINISTRADOR -->
-  <button mat-menu-item routerLink="/rutaUsuario"
-          *ngIf="isAdministrador()">Listar</button>
-  <!-- Insertar: permitido a todos -->
-  <button mat-menu-item routerLink="/rutaUsuario/insertar">Insertar</button>
+  <button mat-menu-item routerLink="/rutaUsuario">Listar</button>
 </mat-menu>
 
 <mat-menu #menuPago="matMenu">
   <!-- Listar pagos: admin o turista -->
-  <button mat-menu-item routerLink="/rutaPago"
-          *ngIf="isAdministrador() || isTurista()">Listar</button>
+  <button mat-menu-item routerLink="/rutaPago">Listar</button>
   <!-- Insertar pago: admin o turista -->
-  <button mat-menu-item routerLink="/rutaPago/insertar"
-          *ngIf="isAdministrador() || isTurista()">Insertar</button>
-  <!-- Reportes de tipo de pago: solo admin -->
-  <button mat-menu-item routerLink="/rutaPago/reportes"
-          *ngIf="isAdministrador()">Reportes</button>
+  <button mat-menu-item routerLink="/rutaPago/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuItem="matMenu">
-  <button mat-menu-item routerLink="/rutaItem"
-          *ngIf="isAdministrador() || isTurista() || isConductor()">Listar</button>
-  <button mat-menu-item routerLink="/rutaItem/insertar"
-          *ngIf="isAdministrador() || isTurista() || isConductor()">Insertar</button>
-  <button mat-menu-item routerLink="/rutaItem/formato"
-          *ngIf="isAdministrador()">Filtrar por Formato</button>
+  <button mat-menu-item routerLink="/rutaItem">Listar</button>
+  <button mat-menu-item routerLink="/rutaItem/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuResenia="matMenu">
-  <button mat-menu-item routerLink="/rutaResenia"
-          *ngIf="isAdministrador() || isTurista() || isConductor()">Listar</button>
-  <button mat-menu-item routerLink="/rutaResenia/insertar"
-          *ngIf="isAdministrador() || isTurista()">Insertar</button>
-  <button mat-menu-item routerLink="/rutaResenia/busqueda"
-          *ngIf="isAdministrador() || isTurista() || isConductor()">Buscar por nombre</button>
+  <button mat-menu-item routerLink="/rutaResenia">Listar</button>
+  <button mat-menu-item routerLink="/rutaResenia/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuRol="matMenu">
-  <button mat-menu-item routerLink="/rutaRol"
-          *ngIf="isAdministrador()">Listar</button>
-  <button mat-menu-item routerLink="/rutaRol/insertar"
-          *ngIf="isAdministrador()">Insertar</button>
-  <button mat-menu-item routerLink="/rutaRol/reportes"
-          *ngIf="isAdministrador()">Reporte usuarios por rol</button>
+  <button mat-menu-item routerLink="/rutaRol">Listar</button>
 </mat-menu>
 
 
 <mat-menu #menuEstado="matMenu">
-  <button mat-menu-item routerLink="/rutaEstado"
-          *ngIf="isAdministrador() || isTurista() || isConductor()">Listar</button>
-  <button mat-menu-item routerLink="/rutaEstado/insertar"
-          *ngIf="isAdministrador() || isTurista() || isConductor()">Insertar</button>
+  <button mat-menu-item routerLink="/rutaEstado">Listar</button>
+  <button mat-menu-item routerLink="/rutaEstado/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuViaje="matMenu">
-  <button mat-menu-item routerLink="/rutaViaje"
-          *ngIf="isAdministrador() || isConductor()">Listar</button>
-  <button mat-menu-item routerLink="/rutaViaje/insertar"
-          *ngIf="isAdministrador() || isConductor()">Insertar</button>
-  <button mat-menu-item routerLink="/rutaViaje/reportes"
-          *ngIf="isAdministrador()">Reporte viajes por ruta</button>
+  <button mat-menu-item routerLink="/rutaViaje">Listar</button>
+  <button mat-menu-item routerLink="/rutaViaje/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuBus="matMenu">
-  <button mat-menu-item routerLink="/rutaBus"
-          *ngIf="isAdministrador() || isConductor()">Listar</button>
-  <button mat-menu-item routerLink="/rutaBus/insertar"
-          *ngIf="isAdministrador() || isConductor()">Insertar</button>
+  <button mat-menu-item routerLink="/rutaBus">Listar</button>
+  <button mat-menu-item routerLink="/rutaBus/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuAsiento="matMenu">
-  <button mat-menu-item routerLink="/rutaAsiento"
-          *ngIf="isAdministrador() || isTurista()">Listar</button>
-  <button mat-menu-item routerLink="/rutaAsiento/insertar"
-          *ngIf="isAdministrador() || isTurista()">Insertar</button>
-  <!-- Reportes de asientos solo admin -->
-  <button mat-menu-item routerLink="/rutaAsiento/reportes"
-          *ngIf="isAdministrador()">Reportes</button>
+  <button mat-menu-item routerLink="/rutaAsiento">Listar</button>
+  <button mat-menu-item routerLink="/rutaAsiento/insertar">Insertar</button>
+
+
 </mat-menu>
 
 <mat-menu #menuRuta="matMenu">
   <!-- Listar rutas -->
-  <button mat-menu-item routerLink="/rutaRuta"
-          *ngIf="isAdministrador() || isConductor()">Listar</button>
+  <button mat-menu-item routerLink="/rutaRuta">Listar</button>
 
   <!-- Insertar rutas -->
-  <button mat-menu-item routerLink="/rutaRuta/insertar"
-          *ngIf="isAdministrador() || isConductor()">Insertar</button>
+  <button mat-menu-item routerLink="/rutaRuta/insertar">Insertar</button>
 </mat-menu>
 
 <mat-menu #menuItemUsuario="matMenu">
   <button mat-menu-item routerLink="/rutaItemUsuario">Listar</button>
   <button mat-menu-item routerLink="/rutaItemUsuario/insertar">Insertar</button>
-  <button mat-menu-item routerLink="/rutaItemUsuario/top5"
-          *ngIf="isAdministrador()">Top 5 Calificados</button>
 </mat-menu>
 
 <mat-menu #menuReportes="matMenu">

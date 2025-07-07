@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 
 import { Reserva_boleto } from '../../../models/Reserva_boleto';
-import { Usuario }        from '../../../models/Usuario';
+import { Usuario }        from '../../../models/Usuarios';
 import { Pago }           from '../../../models/Pago';
 import { Asiento }        from '../../../models/Asiento';
 
@@ -87,7 +87,7 @@ export class InsertarreservaBoletoComponent implements OnInit {
           this.form.patchValue({
             ticketAmountReservaBoleto: data.ticketAmountReservaBoleto,
             seatQuantityReservaBoleto: data.seatQuantityReservaBoleto,
-            usuario:  data.usuario.id,          // usa la clave real de Usuario
+            usuario:  data.usuario.idUsuario,          // usa la clave real de Usuario
             pago:     data.pago.paymentTypePago,
             asiento:  data.asiento.idAsiento
           });
@@ -109,7 +109,7 @@ export class InsertarreservaBoletoComponent implements OnInit {
     this.reserva.seatQuantityReservaBoleto = fv.seatQuantityReservaBoleto;
 
     this.reserva.usuario  = new Usuario();
-    this.reserva.usuario.id = fv.usuario
+    this.reserva.usuario.idUsuario = fv.usuario
 
     this.reserva.pago = new Pago();
     this.reserva.pago.idPago = this.edicion ? fv.pago.idPago : 0;  // Si es edición, asigna fv.pago.idPago, sino asigna 0

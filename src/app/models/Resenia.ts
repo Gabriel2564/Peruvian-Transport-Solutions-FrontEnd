@@ -1,4 +1,4 @@
-import { Usuario } from "./Usuario"
+import { Usuario } from "./Usuarios"
 import { Viaje } from "./Viaje"
 
 export class Resenia{
