@@ -1,8 +1,13 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { Subject } from "rxjs";
 import { Rol } from "../models/Rol";
+=======
+import { Observable, Subject } from "rxjs";
+import {  Roles } from "../models/Roles";
+>>>>>>> Stashed changes
 =======
 import { Observable, Subject } from "rxjs";
 import {  Roles } from "../models/Roles";

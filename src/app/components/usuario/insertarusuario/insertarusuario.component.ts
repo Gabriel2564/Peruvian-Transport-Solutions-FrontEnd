@@ -20,6 +20,9 @@ import { RolService } from '../../../services/Rol.service';
 import { MatSelectModule } from '@angular/material/select';
 import { Roles } from '../../../models/Roles';
 import { Usuarios } from '../../../models/Usuarios';
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 @Component({

@@ -26,7 +26,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ListarusuarioComponent {
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
   usDataSource: MatTableDataSource<Usuarios> = new MatTableDataSource<Usuarios>();
   usFiltro: string = '';
 

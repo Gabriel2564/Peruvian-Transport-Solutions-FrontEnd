@@ -12,6 +12,9 @@ import {
 } from '@angular/forms';
 import { Roles } from '../../../models/Roles';
 import { RolService } from '../../../services/Rol.service';
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RolService } from '../../../services/Rol.service';
@@ -62,6 +65,9 @@ export class InsertarrolComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute,
    
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   ) {}
 
@@ -84,6 +90,9 @@ export class InsertarrolComponent implements OnInit{
     });
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   }
 
@@ -137,6 +146,9 @@ export class InsertarrolComponent implements OnInit{
         this.form = this.formBuilder.group({
           id: [data.id],
           nombre: [data.rol, Validators.required],
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         });
       });
