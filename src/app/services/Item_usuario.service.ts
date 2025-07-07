@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Item_usuario } from "../models/Item_usuario";
 import { HttpClient } from "@angular/common/http";
+import { ItemusuariotopDTO } from "../models/ItemUsuariotopDTO";
 
 const base_url = environment.base
 
@@ -38,4 +39,7 @@ export class Item_usuarioService {
           listId(id: number) {
             return this.http.get<Item_usuario>(`${this.url}/listar/${id}`);
           }
+          getTOP():Observable<ItemusuariotopDTO[]>{
+              return this.http.get<ItemusuariotopDTO[]>(`${this.url}/topCalificados`);
+            }
 }

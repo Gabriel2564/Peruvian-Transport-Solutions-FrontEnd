@@ -39,6 +39,7 @@ import { seguridadGuard } from './guard/seguridad.guard';
 import { ReporteasientoporbusComponent } from './components/reportes/reporteasientoporbus/reporteasientoporbus.component';
 import { ReportepaymentsbytypeComponent } from './components/reportes/reportepaymentsbytype/reportepaymentsbytype.component';
 import { InsertaritemusuarioComponent } from './components/item-usuario/insertaritem-usiario/insertaritem-usiario.component';
+import { ReporteitemusuariotopComponent } from './components/reportes/reporteitemusuariotop/reporteitemusuariotop.component';
 
 
 
@@ -143,6 +144,10 @@ export const routes: Routes = [
     {
       path: 'paymentsbytype',
       component: ReportepaymentsbytypeComponent
+    },
+    {
+      path: 'topitem',
+      component: ReporteitemusuariotopComponent
     }
     ],canActivate: [seguridadGuard],
   },
