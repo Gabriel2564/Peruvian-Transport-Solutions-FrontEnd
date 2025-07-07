@@ -1,4 +1,4 @@
-import { Usuario } from "./Usuario"
+import { Usuarios } from "./Usuarios"
 import { Viaje } from "./Viaje"
 
 export class Resenia{
@@ -6,6 +6,6 @@ export class Resenia{
     publicationDateResenia: string = ""
     likesResenia: number = 0
     contentResenia: string = ""
-    usuario: Usuario = new Usuario()
+    usuario: Usuarios = new Usuarios()
     viaje: Viaje = new Viaje()
 }

@@ -8,12 +8,23 @@
 </div>
 
 <div class="contenedor-tarjetas">
+<<<<<<< Updated upstream
   <div class="tarjeta" *ngFor="let element of dataSource.data">
     <p><strong>ID:</strong> {{ element.id }}</p>
     <p><strong>Nombre del rol:</strong> {{ element.rol }}</p>
     <p><strong>ID del usuario:</strong> {{ element.usuario.id}}</p>
 
     <div class="acciones">
+=======
+  <mat-card class="tarjeta" *ngFor="let element of rolesPaginados">
+    <mat-card-header>
+      <mat-card-title>{{ element.rol }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>ID Rol:</strong> {{ element.id }}</p> 
+    </mat-card-content>
+    <mat-card-actions class="acciones">
+>>>>>>> Stashed changes
       <button mat-raised-button color="primary" [routerLink]="['actualizaciones', element.id]">
         <mat-icon>edit</mat-icon> Actualizar
       </button>
