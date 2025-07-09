@@ -41,7 +41,6 @@ import { ReportepaymentsbytypeComponent } from './components/reportes/reportepay
 import { InsertaritemusuarioComponent } from './components/item-usuario/insertaritem-usiario/insertaritem-usiario.component';
 import { ReporteitemusuariotopComponent } from './components/reportes/reporteitemusuariotop/reporteitemusuariotop.component';
 import { ReporteReseniaByUsernameComponent } from './components/reportes/reporte-resenia-by-username/reporte-resenia-by-username.component';
-import { ItemporformatoComponent } from './components/reportes/itemporformato/itemporformato.component';
 
 
 
@@ -155,10 +154,6 @@ export const routes: Routes = [
       path: 'reseniabyusername',
       component: ReporteReseniaByUsernameComponent
     },
-    {
-      path: 'itemporformato',
-      component: ItemporformatoComponent
-    }
     ],canActivate: [seguridadGuard],
   },
 {
