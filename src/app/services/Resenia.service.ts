@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Resenia } from "../models/Resenia";
 import { HttpClient } from "@angular/common/http";
+import { ReseniaByUsernameDTO } from "../models/ReseniaByUsernameDTO";
 
 const base_url = environment.base
 
@@ -36,5 +37,8 @@ export class ReseniaService {
   
     deleteA(id: number) {
       return this.http.delete(`${this.url}/${id}`);
+    }
+    ReseniaByUsername():Observable<ReseniaByUsernameDTO[]>{
+          return this.http.get<ReseniaByUsernameDTO[]>(`${this.url}/busquedaPorNombre`);
     }
 }
