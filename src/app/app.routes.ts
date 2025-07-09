@@ -58,20 +58,32 @@ export const routes: Routes = [
     path: 'home',
     component:HomeComponent
   },
-  {
-  path:'rutaUsuario', component:UsuarioComponent,
-  children:[
-    {
-      path:'insertar', component:InsertarusuarioComponent
-    },
-
-    {
-      path:'actualizaciones/:id', component:InsertarusuarioComponent
-    }
-  ],
-  canActivate: [seguridadGuard],
   
-},
+  {
+    path: 'rutaUsuario',
+    component: UsuarioComponent,
+    canActivate:    [seguridadGuard],       // protege /rutaUsuario
+    canActivateChild: [seguridadGuard],     // protege también a los children
+    data: {
+      roles: ['ADMINISTRADOR', 'CONDUCTOR', 'TURISTA']
+    },
+    children: [
+      {
+        path: 'insertar',
+        component: InsertarusuarioComponent,
+        data: {
+          roles: ['ADMINISTRADOR']          // solo ADMINISTRADOR
+        }
+      },
+      {
+        path: 'actualizaciones/:id',
+        component: InsertarusuarioComponent,
+        data: {
+          roles: ['ADMINISTRADOR']          // solo ADMINISTRADOR
+        }
+      }
+    ]
+  },
   {
   path:'rutaPago', component:PagoComponent,
   children:[

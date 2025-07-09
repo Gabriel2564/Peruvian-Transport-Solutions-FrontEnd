@@ -13,12 +13,7 @@
   </mat-form-field>
 </div>
 
-<div class="agregar-container">
-  <span>¿Deseas agregar un usuario? Haz click aquí:</span>
-  <button class="agregar-btn" [routerLink]="['/rutaUsuario/insertar']">
-    <mat-icon>add</mat-icon> Agregar usuario
-  </button>
-</div>
+
 
 <div class="contenedor-tarjetas">
   <mat-card
@@ -60,13 +55,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button
-        mat-stroked-button
-        color="primary"
-        [routerLink]="['/rutaUsuario/actualizaciones', element.idUsuario]"
-      >
-        <mat-icon>edit</mat-icon> Editar
-      </button>
+    
       <button
         mat-stroked-button
         color="warn"
