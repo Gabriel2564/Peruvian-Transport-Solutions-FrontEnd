@@ -27,7 +27,7 @@ export class ReseniaService {
       return this.listaCambio.asObservable()
     }
      listId(id: number) {
-      return this.http.get<Resenia>(`${this.url}/${id}`);
+      return this.http.get<Resenia>(`${this.url}/listar/${id}`);
     }
   
     update(r:Resenia) {
