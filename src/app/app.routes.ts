@@ -70,6 +70,7 @@ export const routes: Routes = [
     }
   ],
   canActivate: [seguridadGuard],
+  
 },
   {
   path:'rutaPago', component:PagoComponent,
@@ -118,6 +119,7 @@ export const routes: Routes = [
 {
   path: 'rutaRol',
   component: RolComponent,
+  data: { roles: ['ADMINISTRADOR'] }, 
   children: [
     {
       path: 'insertar',
@@ -133,6 +135,7 @@ export const routes: Routes = [
 {
     path: 'rutareportes',
     component: ReportesComponent,
+    data: { roles: ['ADMINISTRADOR'] }, 
     children: [
     {
       path: 'userbyrol',
@@ -158,6 +161,7 @@ export const routes: Routes = [
   },
 {
   path:'rutaAsiento', component:AsientoComponent,
+  data: { roles: ['ADMINISTRADOR','TURISTA'] }, 
   children:[
     {
       path:'insertar', component:InsertarasientoComponent
@@ -182,6 +186,7 @@ export const routes: Routes = [
 },
 {
   path:'rutaReservaBoleto', component:ReservaBoletoComponent,
+  data: { roles: ['ADMINISTRADOR','TURISTA'] },
   children:[
     {
       path:'insertar', component:InsertarreservaBoletoComponent
@@ -191,6 +196,7 @@ export const routes: Routes = [
       path:'actualizaciones/:id', component:InsertarreservaBoletoComponent
     }
   ],canActivate: [seguridadGuard],
+ 
 },
 {
   path:'rutaViaje', component:ViajeComponent,
@@ -230,6 +236,7 @@ export const routes: Routes = [
 },
 {
   path:'rutaItemUsuario', component:ItemUsuarioComponent,
+  data: { roles: ['ADMINISTRADOR','TURISTA'] },
   children:[
     {
       path:'insertar', component:InsertaritemusuarioComponent
